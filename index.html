@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EbookHub - Sua Loja de Ebooks Multi-Nichos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="EbookHub Logo" class="logo-image">
+                <h1>EbookHub</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#categories">Categorias</a></li>
+                    <li><a href="#products">Ebooks</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Buscar ebooks...">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                <!-- User Not Logged In -->
+                <div class="user-actions" id="userNotLoggedIn">
+                    <button class="login-btn" id="loginBtn">
+                        <i class="fas fa-user"></i> Entrar
+                    </button>
+                </div>
+                
+                <!-- User Logged In -->
+                <div class="user-actions logged-in" id="userLoggedIn" style="display: none;">
+                    <span class="user-greeting" id="userGreeting">Olá, <strong>Usuário</strong></span>
+                    <button class="my-ebooks-btn" id="myEbooksBtn" title="Meus Ebooks">
+                        <i class="fas fa-book-open"></i>
+                        <span class="my-ebooks-count" id="myEbooksCount">0</span>
+                    </button>
+                    <button class="cart-btn" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <button class="logout-btn" id="logoutBtn" title="Sair">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Transforme Seu Conhecimento</h2>
+                <p>Ebooks de qualidade em diversos nichos para impulsionar seu aprendizado e crescimento</p>
+                <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
+                    Explorar Ebooks
+                </button>
+            </div>
+            <div class="hero-image">
+                <i class="fas fa-book-reader"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">Categorias</h2>
+            <div class="category-grid">
+                <div class="category-card" data-category="ensino">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Ensino & Educação</h3>
+                    <p>Prepare-se para ENEM, concursos e mais</p>
+                </div>
+                <div class="category-card" data-category="culinaria">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Culinária</h3>
+                    <p>Receitas deliciosas e técnicas culinárias</p>
+                </div>
+                <div class="category-card" data-category="negocios">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Negócios & Marketing</h3>
+                    <p>Cresça seu negócio e redes sociais</p>
+                </div>
+                <div class="category-card" data-category="desenvolvimento">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Desenvolvimento Pessoal</h3>
+                    <p>Melhore suas habilidades e mindset</p>
+                </div>
+                <div class="category-card" data-category="saude">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Saúde & Bem-estar</h3>
+                    <p>Cuide da sua saúde física e mental</p>
+                </div>
+                <div class="category-card" data-category="financas">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3>Finanças</h3>
+                    <p>Gestão financeira e investimentos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Nossos Ebooks</h2>
+            
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="todos">Todos</button>
+                <button class="filter-btn" data-filter="ensino">Ensino</button>
+                <button class="filter-btn" data-filter="culinaria">Culinária</button>
+                <button class="filter-btn" data-filter="negocios">Negócios</button>
+                <button class="filter-btn" data-filter="desenvolvimento">Desenvolvimento</button>
+                <button class="filter-btn" data-filter="saude">Saúde</button>
+                <button class="filter-btn" data-filter="financas">Finanças</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Ebooks de Ensino -->
+                <div class="product-card" data-category="ensino">
+                    <div class="product-badge">Novo</div>
+                    <div class="product-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Ensino & Educação</span>
+                        <h3>Como Tirar Nota 1000 no ENEM</h3>
+                        <p>Guia completo com estratégias comprovadas, cronograma de estudos e dicas exclusivas.</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(127 avaliações)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="price">R$ 47,00</span>
+                            <button class="btn-add-cart" onclick="addToCart('Como Tirar Nota 1000 no ENEM', 47.00, 'ensino')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="ensino">
+                    <div class="product-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Ensino & Educação</span>
+                        <h3>Concurso Polícia Federal - Guia Definitivo</h3>
+                        <p>Prepare-se para o concurso da PF com materiais atualizados e questões comentadas.</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(89 avaliações)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="price">R$ 67,00</span>
+                            <button class="btn-add-cart" onclick="addToCart('Concurso Polícia Federal - Guia Definitivo', 67.00, 'ensino')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ebooks de Culinária -->
+                <div class="product-card" data-category="culinaria">
+                    <div class="product-badge bestseller">Best Seller</div>
+                    <div class="product-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Culinária</span>
+                        <h3>150 Receitas de Bolos Irresistíveis</h3>
+                        <p>Do básico ao profissional: bolos para todas as ocasiões com fotos passo a passo.</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(342 avaliações)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="price">R$ 37,00</span>
+                            <button class="btn-add-cart" onclick="addToCart('150 Receitas de Bolos Irresistíveis', 37.00, 'culinaria')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="culinaria">
+                    <div class="product-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Culinária</span>
+                        <h3>Cozinha Brasileira Completa</h3>
+                        <p>Pratos típicos de todas as regiões do Brasil com ingredientes acessíveis.</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(198 avaliações)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="price">R$ 42,00</span>
+                            <button class="btn-add-cart" onclick="addToCart('Cozinha Brasileira Completa', 42.00, 'culinaria')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ebooks de Negócios -->
+                <div class="product-card" data-category="negocios">
+                    <div class="product-badge">Popular</div>
+                    <div class="product-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Negócios & Marketing</span>
+                        <h3>Instagram para Negócios - Guia Completo</h3>
+                        <p>Aprenda a crescer sua loja no Instagram com estratégias de conteúdo e vendas.</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(276 avaliações)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="price">R$ 57,00</span>
+                            <button class="btn-add-cart" onclick="addToCart('Instagram para Negócios - Guia Completo', 57.00, 'negocios')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="negocios">
+                    <div class="product-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Negócios & Marketing</span>
+                        <h3>Instagram Ads - Do Zero ao Avançado</h3>
+                        <p>Domine os anúncios do Instagram e multiplique suas vendas com tráfego pago.</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(154 avaliações)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="price">R$ 77,00</span>
+                            <button class="btn-add-cart" onclick="addToCart('Instagram Ads - Do Zero ao Avançado', 77.00, 'negocios')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ebooks de Desenvolvimento Pessoal -->
+                <div class="product-card" data-category="desenvolvimento">
+                    <div class="product-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Desenvolvimento Pessoal</span>
+                        <h3>Produtividade Máxima</h3>
+                        <p>Técnicas comprovadas para otimizar seu tempo e alcançar suas metas.</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(219 avaliações)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="price">R$ 39,00</span>
+                            <button class="btn-add-cart" onclick="addToCart('Produtividade Máxima', 39.00, 'desenvolvimento')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ebooks de Saúde -->
+                <div class="product-card" data-category="saude">
+                    <div class="product-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Saúde & Bem-estar</span>
+                        <h3>Guia da Alimentação Saudável</h3>
+                        <p>Aprenda a montar um cardápio equilibrado e saboroso para toda família.</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(167 avaliações)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="price">R$ 44,00</span>
+                            <button class="btn-add-cart" onclick="addToCart('Guia da Alimentação Saudável', 44.00, 'saude')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ebooks de Finanças -->
+                <div class="product-card" data-category="financas">
+                    <div class="product-badge">Novo</div>
+                    <div class="product-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Finanças</span>
+                        <h3>Investimentos para Iniciantes</h3>
+                        <p>Comece a investir do zero com segurança e inteligência financeira.</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(203 avaliações)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="price">R$ 52,00</span>
+                            <button class="btn-add-cart" onclick="addToCart('Investimentos para Iniciantes', 52.00, 'financas')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">Sobre a EbookHub</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>A EbookHub é sua plataforma completa de ebooks digitais em diversos nichos do conhecimento. Criamos conteúdo de qualidade para ajudar você a aprender, crescer e alcançar seus objetivos.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Conteúdo de Qualidade</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Acesso Imediato</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Suporte Especializado</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Atualizações Gratuitas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat">
+                        <h3>5000+</h3>
+                        <p>Clientes Satisfeitos</p>
+                    </div>
+                    <div class="stat">
+                        <h3>50+</h3>
+                        <p>Ebooks Disponíveis</p>
+                    </div>
+                    <div class="stat">
+                        <h3>4.8</h3>
+                        <p>Avaliação Média</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EbookHub</h3>
+                    <p>Sua loja de ebooks multi-nichos</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#categories">Categorias</a></li>
+                        <li><a href="#products">Ebooks</a></li>
+                        <li><a href="#about">Sobre</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> ebookhub.vendas@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> (11) 99999-9999</li>
+                        <li><i class="fas fa-map-marker-alt"></i> São Paulo, Brasil</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EbookHub. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Meu Carrinho</h2>
+                <button class="close-btn" id="closeCart">&times;</button>
+            </div>
+            <div class="modal-body" id="cartItems">
+                <!-- Cart items will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotal">R$ 0,00</span>
+                </div>
+                <button class="btn-checkout" onclick="checkout()">
+                    <i class="fas fa-credit-card"></i> Finalizar Compra
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Ebooks Modal -->
+    <div class="modal" id="myEbooksModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-book-open"></i> Meus Ebooks</h2>
+                <button class="close-btn" id="closeMyEbooks">&times;</button>
+            </div>
+            <div class="modal-body" id="myEbooksItems">
+                <!-- My ebooks will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Ebook Details Modal -->
+    <div class="modal" id="ebookDetailsModal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 id="ebookDetailsTitle">Detalhes do Ebook</h2>
+                <button class="close-btn" id="closeEbookDetails">&times;</button>
+            </div>
+            <div class="modal-body" id="ebookDetailsBody">
+                <!-- Ebook details will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Login/Register Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content modal-auth">
+            <div class="modal-header">
+                <h2 id="authModalTitle">Entrar na sua conta</h2>
+                <button class="close-btn" id="closeAuth">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">
+                            <i class="fas fa-envelope"></i> E-mail
+                        </label>
+                        <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">
+                            <i class="fas fa-lock"></i> Senha
+                        </label>
+                        <input type="password" id="loginPassword" placeholder="Digite sua senha" required>
+                    </div>
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    </button>
+                    <p class="auth-switch">
+                        Não tem uma conta? <a href="#" id="showRegister">Cadastre-se aqui</a>
+                    </p>
+                </form>
+
+                <!-- Register Form -->
+                <form id="registerForm" class="auth-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="registerName">
+                            <i class="fas fa-user"></i> Nome completo
+                        </label>
+                        <input type="text" id="registerName" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerNickname">
+                            <i class="fas fa-smile"></i> Como você quer ser chamado?
+                        </label>
+                        <input type="text" id="registerNickname" placeholder="Apelido ou nome preferido" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">
+                            <i class="fas fa-envelope"></i> E-mail
+                        </label>
+                        <input type="email" id="registerEmail" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">
+                            <i class="fas fa-lock"></i> Senha
+                        </label>
+                        <input type="password" id="registerPassword" placeholder="Crie uma senha" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPasswordConfirm">
+                            <i class="fas fa-lock"></i> Confirmar senha
+                        </label>
+                        <input type="password" id="registerPasswordConfirm" placeholder="Confirme sua senha" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-user-plus"></i> Criar conta
+                    </button>
+                    <p class="auth-switch">
+                        Já tem uma conta? <a href="#" id="showLogin">Faça login aqui</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mercado Pago SDK -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script src="script.js"></script>
+</body>
+</html>
