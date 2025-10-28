@@ -47,6 +47,9 @@
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count" id="cartCount">0</span>
                     </button>
+                    <button class="settings-btn" id="settingsBtn" title="Trocar Senha">
+                        <i class="fas fa-key"></i>
+                    </button>
                     <button class="logout-btn" id="logoutBtn" title="Sair">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
@@ -121,7 +124,7 @@
                 <button class="filter-btn" data-filter="ensino">Ensino</button>
                 <button class="filter-btn" data-filter="culinaria">Culinária</button>
                 <button class="filter-btn" data-filter="negocios">Negócios</button>
-                <button class="filter-btn" data-filter="desenvolvimento">Desenvolvimento</button>
+                <button class="filter-btn" data-filter="desenvolvimento">Desenvolvimento Pessoal</button>
                 <button class="filter-btn" data-filter="saude">Saúde</button>
                 <button class="filter-btn" data-filter="financas">Finanças</button>
             </div>
@@ -132,48 +135,50 @@
                 <div class="product-card" data-category="ensino">
                     <div class="product-badge">Novo</div>
                     <div class="product-image">
-                        <i class="fas fa-book"></i>
+                        <img src="covers/redacao-enem-1000.jpg" alt="Guia Completo para Tirar Nota 1000 na Redação do ENEM" style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
                     </div>
                     <div class="product-info">
                         <span class="product-category">Ensino & Educação</span>
-                        <h3>Como Tirar Nota 1000 no ENEM</h3>
-                        <p>Guia completo com estratégias comprovadas, cronograma de estudos e dicas exclusivas.</p>
+                        <h3>Guia Completo para Tirar Nota 1000 na Redação do ENEM</h3>
+                        <p>Você sabia que a redação é o diferencial mais poderoso do ENEM? Com ela, você pode garantir sua vaga na universidade dos sonhos — e este guia foi feito exatamente para te mostrar como chegar lá.</p>
                         <div class="product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
-                            <span>(127 avaliações)</span>
+                            <span>(0 avaliações)</span>
                         </div>
                         <div class="product-footer">
-                            <span class="price">R$ 47,00</span>
-                            <button class="btn-add-cart" onclick="addToCart('Como Tirar Nota 1000 no ENEM', 47.00, 'ensino')">
+                            <span class="price">R$ 14,90</span>
+                            <button class="btn-add-cart" onclick="addToCart('Guia Completo para Tirar Nota 1000 na Redação do ENEM', 14.90, 'ensino')">
                                 <i class="fas fa-cart-plus"></i> Adicionar
                             </button>
                         </div>
                     </div>
                 </div>
 
+
                 <div class="product-card" data-category="ensino">
+                    <div class="product-badge">Novo</div>
                     <div class="product-image">
-                        <i class="fas fa-book"></i>
+                        <img src="covers/cerebro-alta-performance.jpg" alt="O Cérebro de Alta Performance" style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
                     </div>
                     <div class="product-info">
                         <span class="product-category">Ensino & Educação</span>
-                        <h3>Concurso Polícia Federal - Guia Definitivo</h3>
-                        <p>Prepare-se para o concurso da PF com materiais atualizados e questões comentadas.</p>
+                        <h3>O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor</h3>
+                        <p>Você estuda por horas e sente que não aprende nada? A neurociência explica o porquê — e também ensina como mudar isso.</p>
                         <div class="product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(89 avaliações)</span>
+                            <i class="fas fa-star"></i>
+                            <span>(0 avaliações)</span>
                         </div>
                         <div class="product-footer">
-                            <span class="price">R$ 67,00</span>
-                            <button class="btn-add-cart" onclick="addToCart('Concurso Polícia Federal - Guia Definitivo', 67.00, 'ensino')">
+                            <span class="price">R$ 14,90</span>
+                            <button class="btn-add-cart" onclick="addToCart('O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor', 14.90, 'ensino')">
                                 <i class="fas fa-cart-plus"></i> Adicionar
                             </button>
                         </div>
@@ -182,25 +187,25 @@
 
                 <!-- Ebooks de Culinária -->
                 <div class="product-card" data-category="culinaria">
-                    <div class="product-badge bestseller">Best Seller</div>
+                    <div class="product-badge">Novo</div>
                     <div class="product-image">
-                        <i class="fas fa-book"></i>
+                        <img src="covers/doces-de-festa-em-casa.jpg" alt="Doces de Festa em Casa" style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
                     </div>
                     <div class="product-info">
                         <span class="product-category">Culinária</span>
-                        <h3>150 Receitas de Bolos Irresistíveis</h3>
-                        <p>Do básico ao profissional: bolos para todas as ocasiões com fotos passo a passo.</p>
+                        <h3>Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas</h3>
+                        <p>Quem resiste a um bom doce de festa? Neste guia prático e saboroso, você vai aprender como preparar doces deliciosos e lucrativos sem sair de casa.</p>
                         <div class="product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
-                            <span>(342 avaliações)</span>
+                            <span>(0 avaliações)</span>
                         </div>
                         <div class="product-footer">
-                            <span class="price">R$ 37,00</span>
-                            <button class="btn-add-cart" onclick="addToCart('150 Receitas de Bolos Irresistíveis', 37.00, 'culinaria')">
+                            <span class="price">R$ 14,90</span>
+                            <button class="btn-add-cart" onclick="addToCart('Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas', 14.90, 'culinaria')">
                                 <i class="fas fa-cart-plus"></i> Adicionar
                             </button>
                         </div>
@@ -234,25 +239,25 @@
 
                 <!-- Ebooks de Negócios -->
                 <div class="product-card" data-category="negocios">
-                    <div class="product-badge">Popular</div>
+                    <div class="product-badge">Novo</div>
                     <div class="product-image">
-                        <i class="fas fa-book"></i>
+                        <img src="covers/mentalidade-empreendedor.jpg" alt="Mentalidade de Empreendedor" style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
                     </div>
                     <div class="product-info">
                         <span class="product-category">Negócios & Marketing</span>
-                        <h3>Instagram para Negócios - Guia Completo</h3>
-                        <p>Aprenda a crescer sua loja no Instagram com estratégias de conteúdo e vendas.</p>
+                        <h3>Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados</h3>
+                        <p>Você já percebeu que algumas pessoas parecem atrair oportunidades, enquanto outras vivem reclamando da sorte? A diferença não está no dinheiro, no diploma ou nas conexões — está na mentalidade.</p>
                         <div class="product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
-                            <span>(276 avaliações)</span>
+                            <span>(0 avaliações)</span>
                         </div>
                         <div class="product-footer">
-                            <span class="price">R$ 57,00</span>
-                            <button class="btn-add-cart" onclick="addToCart('Instagram para Negócios - Guia Completo', 57.00, 'negocios')">
+                            <span class="price">R$ 14,90</span>
+                            <button class="btn-add-cart" onclick="addToCart('Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados', 14.90, 'negocios')">
                                 <i class="fas fa-cart-plus"></i> Adicionar
                             </button>
                         </div>
@@ -286,24 +291,25 @@
 
                 <!-- Ebooks de Desenvolvimento Pessoal -->
                 <div class="product-card" data-category="desenvolvimento">
+                    <div class="product-badge">Novo</div>
                     <div class="product-image">
-                        <i class="fas fa-book"></i>
+                        <img src="covers/desbloqueie-sua-mente.jpg" alt="Desbloqueie Sua Mente: Hábitos Que Mudam Vidas" style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
                     </div>
                     <div class="product-info">
                         <span class="product-category">Desenvolvimento Pessoal</span>
-                        <h3>Produtividade Máxima</h3>
-                        <p>Técnicas comprovadas para otimizar seu tempo e alcançar suas metas.</p>
+                        <h3>Desbloqueie Sua Mente: Hábitos Que Mudam Vidas</h3>
+                        <p>Você já tentou mudar um hábito, mas acabou desistindo no meio do caminho? A ciência mostra que o problema não é falta de força de vontade, e sim usar a estratégia errada.</p>
                         <div class="product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
-                            <span>(219 avaliações)</span>
+                            <span>(0 avaliações)</span>
                         </div>
                         <div class="product-footer">
-                            <span class="price">R$ 39,00</span>
-                            <button class="btn-add-cart" onclick="addToCart('Produtividade Máxima', 39.00, 'desenvolvimento')">
+                            <span class="price">R$ 14,90</span>
+                            <button class="btn-add-cart" onclick="addToCart('Desbloqueie Sua Mente: Hábitos Que Mudam Vidas', 14.90, 'desenvolvimento')">
                                 <i class="fas fa-cart-plus"></i> Adicionar
                             </button>
                         </div>
@@ -312,24 +318,25 @@
 
                 <!-- Ebooks de Saúde -->
                 <div class="product-card" data-category="saude">
+                    <div class="product-badge">Novo</div>
                     <div class="product-image">
-                        <i class="fas fa-book"></i>
+                        <img src="covers/durma-melhor-viva-melhor.jpg" alt="Durma Melhor, Viva Melhor de Forma Natural" style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
                     </div>
                     <div class="product-info">
                         <span class="product-category">Saúde & Bem-estar</span>
-                        <h3>Guia da Alimentação Saudável</h3>
-                        <p>Aprenda a montar um cardápio equilibrado e saboroso para toda família.</p>
+                        <h3>Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador</h3>
+                        <p>Você já acordou cansado, mal humorado ou com a sensação de "não descansei direito"? A verdade é que a qualidade do seu sono não é luxo — é base para seu corpo, humor, mente e resultados.</p>
                         <div class="product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(167 avaliações)</span>
+                            <i class="fas fa-star"></i>
+                            <span>(0 avaliações)</span>
                         </div>
                         <div class="product-footer">
-                            <span class="price">R$ 44,00</span>
-                            <button class="btn-add-cart" onclick="addToCart('Guia da Alimentação Saudável', 44.00, 'saude')">
+                            <span class="price">R$ 14,90</span>
+                            <button class="btn-add-cart" onclick="addToCart('Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador', 14.90, 'saude')">
                                 <i class="fas fa-cart-plus"></i> Adicionar
                             </button>
                         </div>
@@ -340,23 +347,23 @@
                 <div class="product-card" data-category="financas">
                     <div class="product-badge">Novo</div>
                     <div class="product-image">
-                        <i class="fas fa-book"></i>
+                        <img src="covers/investidor-fundos-imobiliarios.jpg" alt="Guia do Investidor Iniciante em Fundos Imobiliários" style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
                     </div>
                     <div class="product-info">
                         <span class="product-category">Finanças</span>
-                        <h3>Investimentos para Iniciantes</h3>
-                        <p>Comece a investir do zero com segurança e inteligência financeira.</p>
+                        <h3>Guia do Investidor Iniciante em Fundos Imobiliários</h3>
+                        <p>Você sabia que é possível investir no mercado imobiliário com pouco dinheiro e sem precisar comprar um imóvel?</p>
                         <div class="product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
-                            <span>(203 avaliações)</span>
+                            <span>(0 avaliações)</span>
                         </div>
                         <div class="product-footer">
-                            <span class="price">R$ 52,00</span>
-                            <button class="btn-add-cart" onclick="addToCart('Investimentos para Iniciantes', 52.00, 'financas')">
+                            <span class="price">R$ 14,90</span>
+                            <button class="btn-add-cart" onclick="addToCart('Guia do Investidor Iniciante em Fundos Imobiliários', 14.90, 'financas')">
                                 <i class="fas fa-cart-plus"></i> Adicionar
                             </button>
                         </div>
@@ -530,6 +537,11 @@
                     <button type="submit" class="btn-auth">
                         <i class="fas fa-sign-in-alt"></i> Entrar
                     </button>
+                    <p class="auth-switch" style="margin-top: 0.5rem;">
+                        <a href="#" id="forgotPassword" style="color: var(--primary-color); text-decoration: none;">
+                            <i class="fas fa-key"></i> Esqueci minha senha
+                        </a>
+                    </p>
                     <p class="auth-switch">
                         Não tem uma conta? <a href="#" id="showRegister">Cadastre-se aqui</a>
                     </p>
@@ -554,6 +566,13 @@
                             <i class="fas fa-envelope"></i> E-mail
                         </label>
                         <input type="email" id="registerEmail" placeholder="seu@email.com" required>
+                        <small class="email-hint" id="emailHint" style="display: none; color: #ff6b6b; margin-top: 5px;"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmailConfirm">
+                            <i class="fas fa-envelope"></i> Confirmar e-mail
+                        </label>
+                        <input type="email" id="registerEmailConfirm" placeholder="Digite o email novamente" required>
                     </div>
                     <div class="form-group">
                         <label for="registerPassword">
@@ -573,6 +592,99 @@
                     <p class="auth-switch">
                         Já tem uma conta? <a href="#" id="showLogin">Faça login aqui</a>
                     </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content modal-auth">
+            <div class="modal-header">
+                <h2>Trocar Senha</h2>
+                <button class="close-btn" id="closeChangePassword">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="currentPassword">
+                            <i class="fas fa-lock"></i> Senha atual
+                        </label>
+                        <input type="password" id="currentPassword" placeholder="Digite sua senha atual" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">
+                            <i class="fas fa-key"></i> Nova senha
+                        </label>
+                        <input type="password" id="newPassword" placeholder="Digite a nova senha" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmNewPassword">
+                            <i class="fas fa-key"></i> Confirmar nova senha
+                        </label>
+                        <input type="password" id="confirmNewPassword" placeholder="Confirme a nova senha" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-check"></i> Alterar Senha
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content modal-auth">
+            <div class="modal-header">
+                <h2>Recuperar Senha</h2>
+                <button class="close-btn" id="closeForgotPassword">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Step 1: Verify Email and Name -->
+                <form id="verifyAccountForm" class="auth-form">
+                    <p style="text-align: center; color: var(--text-light); margin-bottom: 1.5rem;">
+                        Digite seu email e nome completo cadastrados para recuperar sua senha.
+                    </p>
+                    <div class="form-group">
+                        <label for="recoverEmail">
+                            <i class="fas fa-envelope"></i> E-mail cadastrado
+                        </label>
+                        <input type="email" id="recoverEmail" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recoverName">
+                            <i class="fas fa-user"></i> Nome completo
+                        </label>
+                        <input type="text" id="recoverName" placeholder="Seu nome completo" required>
+                    </div>
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-search"></i> Verificar Dados
+                    </button>
+                    <p class="auth-switch">
+                        Lembrou sua senha? <a href="#" id="backToLogin">Fazer login</a>
+                    </p>
+                </form>
+
+                <!-- Step 2: Create New Password (hidden initially) -->
+                <form id="resetPasswordForm" class="auth-form" style="display: none;">
+                    <p style="text-align: center; color: var(--success-color); margin-bottom: 1.5rem;">
+                        <i class="fas fa-check-circle"></i> Dados verificados! Crie sua nova senha.
+                    </p>
+                    <div class="form-group">
+                        <label for="resetNewPassword">
+                            <i class="fas fa-key"></i> Nova senha
+                        </label>
+                        <input type="password" id="resetNewPassword" placeholder="Digite a nova senha" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="resetConfirmPassword">
+                            <i class="fas fa-key"></i> Confirmar nova senha
+                        </label>
+                        <input type="password" id="resetConfirmPassword" placeholder="Confirme a nova senha" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-check"></i> Resetar Senha
+                    </button>
                 </form>
             </div>
         </div>

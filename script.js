@@ -1,7 +1,7 @@
 // ===== Mercado Pago Configuration =====
-// IMPORTANTE: Substitua com suas credenciais reais
-const MP_PUBLIC_KEY = 'SUA_PUBLIC_KEY_AQUI';
-const MP_ACCESS_TOKEN = 'SEU_ACCESS_TOKEN_AQUI';
+// CREDENCIAIS DE TESTE (para desenvolvimento)
+const MP_PUBLIC_KEY = 'TEST-1e24b8a3-3e19-4598-ab4f-93ecffca750c';
+const MP_ACCESS_TOKEN = 'TEST-92158868421375-101718-778f0f2685ab4f8e8e82f7f8b866da29-1964064467';
 
 // Initialize Mercado Pago
 const mp = new MercadoPago(MP_PUBLIC_KEY, {
@@ -106,11 +106,44 @@ function addToCart(name, price, category) {
         return;
     }
     
+    // Get image from the product card
+    let image = 'images/default-ebook.svg';
+    
+    // Check for specific ebook and use its cover
+    if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
+        image = 'covers/redacao-enem-1000.jpg';
+    } else if (name === 'Guia do Investidor Iniciante em Fundos Imobiliários') {
+        image = 'covers/investidor-fundos-imobiliarios.jpg';
+    } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
+        image = 'covers/cerebro-alta-performance.jpg';
+    } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
+        image = 'covers/desbloqueie-sua-mente.jpg';
+    } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
+        image = 'covers/mentalidade-empreendedor.jpg';
+    } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
+        image = 'covers/durma-melhor-viva-melhor.jpg';
+    } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
+        image = 'covers/doces-de-festa-em-casa.jpg';
+    }
+    
+    // Try to get image from the product card if not found above
+    const productCards = document.querySelectorAll('.product-card');
+    productCards.forEach(card => {
+        const cardTitle = card.querySelector('h3')?.textContent;
+        if (cardTitle === name) {
+            const img = card.querySelector('img');
+            if (img && img.src) {
+                image = img.src;
+            }
+        }
+    });
+    
     const item = {
         id: Date.now(),
         name: name,
         price: price,
-        category: category
+        category: category,
+        image: image
     };
     
     cart.push(item);
@@ -179,7 +212,7 @@ function updateCartDisplay() {
                 </div>
                 <div class="cart-item-info">
                     <h4>${item.name}</h4>
-                    <span>${item.category}</span>
+                    <span>${getCategoryName(item.category)}</span>
                 </div>
                 <div class="cart-item-actions">
                     <span class="cart-item-price">R$ ${item.price.toFixed(2)}</span>
@@ -225,7 +258,7 @@ async function checkout() {
                 description: `Ebook: ${item.name} - ${item.category}`
             })),
             payer: {
-                name: 'EbookHub',
+                name: currentUser.nickname || currentUser.name,
                 email: currentUser.email
             },
             payment_methods: {
@@ -279,7 +312,7 @@ function handleSuccessfulPayment(result) {
         const ebook = {
             ...item,
             purchaseDate: purchaseDate,
-            downloadUrl: `downloads/${item.id}.pdf`, // Placeholder for actual download URL
+            downloadUrl: item.name, // Use ebook name for download reference
             transactionId: result.payment_id || 'MP-' + Date.now()
         };
         myEbooks.push(ebook);
@@ -455,14 +488,113 @@ loginForm.addEventListener('submit', (e) => {
 });
 
 // Handle Register
+// Email validation function
+function validateEmail(email) {
+    // Basic email regex pattern
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!emailRegex.test(email)) {
+        return { valid: false, message: 'Por favor, insira um e-mail válido!' };
+    }
+    
+    // Check for common typos in domains
+    const commonDomains = [
+        'gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 
+        'live.com', 'icloud.com', 'uol.com.br', 'bol.com.br'
+    ];
+    
+    const emailParts = email.toLowerCase().split('@');
+    if (emailParts.length !== 2) {
+        return { valid: false, message: 'E-mail inválido!' };
+    }
+    
+    const domain = emailParts[1];
+    
+    // Check for common typos
+    const typos = {
+        'gmial.com': 'gmail.com',
+        'gmai.com': 'gmail.com',
+        'gmil.com': 'gmail.com',
+        'gmail.con': 'gmail.com',
+        'gmail.cm': 'gmail.com',
+        'hotmail.con': 'hotmail.com',
+        'hotmail.cm': 'hotmail.com',
+        'hotmal.com': 'hotmail.com',
+        'outlook.con': 'outlook.com',
+        'outlook.cm': 'outlook.com',
+        'yahoo.con': 'yahoo.com',
+        'yahoo.cm': 'yahoo.com'
+    };
+    
+    if (typos[domain]) {
+        return { 
+            valid: false, 
+            message: `Você quis dizer ${emailParts[0]}@${typos[domain]}?`,
+            suggestion: `${emailParts[0]}@${typos[domain]}`
+        };
+    }
+    
+    // Check if domain has at least 2 characters after the dot
+    const domainParts = domain.split('.');
+    if (domainParts.length < 2 || domainParts[domainParts.length - 1].length < 2) {
+        return { valid: false, message: 'Domínio do e-mail inválido!' };
+    }
+    
+    return { valid: true };
+}
+
+// Add real-time email validation
+const registerEmailInput = document.getElementById('registerEmail');
+const emailHint = document.getElementById('emailHint');
+
+if (registerEmailInput && emailHint) {
+    registerEmailInput.addEventListener('blur', () => {
+        const email = registerEmailInput.value.trim();
+        if (email) {
+            const validation = validateEmail(email);
+            if (!validation.valid) {
+                emailHint.textContent = validation.message;
+                emailHint.style.display = 'block';
+                emailHint.style.color = '#ff6b6b';
+                
+                // If there's a suggestion, make it clickable
+                if (validation.suggestion) {
+                    emailHint.innerHTML = `${validation.message} <a href="#" style="color: #4CAF50; text-decoration: underline;">Corrigir</a>`;
+                    emailHint.querySelector('a').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        registerEmailInput.value = validation.suggestion;
+                        emailHint.style.display = 'none';
+                    });
+                }
+            } else {
+                emailHint.style.display = 'none';
+            }
+        }
+    });
+}
+
 registerForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    const name = document.getElementById('registerName').value;
-    const nickname = document.getElementById('registerNickname').value;
-    const email = document.getElementById('registerEmail').value;
+    const name = document.getElementById('registerName').value.trim();
+    const nickname = document.getElementById('registerNickname').value.trim();
+    const email = document.getElementById('registerEmail').value.trim().toLowerCase();
+    const emailConfirm = document.getElementById('registerEmailConfirm').value.trim().toLowerCase();
     const password = document.getElementById('registerPassword').value;
     const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+    
+    // Validate email format
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.valid) {
+        showNotification(emailValidation.message, 'error');
+        return;
+    }
+    
+    // Validate emails match
+    if (email !== emailConfirm) {
+        showNotification('Os e-mails não coincidem! Digite o mesmo e-mail nos dois campos.', 'error');
+        return;
+    }
     
     // Validate passwords match
     if (password !== passwordConfirm) {
@@ -511,6 +643,196 @@ logoutBtn.addEventListener('click', () => {
     }
 });
 
+// ===== Change Password =====
+const changePasswordModal = document.getElementById('changePasswordModal');
+const settingsBtn = document.getElementById('settingsBtn');
+const closeChangePassword = document.getElementById('closeChangePassword');
+const changePasswordForm = document.getElementById('changePasswordForm');
+
+// Open change password modal
+settingsBtn.addEventListener('click', () => {
+    changePasswordModal.classList.add('active');
+});
+
+// Close change password modal
+closeChangePassword.addEventListener('click', () => {
+    changePasswordModal.classList.remove('active');
+    changePasswordForm.reset();
+});
+
+// Close modal when clicking outside
+changePasswordModal.addEventListener('click', (e) => {
+    if (e.target === changePasswordModal) {
+        changePasswordModal.classList.remove('active');
+        changePasswordForm.reset();
+    }
+});
+
+// Handle Change Password
+changePasswordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const currentPassword = document.getElementById('currentPassword').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+    
+    // Validate new passwords match
+    if (newPassword !== confirmNewPassword) {
+        showNotification('As novas senhas não coincidem!', 'error');
+        return;
+    }
+    
+    // Validate new password is different from current
+    if (currentPassword === newPassword) {
+        showNotification('A nova senha deve ser diferente da senha atual!', 'warning');
+        return;
+    }
+    
+    // Get users from localStorage
+    const users = JSON.parse(localStorage.getItem('ebookhub_users') || '{}');
+    
+    // Verify current password
+    if (!currentUser || !users[currentUser.email]) {
+        showNotification('Erro ao verificar usuário!', 'error');
+        return;
+    }
+    
+    if (users[currentUser.email].password !== currentPassword) {
+        showNotification('Senha atual incorreta!', 'error');
+        return;
+    }
+    
+    // Update password
+    users[currentUser.email].password = newPassword;
+    localStorage.setItem('ebookhub_users', JSON.stringify(users));
+    
+    // Close modal and reset form
+    changePasswordModal.classList.remove('active');
+    changePasswordForm.reset();
+    
+    showNotification('Senha alterada com sucesso!', 'success');
+});
+
+// ===== Forgot Password =====
+const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+const forgotPasswordLink = document.getElementById('forgotPassword');
+const closeForgotPassword = document.getElementById('closeForgotPassword');
+const verifyAccountForm = document.getElementById('verifyAccountForm');
+const resetPasswordForm = document.getElementById('resetPasswordForm');
+const backToLoginLink = document.getElementById('backToLogin');
+
+let verifiedEmail = null; // Store verified email for password reset
+
+// Open forgot password modal
+forgotPasswordLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeAuthModal();
+    forgotPasswordModal.classList.add('active');
+    verifyAccountForm.style.display = 'flex';
+    resetPasswordForm.style.display = 'none';
+    verifiedEmail = null;
+});
+
+// Back to login
+backToLoginLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    forgotPasswordModal.classList.remove('active');
+    verifyAccountForm.reset();
+    resetPasswordForm.reset();
+    openAuthModal();
+});
+
+// Close forgot password modal
+closeForgotPassword.addEventListener('click', () => {
+    forgotPasswordModal.classList.remove('active');
+    verifyAccountForm.reset();
+    resetPasswordForm.reset();
+    verifyAccountForm.style.display = 'flex';
+    resetPasswordForm.style.display = 'none';
+    verifiedEmail = null;
+});
+
+// Close modal when clicking outside
+forgotPasswordModal.addEventListener('click', (e) => {
+    if (e.target === forgotPasswordModal) {
+        forgotPasswordModal.classList.remove('active');
+        verifyAccountForm.reset();
+        resetPasswordForm.reset();
+        verifyAccountForm.style.display = 'flex';
+        resetPasswordForm.style.display = 'none';
+        verifiedEmail = null;
+    }
+});
+
+// Step 1: Verify account
+verifyAccountForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const email = document.getElementById('recoverEmail').value.trim().toLowerCase();
+    const name = document.getElementById('recoverName').value.trim();
+    
+    // Get users from localStorage
+    const users = JSON.parse(localStorage.getItem('ebookhub_users') || '{}');
+    
+    // Check if user exists
+    if (!users[email]) {
+        showNotification('E-mail não cadastrado!', 'error');
+        return;
+    }
+    
+    // Verify name matches
+    if (users[email].name.toLowerCase() !== name.toLowerCase()) {
+        showNotification('Nome não corresponde ao cadastrado!', 'error');
+        return;
+    }
+    
+    // Success! Show password reset form
+    verifiedEmail = email;
+    verifyAccountForm.style.display = 'none';
+    resetPasswordForm.style.display = 'flex';
+    showNotification('Dados verificados! Crie sua nova senha.', 'success');
+});
+
+// Step 2: Reset password
+resetPasswordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const newPassword = document.getElementById('resetNewPassword').value;
+    const confirmPassword = document.getElementById('resetConfirmPassword').value;
+    
+    // Validate passwords match
+    if (newPassword !== confirmPassword) {
+        showNotification('As senhas não coincidem!', 'error');
+        return;
+    }
+    
+    if (!verifiedEmail) {
+        showNotification('Erro ao processar recuperação!', 'error');
+        return;
+    }
+    
+    // Get users from localStorage
+    const users = JSON.parse(localStorage.getItem('ebookhub_users') || '{}');
+    
+    // Update password
+    users[verifiedEmail].password = newPassword;
+    localStorage.setItem('ebookhub_users', JSON.stringify(users));
+    
+    // Close modal and reset forms
+    forgotPasswordModal.classList.remove('active');
+    verifyAccountForm.reset();
+    resetPasswordForm.reset();
+    verifyAccountForm.style.display = 'flex';
+    resetPasswordForm.style.display = 'none';
+    verifiedEmail = null;
+    
+    // Show success and open login modal
+    showNotification('Senha resetada com sucesso! Faça login com a nova senha.', 'success');
+    setTimeout(() => {
+        openAuthModal();
+    }, 1000);
+});
+
 // Open ebook details
 function openEbookDetails(name, price, category, description, rating, reviews, badge, highlights) {
     const categoryName = getCategoryName(category);
@@ -524,12 +846,30 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
     
     const badgeHtml = badge ? `<div class="ebook-details-badge ${badge.toLowerCase() === 'best seller' ? 'bestseller' : ''}">${badge}</div>` : '';
     
+    // Get cover image for this ebook
+    let coverImage = 'images/default-ebook.svg';
+    if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
+        coverImage = 'covers/redacao-enem-1000.jpg';
+    } else if (name === 'Guia do Investidor Iniciante em Fundos Imobiliários') {
+        coverImage = 'covers/investidor-fundos-imobiliarios.jpg';
+    } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
+        coverImage = 'covers/cerebro-alta-performance.jpg';
+    } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
+        coverImage = 'covers/desbloqueie-sua-mente.jpg';
+    } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
+        coverImage = 'covers/mentalidade-empreendedor.jpg';
+    } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
+        coverImage = 'covers/durma-melhor-viva-melhor.jpg';
+    } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
+        coverImage = 'covers/doces-de-festa-em-casa.jpg';
+    }
+    
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
     ebookDetailsBody.innerHTML = `
         <div class="ebook-details-container">
             <div class="ebook-details-image">
                 ${badgeHtml}
-                <i class="fas fa-book"></i>
+                <img src="${coverImage}" alt="${name}" style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
             </div>
             <div class="ebook-details-info">
                 <span class="ebook-details-category">${categoryName}</span>
@@ -617,7 +957,7 @@ function updateMyEbooksDisplay() {
                     </div>
                 </div>
                 <div class="my-ebook-actions">
-                    <button class="btn-download" onclick="downloadEbook('${ebook.name}', '${ebook.downloadUrl}')">
+                    <button class="btn-download" onclick="downloadEbook('${ebook.name}')">
                         <i class="fas fa-download"></i> Baixar PDF
                     </button>
                 </div>
@@ -642,18 +982,36 @@ function getCategoryName(category) {
 }
 
 // Download ebook function
-function downloadEbook(name, url) {
-    if (url === '#') {
-        showNotification('O download estará disponível em breve! Aguardando upload dos arquivos.', 'info');
+function downloadEbook(name) {
+    // Get the actual PDF path based on ebook name
+    let pdfPath = '';
+    
+    if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
+        pdfPath = 'GUIA-COMPLETO-PARA-TIRAR-NOTA-1000-NA-REDACAO-DO-ENEM.pdf';
+    } else if (name === 'Guia do Investidor Iniciante em Fundos Imobiliários') {
+        pdfPath = 'GUIA-DO-INVESTIDOR-INICIANTE-EM-FUNDOS-IMOBILIARIOS.pdf';
+    } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
+        pdfPath = 'O-CEREBRO-DE-ALTA-PERFORMANCE.pdf';
+    } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
+        pdfPath = 'DESBLOQUEIE-SUA-MENTE-HABITOS-QUE-MUDAM-SUA-VIDA (1).pdf';
+    } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
+        pdfPath = 'MENTALIDADE-DE-EMPREENDEDOR.pdf';
+    } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
+        pdfPath = 'DURMA-MELHOR-VIVA-MELHOR-DE-FORMA-NATURAL.pdf';
+    } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
+        pdfPath = 'DOCES-DE-FESTA-EM-CASA.pdf';
+    }
+    
+    if (!pdfPath) {
+        showNotification('PDF não encontrado para este ebook.', 'error');
         return;
     }
     
-    // In a real implementation, this would download the actual file
     showNotification(`Iniciando download de "${name}"...`, 'success');
     
     // Create temporary link to download
     const link = document.createElement('a');
-    link.href = url;
+    link.href = pdfPath;
     link.download = `${name}.pdf`;
     document.body.appendChild(link);
     link.click();
@@ -850,17 +1208,103 @@ document.head.appendChild(style);
 
 // ===== Ebook Data (Detailed Information) =====
 const ebookDetails = {
-    'Como Tirar Nota 1000 no ENEM': {
-        description: 'Guia completo e atualizado com todas as estratégias comprovadas para alcançar a nota máxima no ENEM. Inclui cronograma de estudos personalizado, técnicas de redação nota 1000, questões comentadas das últimas provas e dicas exclusivas de aprovados.',
+    'Guia Completo para Tirar Nota 1000 na Redação do ENEM': {
+        description: 'Você sabia que a redação é o diferencial mais poderoso do ENEM? Com ela, você pode garantir sua vaga na universidade dos sonhos — e este guia foi feito exatamente para te mostrar como chegar lá. Neste eBook, você vai aprender o passo a passo completo para dominar a redação e conquistar a nota máxima: 1000 pontos. Nada de fórmulas mágicas — aqui você vai entender a estratégia real usada por quem atinge o topo.',
         rating: 5,
-        reviews: 127,
+        reviews: 0,
         badge: 'Novo',
         highlights: [
-            'Cronograma de estudos completo de 12 meses',
-            'Técnicas de redação com correções exemplificadas',
-            '500+ questões comentadas',
-            'Métodos de memorização eficazes',
-            'Simulados completos com gabarito'
+            'Explicação detalhada das 5 competências avaliadas pelo ENEM',
+            'Estrutura perfeita da redação (introdução, desenvolvimento e conclusão)',
+            'Técnicas de argumentação e uso inteligente de repertórios socioculturais',
+            'Modelo completo de proposta de intervenção nota máxima',
+            'Cronograma prático para treinar e evoluir semana após semana',
+            'Exemplos reais e análises de redações nota 1000'
+        ]
+    },
+    'Guia do Investidor Iniciante em Fundos Imobiliários': {
+        description: 'Você sabia que é possível investir no mercado imobiliário com pouco dinheiro e sem precisar comprar um imóvel? Neste guia completo, você vai aprender tudo o que um investidor iniciante precisa saber para começar a lucrar com Fundos Imobiliários (FIIs) e construir renda passiva todos os meses — de forma simples, segura e acessível. Nada de termos complicados ou promessas milagrosas — aqui você vai entender como investir com estratégia e transformar pequenos aportes em grandes resultados.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'O que são Fundos Imobiliários e como eles funcionam',
+            'Tipos de FIIs e como escolher os melhores para começar',
+            'Como investir com pouco dinheiro e de forma segura',
+            'Como receber dividendos mensais e reinvestir com inteligência',
+            'Quais são os principais riscos e como evitá-los',
+            'Estratégias práticas para montar sua carteira e viver de renda'
+        ]
+    },
+    'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor': {
+        description: 'Você estuda por horas e sente que não aprende nada? A neurociência explica o porquê — e também ensina como mudar isso. Neste guia prático, você vai descobrir como o cérebro realmente aprende, como funciona a memória, a concentração e o foco, e como aplicar esses conhecimentos científicos para estudar de forma mais eficiente, rápida e duradoura. Nada de decorar conteúdo ou perder tempo com métodos ultrapassados. Aqui você vai entender o funcionamento real da mente humana e aprender a ativar o seu potencial máximo de aprendizado.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como o cérebro aprende e memoriza informações',
+            'Os principais neurotransmissores que influenciam a aprendizagem',
+            'Estratégias científicas para turbinar foco e concentração',
+            'Como combater a procrastinação com base na neurociência',
+            'O papel do sono e da alimentação na performance mental',
+            'Técnicas práticas de estudo baseadas em evidências científicas'
+        ]
+    },
+    'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas': {
+        description: 'Você já tentou mudar um hábito, mas acabou desistindo no meio do caminho? A ciência mostra que o problema não é falta de força de vontade, e sim usar a estratégia errada. Neste guia prático e transformador, você vai aprender como sua mente realmente funciona, e como usar a neurociência e a psicologia dos hábitos para substituir comportamentos ruins por hábitos poderosos — de forma leve, natural e permanente. Nada de fórmulas mágicas. Aqui você vai descobrir como pequenas mudanças diárias criam resultados extraordinários, e como reprogramar sua mente para alcançar seus objetivos mais ambiciosos.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como os hábitos são formados no cérebro',
+            'O poder dos pequenos hábitos e do progresso constante',
+            'Como eliminar hábitos ruins e criar novos comportamentos positivos',
+            'Técnicas práticas para manter a consistência',
+            'O papel do ambiente, da disciplina e da identidade pessoal',
+            'Como desenvolver a mentalidade de crescimento e viver em alta performance'
+        ]
+    },
+    'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados': {
+        description: 'Você já percebeu que algumas pessoas parecem atrair oportunidades, enquanto outras vivem reclamando da sorte? A diferença não está no dinheiro, no diploma ou nas conexões — está na mentalidade. Este guia foi criado para te mostrar como pensa, age e enxerga o mundo um verdadeiro empreendedor. Você vai descobrir como desenvolver uma mente vencedora, transformar ideias em ações lucrativas e criar o tipo de mentalidade que constrói riqueza e liberdade. Nada de fórmulas mágicas — aqui você vai entender como pensar como quem ganha dinheiro de verdade: com estratégia, visão e atitude.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'O que define a mentalidade empreendedora',
+            'Como transformar desafios em oportunidades',
+            'O poder da ação e da aprendizagem contínua',
+            'Como lidar com o medo, o erro e o fracasso',
+            'A importância da visão de longo prazo',
+            'Hábitos e atitudes de quem cria riqueza',
+            'Como tirar ideias do papel e gerar resultados reais'
+        ]
+    },
+    'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador': {
+        description: 'Você já acordou cansado, mal humorado ou com a sensação de "não descansei direito"? A verdade é que a qualidade do seu sono não é luxo — é base para seu corpo, humor, mente e resultados. Neste guia natural e prático, você vai entender como o sono realmente funciona, de que forma ele impacta seu desempenho diário, seu humor, seu corpo e sua produtividade — e como aplicar hábitos simples e eficazes para dormir melhor, de forma restauradora e natural. Sem remédios, sem jargões complicados. Só ciência aplicada + estratégias simples para toda pessoa que deseja acordar renovado(a), produtivo(a) e saudável.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Por que o sono é tão importante para o seu corpo, cérebro e emoções',
+            'Como a privação de sono impacta humor, memória, foco e produtividade',
+            'Como criar um ambiente natural e saudável para o sono',
+            'Hábitos noturnos e diurnos que promovem sono de qualidade',
+            'Estratégias práticas para dormir melhor sem depender de remédios',
+            'Como acordar renovado(a) e transformar seu dia com energia e foco'
+        ]
+    },
+    'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas': {
+        description: 'Quem resiste a um bom doce de festa? Neste guia prático e saboroso, você vai aprender como preparar doces deliciosos e lucrativos sem sair de casa — seja para vender e faturar um dinheiro extra ou para encantar sua família e amigos com sobremesas irresistíveis. Nada de receitas complicadas: aqui você vai encontrar passo a passo detalhado, dicas de conservação, decoração e apresentação, além de técnicas simples que deixam seus doces com aparência profissional.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como preparar brigadeiros, beijinhos, trufas, bolos no pote e outros clássicos',
+            'Dicas de ingredientes e ponto perfeito para cada doce',
+            'Como montar uma pequena produção caseira para vender',
+            'Técnicas de decoração e armazenamento',
+            'Ideias criativas para embalar e apresentar seus doces',
+            'Cálculo de custo e lucro para começar a empreender'
         ]
     },
     'Concurso Polícia Federal - Guia Definitivo': {
@@ -1047,6 +1491,18 @@ document.addEventListener('keydown', (e) => {
         }
         if (ebookDetailsModal.classList.contains('active')) {
             closeEbookDetailsModal();
+        }
+        if (changePasswordModal.classList.contains('active')) {
+            changePasswordModal.classList.remove('active');
+            changePasswordForm.reset();
+        }
+        if (forgotPasswordModal.classList.contains('active')) {
+            forgotPasswordModal.classList.remove('active');
+            verifyAccountForm.reset();
+            resetPasswordForm.reset();
+            verifyAccountForm.style.display = 'flex';
+            resetPasswordForm.style.display = 'none';
+            verifiedEmail = null;
         }
     }
     

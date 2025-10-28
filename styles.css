@@ -191,6 +191,22 @@ header .container {
     transform: scale(1.05);
 }
 
+.settings-btn {
+    background: #9C27B0;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+}
+
+.settings-btn:hover {
+    background: #7B1FA2;
+    transform: scale(1.05);
+}
+
 .my-ebooks-btn {
     position: relative;
     background: var(--success-color);
@@ -463,11 +479,21 @@ header .container {
     align-items: center;
     justify-content: center;
     color: white;
+    overflow: hidden;
 }
 
 .product-image i {
     font-size: 5rem;
     opacity: 0.3;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    object-position: center 15%;
+    background-color: #f8f9fa;
 }
 
 .product-info {
