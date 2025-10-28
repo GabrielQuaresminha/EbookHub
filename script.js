@@ -267,9 +267,9 @@ async function checkout() {
                 installments: 12
             },
             back_urls: {
-                success: window.location.href,
-                failure: window.location.href,
-                pending: window.location.href
+                success: window.location.href + '?status=approved',
+                failure: window.location.href + '?status=rejected',
+                pending: window.location.href + '?status=pending'
             },
             auto_return: 'approved',
             notification_url: window.location.href + '?notification=payment'
