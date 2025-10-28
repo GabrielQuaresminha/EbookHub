@@ -635,12 +635,10 @@ registerForm.addEventListener('submit', (e) => {
 
 // Handle Logout
 logoutBtn.addEventListener('click', () => {
-    if (confirm('Tem certeza que deseja sair?')) {
-        localStorage.removeItem('ebookhub_current_user');
-        currentUser = null;
-        updateUIForLoggedOutUser();
-        showNotification('Você saiu da sua conta', 'info');
-    }
+    localStorage.removeItem('ebookhub_current_user');
+    currentUser = null;
+    updateUIForLoggedOutUser();
+    showNotification('Você saiu da sua conta', 'info');
 });
 
 // ===== Change Password =====
