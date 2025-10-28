@@ -1550,6 +1550,43 @@ searchInput.addEventListener('input', debounce((e) => {
     }
 }, 300));
 
+// ===== Payment Return Detection =====
+// Check if user returned from payment
+function checkPaymentReturn() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    const payment_id = urlParams.get('payment_id');
+    
+    if (status === 'approved' && payment_id) {
+        console.log('✅ Pagamento aprovado! Processando compra...');
+        
+        // Simulate successful payment result
+        const result = {
+            payment_id: payment_id,
+            status: 'approved'
+        };
+        
+        // Process the purchase
+        handleSuccessfulPayment(result);
+        
+        // Show success message
+        showNotification('Pagamento aprovado! Seus ebooks foram adicionados à sua biblioteca.', 'success');
+        
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (status === 'rejected') {
+        showNotification('Pagamento rejeitado. Tente novamente.', 'error');
+        window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (status === 'pending') {
+        showNotification('Pagamento pendente. Aguarde a confirmação.', 'info');
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+}
+
+// Check payment return on page load
+checkPaymentReturn();
+
 console.log('🎉 EbookHub carregado com sucesso!');
 console.log('✨ Funcionalidades: Login/Cadastro, Meus Ebooks, Carrinho');
 console.log('🔐 Sistema de autenticação ativo!');
+console.log('💳 Sistema de pagamento integrado!');
