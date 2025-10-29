@@ -1,5 +1,6 @@
 // ===== API Configuration =====
-const API_URL = window.location.origin; // Use same origin for backend
+// Backend URL from Railway - v3.0
+const API_URL = 'https://ebookhub-production.up.railway.app';
 
 // ===== Mercado Pago Configuration =====
 // CREDENCIAIS DE PRODUÇÃO (para vendas reais) - v2.2
