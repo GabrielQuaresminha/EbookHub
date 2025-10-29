@@ -1583,8 +1583,47 @@ function checkPaymentReturn() {
     }
 }
 
+// ===== Manual Payment Processing =====
+// Function to manually process payment (for testing)
+function processManualPayment() {
+    if (cart.length === 0) {
+        showNotification('Carrinho vazio! Adicione um ebook primeiro.', 'warning');
+        return;
+    }
+    
+    console.log('🔄 Processando pagamento manual...');
+    
+    // Simulate successful payment result
+    const result = {
+        payment_id: 'MP-MANUAL-' + Date.now(),
+        status: 'approved'
+    };
+    
+    // Process the purchase
+    handleSuccessfulPayment(result);
+    
+    // Show success message
+    showNotification('Pagamento processado! Seus ebooks foram adicionados à sua biblioteca.', 'success');
+}
+
+// Add manual payment button for testing
+function addManualPaymentButton() {
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (checkoutBtn && !document.querySelector('.manual-payment-btn')) {
+        const manualBtn = document.createElement('button');
+        manualBtn.className = 'manual-payment-btn';
+        manualBtn.innerHTML = '<i class="fas fa-hand-holding-usd"></i> Processar Pagamento Manual (Teste)';
+        manualBtn.style.cssText = 'background: #28a745; color: white; border: none; padding: 10px 15px; border-radius: 5px; margin-left: 10px; cursor: pointer;';
+        manualBtn.onclick = processManualPayment;
+        checkoutBtn.parentNode.appendChild(manualBtn);
+    }
+}
+
 // Check payment return on page load
 checkPaymentReturn();
+
+// Add manual payment button for testing
+setTimeout(addManualPaymentButton, 1000);
 
 console.log('🎉 EbookHub carregado com sucesso!');
 console.log('✨ Funcionalidades: Login/Cadastro, Meus Ebooks, Carrinho');
