@@ -120,6 +120,10 @@ app.post('/api/register', async (req, res) => {
 
 // Login
 app.post('/api/login', async (req, res) => {
+    if (!mongoReady) {
+        return res.status(503).json({ error: 'MongoDB não está conectado. Tente novamente em alguns segundos.' });
+    }
+    
     try {
         const { email, password } = req.body;
 

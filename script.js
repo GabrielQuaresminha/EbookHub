@@ -530,6 +530,25 @@ loginForm.addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (!response.ok) {
+            // Fallback to localStorage if backend is down
+            console.warn('Backend not available, using localStorage fallback');
+            
+            const users = JSON.parse(localStorage.getItem('ebookhub_users') || '{}');
+            
+            if (users[email] && users[email].password === password) {
+                currentUser = {
+                    name: users[email].name,
+                    nickname: users[email].nickname,
+                    email: email
+                };
+                localStorage.setItem('ebookhub_current_user', JSON.stringify(currentUser));
+                updateUIForLoggedInUser();
+                closeAuthModal();
+                const displayName = currentUser.nickname || currentUser.name.split(' ')[0];
+                showNotification(`Bem-vindo(a) de volta, ${displayName}!`, 'success');
+                return;
+            }
+            
             showNotification(data.error || 'E-mail ou senha incorretos!', 'error');
             return;
         }
