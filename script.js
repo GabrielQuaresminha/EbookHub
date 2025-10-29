@@ -181,6 +181,7 @@ function addToCart(name, price, category) {
 function removeFromCart(itemId) {
     cart = cart.filter(item => item.id !== itemId);
     saveCart();
+    updateCartCount();
     updateCartDisplay();
     showNotification('Ebook removido do carrinho', 'info');
 }
