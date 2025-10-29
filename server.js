@@ -13,14 +13,22 @@ app.use(express.json());
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gabrielquaresma96_db_user:obEawi5Y0ehgj1CK@cluster0.dzzgcla.mongodb.net/ebookhub?retryWrites=true&w=majority&serverSelectionTimeoutMS=5000';
 
+// Wait for MongoDB to be ready before handling requests
+let mongoReady = false;
+
 mongoose.connect(MONGODB_URI, {
-    serverSelectionTimeoutMS: 5000,
+    serverSelectionTimeoutMS: 30000,
     socketTimeoutMS: 45000,
+    retryWrites: true
 })
-    .then(() => console.log('✅ MongoDB conectado com sucesso!'))
+    .then(() => {
+        console.log('✅ MongoDB conectado com sucesso!');
+        mongoReady = true;
+    })
     .catch(err => {
         console.error('❌ Erro ao conectar MongoDB:', err.message);
         console.error('Connection string:', MONGODB_URI);
+        mongoReady = false;
     });
 
 // Serve static files AFTER routes
@@ -57,6 +65,10 @@ const Purchase = mongoose.model('Purchase', PurchaseSchema);
 
 // Register
 app.post('/api/register', async (req, res) => {
+    if (!mongoReady) {
+        return res.status(503).json({ error: 'MongoDB não está conectado. Tente novamente em alguns segundos.' });
+    }
+    
     try {
         console.log('Register request received:', req.body);
         const { name, nickname, email, password } = req.body;
