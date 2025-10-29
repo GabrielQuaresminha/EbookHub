@@ -1,6 +1,7 @@
 // ===== API Configuration =====
 // Backend URL from Railway - v3.0
-const API_URL = 'https://ebookhub-production.up.railway.app';
+const API_URL = window.location.origin; // Fallback to localStorage temporarily
+const USE_LOCALSTORAGE = true; // Set to false when backend is working
 
 // ===== Mercado Pago Configuration =====
 // CREDENCIAIS DE PRODUÇÃO (para vendas reais) - v2.2
