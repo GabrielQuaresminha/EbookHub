@@ -345,21 +345,9 @@ async function handleSuccessfulPayment(result) {
         return;
     }
 
-    // Move items from cart to myEbooks
-    const purchaseDate = new Date().toLocaleString('pt-BR');
-    cart.forEach(item => {
-        const ebook = {
-            ...item,
-            purchaseDate: purchaseDate,
-            downloadUrl: item.name, // Use ebook name for download reference
-            transactionId: result.payment_id || 'MP-' + Date.now()
-        };
-        myEbooks.push(ebook);
-    });
-    
-    // Save purchase to API
+    // Save purchase to API FIRST
     try {
-        await fetch(`${API_URL}/api/purchase`, {
+        const response = await fetch(`${API_URL}/api/purchase`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -369,6 +357,20 @@ async function handleSuccessfulPayment(result) {
                 status: 'approved'
             })
         });
+        
+        if (response.ok) {
+            // Move items from cart to myEbooks AFTER successful save
+            const purchaseDate = new Date().toLocaleString('pt-BR');
+            cart.forEach(item => {
+                const ebook = {
+                    ...item,
+                    purchaseDate: purchaseDate,
+                    downloadUrl: item.name, // Use ebook name for download reference
+                    transactionId: result.payment_id || 'MP-' + Date.now()
+                };
+                myEbooks.push(ebook);
+            });
+        }
     } catch (error) {
         console.error('Save purchase error:', error);
     }
@@ -378,6 +380,7 @@ async function handleSuccessfulPayment(result) {
     await saveCart();
     updateCartCount();
     updateMyEbooksCount();
+    updateMyEbooksDisplay();
     updateCartDisplay();
     
     showNotification('Pagamento aprovado! Ebooks adicionados à sua biblioteca! 🎉', 'success');
