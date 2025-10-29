@@ -1,5 +1,5 @@
 // ===== Mercado Pago Configuration =====
-// CREDENCIAIS DE PRODUÇÃO (para vendas reais)
+// CREDENCIAIS DE PRODUÇÃO (para vendas reais) - v2.2
 const MP_PUBLIC_KEY = 'APP_USR-616a169c-90a7-4996-99be-4d91a55a1419';
 const MP_ACCESS_TOKEN = 'APP_USR-92158868421375-101718-37ad7e8f5bef84a15fd3995af1d2ea25-1964064467';
 
