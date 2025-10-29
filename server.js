@@ -52,18 +52,26 @@ const Purchase = mongoose.model('Purchase', PurchaseSchema);
 // Register
 app.post('/api/register', async (req, res) => {
     try {
+        console.log('Register request received:', req.body);
         const { name, nickname, email, password } = req.body;
+
+        if (!name || !nickname || !email || !password) {
+            return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+        }
 
         // Check if user exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
+            console.log('User already exists:', email);
             return res.status(400).json({ error: 'Este e-mail já está cadastrado!' });
         }
 
         // Hash password
+        console.log('Hashing password...');
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create user
+        console.log('Creating user...');
         const user = new User({
             name,
             nickname,
@@ -72,6 +80,7 @@ app.post('/api/register', async (req, res) => {
         });
 
         await user.save();
+        console.log('User created successfully:', user._id);
 
         res.json({
             success: true,
@@ -84,7 +93,7 @@ app.post('/api/register', async (req, res) => {
         });
     } catch (error) {
         console.error('Register error:', error);
-        res.status(500).json({ error: 'Erro ao criar conta' });
+        res.status(500).json({ error: 'Erro ao criar conta', details: error.message });
     }
 });
 
