@@ -1,3 +1,6 @@
+// ===== API Configuration =====
+const API_URL = window.location.origin; // Use same origin for backend
+
 // ===== Mercado Pago Configuration =====
 // CREDENCIAIS DE PRODUÇÃO (para vendas reais) - v2.2
 const MP_PUBLIC_KEY = 'APP_USR-616a169c-90a7-4996-99be-4d91a55a1419';
@@ -47,46 +50,66 @@ function updateUIForLoggedOutUser() {
 let cart = [];
 let myEbooks = [];
 
-// Load cart from localStorage
-function loadCart() {
-    if (!currentUser) {
+// Load cart from API
+async function loadCart() {
+    if (!currentUser || !currentUser.id) {
         cart = [];
         updateCartCount();
         return;
     }
-    const savedCart = localStorage.getItem(`ebookhub_cart_${currentUser.email}`);
-    if (savedCart) {
-        cart = JSON.parse(savedCart);
+    try {
+        const response = await fetch(`${API_URL}/api/cart/${currentUser.id}`);
+        const data = await response.json();
+        if (data.items) {
+            cart = data.items;
+            updateCartCount();
+        }
+    } catch (error) {
+        console.error('Load cart error:', error);
+        cart = [];
         updateCartCount();
     }
 }
 
-// Load my ebooks from localStorage
-function loadMyEbooks() {
-    if (!currentUser) {
+// Load my ebooks from API
+async function loadMyEbooks() {
+    if (!currentUser || !currentUser.id) {
         myEbooks = [];
         updateMyEbooksCount();
         return;
     }
-    const savedEbooks = localStorage.getItem(`ebookhub_myebooks_${currentUser.email}`);
-    if (savedEbooks) {
-        myEbooks = JSON.parse(savedEbooks);
+    try {
+        const response = await fetch(`${API_URL}/api/my-ebooks/${currentUser.id}`);
+        const data = await response.json();
+        if (data.ebooks) {
+            myEbooks = data.ebooks;
+            updateMyEbooksCount();
+        }
+    } catch (error) {
+        console.error('Load my ebooks error:', error);
+        myEbooks = [];
         updateMyEbooksCount();
     }
 }
 
-// Save my ebooks to localStorage
-function saveMyEbooks() {
-    if (!currentUser) return;
-    localStorage.setItem(`ebookhub_myebooks_${currentUser.email}`, JSON.stringify(myEbooks));
-    updateMyEbooksCount();
+// Save my ebooks to API
+async function saveMyEbooks() {
+    if (!currentUser || !currentUser.id) return;
+    // This will be updated when purchase is saved
 }
 
-// Save cart to localStorage
-function saveCart() {
-    if (!currentUser) return;
-    localStorage.setItem(`ebookhub_cart_${currentUser.email}`, JSON.stringify(cart));
-    updateCartCount();
+// Save cart to API
+async function saveCart() {
+    if (!currentUser || !currentUser.id) return;
+    try {
+        await fetch(`${API_URL}/api/cart/${currentUser.id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: cart })
+        });
+    } catch (error) {
+        console.error('Save cart error:', error);
+    }
 }
 
 // Add item to cart
@@ -313,7 +336,12 @@ async function checkout() {
 }
 
 // Handle successful payment
-function handleSuccessfulPayment(result) {
+async function handleSuccessfulPayment(result) {
+    if (!currentUser || !currentUser.id) {
+        showNotification('Erro: usuário não identificado', 'error');
+        return;
+    }
+
     // Move items from cart to myEbooks
     const purchaseDate = new Date().toLocaleString('pt-BR');
     cart.forEach(item => {
@@ -326,10 +354,25 @@ function handleSuccessfulPayment(result) {
         myEbooks.push(ebook);
     });
     
+    // Save purchase to API
+    try {
+        await fetch(`${API_URL}/api/purchase`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: currentUser.id,
+                items: cart,
+                paymentId: result.payment_id || 'MP-' + Date.now(),
+                status: 'approved'
+            })
+        });
+    } catch (error) {
+        console.error('Save purchase error:', error);
+    }
+    
     // Clear cart
     cart = [];
-    saveCart();
-    saveMyEbooks();
+    await saveCart();
     updateCartCount();
     updateMyEbooksCount();
     updateCartDisplay();
@@ -469,29 +512,37 @@ showLoginLink.addEventListener('click', (e) => {
 });
 
 // Handle Login
-loginForm.addEventListener('submit', (e) => {
+loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
     
-    // Get users from localStorage
-    const users = JSON.parse(localStorage.getItem('ebookhub_users') || '{}');
-    
-    if (users[email] && users[email].password === password) {
+    try {
+        // Login via API
+        const response = await fetch(`${API_URL}/api/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            showNotification(data.error || 'E-mail ou senha incorretos!', 'error');
+            return;
+        }
+
         // Login successful
-        currentUser = {
-            name: users[email].name,
-            nickname: users[email].nickname,
-            email: email
-        };
+        currentUser = data.user;
         localStorage.setItem('ebookhub_current_user', JSON.stringify(currentUser));
         updateUIForLoggedInUser();
         closeAuthModal();
         const displayName = currentUser.nickname || currentUser.name.split(' ')[0];
         showNotification(`Bem-vindo(a) de volta, ${displayName}!`, 'success');
-    } else {
-        showNotification('E-mail ou senha incorretos!', 'error');
+    } catch (error) {
+        console.error('Login error:', error);
+        showNotification('Erro ao conectar com o servidor', 'error');
     }
 });
 
@@ -581,7 +632,7 @@ if (registerEmailInput && emailHint) {
     });
 }
 
-registerForm.addEventListener('submit', (e) => {
+registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const name = document.getElementById('registerName').value.trim();
@@ -610,35 +661,31 @@ registerForm.addEventListener('submit', (e) => {
         return;
     }
     
-    // Get users from localStorage
-    const users = JSON.parse(localStorage.getItem('ebookhub_users') || '{}');
-    
-    // Check if user already exists
-    if (users[email]) {
-        showNotification('Este e-mail já está cadastrado!', 'warning');
-        return;
+    try {
+        // Register via API
+        const response = await fetch(`${API_URL}/api/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, nickname, email, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            showNotification(data.error || 'Erro ao criar conta', 'error');
+            return;
+        }
+
+        // Auto login after register
+        currentUser = data.user;
+        localStorage.setItem('ebookhub_current_user', JSON.stringify(currentUser));
+        updateUIForLoggedInUser();
+        closeAuthModal();
+        showNotification(`Conta criada com sucesso! Bem-vindo(a), ${nickname}!`, 'success');
+    } catch (error) {
+        console.error('Register error:', error);
+        showNotification('Erro ao conectar com o servidor', 'error');
     }
-    
-    // Register new user
-    users[email] = {
-        name: name,
-        nickname: nickname,
-        password: password,
-        createdAt: new Date().toISOString()
-    };
-    
-    localStorage.setItem('ebookhub_users', JSON.stringify(users));
-    
-    // Auto login after register
-    currentUser = {
-        name: name,
-        nickname: nickname,
-        email: email
-    };
-    localStorage.setItem('ebookhub_current_user', JSON.stringify(currentUser));
-    updateUIForLoggedInUser();
-    closeAuthModal();
-    showNotification(`Conta criada com sucesso! Bem-vindo(a), ${nickname}!`, 'success');
 });
 
 // Handle Logout
@@ -675,7 +722,7 @@ changePasswordModal.addEventListener('click', (e) => {
 });
 
 // Handle Change Password
-changePasswordForm.addEventListener('submit', (e) => {
+changePasswordForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const currentPassword = document.getElementById('currentPassword').value;
@@ -694,29 +741,38 @@ changePasswordForm.addEventListener('submit', (e) => {
         return;
     }
     
-    // Get users from localStorage
-    const users = JSON.parse(localStorage.getItem('ebookhub_users') || '{}');
-    
-    // Verify current password
-    if (!currentUser || !users[currentUser.email]) {
+    if (!currentUser || !currentUser.email) {
         showNotification('Erro ao verificar usuário!', 'error');
         return;
     }
     
-    if (users[currentUser.email].password !== currentPassword) {
-        showNotification('Senha atual incorreta!', 'error');
-        return;
+    try {
+        const response = await fetch(`${API_URL}/api/change-password`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: currentUser.email,
+                currentPassword,
+                newPassword
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            showNotification(data.error || 'Erro ao alterar senha', 'error');
+            return;
+        }
+
+        // Close modal and reset form
+        changePasswordModal.classList.remove('active');
+        changePasswordForm.reset();
+        
+        showNotification('Senha alterada com sucesso!', 'success');
+    } catch (error) {
+        console.error('Change password error:', error);
+        showNotification('Erro ao conectar com o servidor', 'error');
     }
-    
-    // Update password
-    users[currentUser.email].password = newPassword;
-    localStorage.setItem('ebookhub_users', JSON.stringify(users));
-    
-    // Close modal and reset form
-    changePasswordModal.classList.remove('active');
-    changePasswordForm.reset();
-    
-    showNotification('Senha alterada com sucesso!', 'success');
 });
 
 // ===== Forgot Password =====
@@ -771,36 +827,39 @@ forgotPasswordModal.addEventListener('click', (e) => {
 });
 
 // Step 1: Verify account
-verifyAccountForm.addEventListener('submit', (e) => {
+verifyAccountForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const email = document.getElementById('recoverEmail').value.trim().toLowerCase();
     const name = document.getElementById('recoverName').value.trim();
     
-    // Get users from localStorage
-    const users = JSON.parse(localStorage.getItem('ebookhub_users') || '{}');
-    
-    // Check if user exists
-    if (!users[email]) {
-        showNotification('E-mail não cadastrado!', 'error');
-        return;
+    try {
+        const response = await fetch(`${API_URL}/api/verify-account`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, name })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            showNotification(data.error || 'Erro ao verificar conta', 'error');
+            return;
+        }
+
+        // Success! Show password reset form
+        verifiedEmail = email;
+        verifyAccountForm.style.display = 'none';
+        resetPasswordForm.style.display = 'flex';
+        showNotification('Dados verificados! Crie sua nova senha.', 'success');
+    } catch (error) {
+        console.error('Verify account error:', error);
+        showNotification('Erro ao conectar com o servidor', 'error');
     }
-    
-    // Verify name matches
-    if (users[email].name.toLowerCase() !== name.toLowerCase()) {
-        showNotification('Nome não corresponde ao cadastrado!', 'error');
-        return;
-    }
-    
-    // Success! Show password reset form
-    verifiedEmail = email;
-    verifyAccountForm.style.display = 'none';
-    resetPasswordForm.style.display = 'flex';
-    showNotification('Dados verificados! Crie sua nova senha.', 'success');
 });
 
 // Step 2: Reset password
-resetPasswordForm.addEventListener('submit', (e) => {
+resetPasswordForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const newPassword = document.getElementById('resetNewPassword').value;
@@ -817,26 +876,37 @@ resetPasswordForm.addEventListener('submit', (e) => {
         return;
     }
     
-    // Get users from localStorage
-    const users = JSON.parse(localStorage.getItem('ebookhub_users') || '{}');
-    
-    // Update password
-    users[verifiedEmail].password = newPassword;
-    localStorage.setItem('ebookhub_users', JSON.stringify(users));
-    
-    // Close modal and reset forms
-    forgotPasswordModal.classList.remove('active');
-    verifyAccountForm.reset();
-    resetPasswordForm.reset();
-    verifyAccountForm.style.display = 'flex';
-    resetPasswordForm.style.display = 'none';
-    verifiedEmail = null;
-    
-    // Show success and open login modal
-    showNotification('Senha resetada com sucesso! Faça login com a nova senha.', 'success');
-    setTimeout(() => {
-        openAuthModal();
-    }, 1000);
+    try {
+        const response = await fetch(`${API_URL}/api/reset-password`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: verifiedEmail, newPassword })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            showNotification(data.error || 'Erro ao resetar senha', 'error');
+            return;
+        }
+
+        // Close modal and reset forms
+        forgotPasswordModal.classList.remove('active');
+        verifyAccountForm.reset();
+        resetPasswordForm.reset();
+        verifyAccountForm.style.display = 'flex';
+        resetPasswordForm.style.display = 'none';
+        verifiedEmail = null;
+        
+        // Show success and open login modal
+        showNotification('Senha resetada com sucesso! Faça login com a nova senha.', 'success');
+        setTimeout(() => {
+            openAuthModal();
+        }, 1000);
+    } catch (error) {
+        console.error('Reset password error:', error);
+        showNotification('Erro ao conectar com o servidor', 'error');
+    }
 });
 
 // Open ebook details
