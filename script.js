@@ -1590,3 +1590,4 @@ console.log('🎉 EbookHub carregado com sucesso!');
 console.log('✨ Funcionalidades: Login/Cadastro, Meus Ebooks, Carrinho');
 console.log('🔐 Sistema de autenticação ativo!');
 console.log('💳 Sistema de pagamento integrado!');
+console.log('🚀 Deploy automático funcionando!');
