@@ -6,17 +6,17 @@ const path = require('path');
 
 const app = express();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.static(__dirname)); // Serve static files
-
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gabrielquaresma96_db_user:obEawi5Y0ehgj1CK@cluster0.dzzgcla.mongodb.net/ebookhub?retryWrites=true&w=majority';
 
 mongoose.connect(MONGODB_URI)
     .then(() => console.log('✅ MongoDB conectado com sucesso!'))
     .catch(err => console.error('❌ Erro ao conectar MongoDB:', err));
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.static(__dirname)); // Serve static files
 
 // Schemas
 const UserSchema = new mongoose.Schema({
