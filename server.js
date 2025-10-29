@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.static(__dirname)); // Serve static files
 
 // MongoDB Connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gabriel:ebookhub2024@ebookhub-cluster.fkmrx.mongodb.net/ebookhub?retryWrites=true&w=majority';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gabrielquaresma96_db_user:obEawi5Y0ehgj1CK@cluster0.dzzgcla.mongodb.net/ebookhub?retryWrites=true&w=majority';
 
 mongoose.connect(MONGODB_URI)
     .then(() => console.log('✅ MongoDB conectado com sucesso!'))
