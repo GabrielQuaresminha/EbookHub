@@ -1,7 +1,6 @@
 // ===== API Configuration =====
 // Backend URL from Railway - v3.0
-const API_URL = window.location.origin; // Fallback to localStorage temporarily
-const USE_LOCALSTORAGE = true; // Set to false when backend is working
+const API_URL = 'https://ebookhub-production.up.railway.app';
 
 // ===== Mercado Pago Configuration =====
 // CREDENCIAIS DE PRODUÇÃO (para vendas reais) - v2.2
@@ -674,7 +673,30 @@ registerForm.addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (!response.ok) {
-            showNotification(data.error || 'Erro ao criar conta', 'error');
+            // Fallback to localStorage if backend is down
+            console.warn('Backend not available, using localStorage fallback');
+            
+            const users = JSON.parse(localStorage.getItem('ebookhub_users') || '{}');
+            
+            if (users[email]) {
+                showNotification('Este e-mail já está cadastrado!', 'warning');
+                return;
+            }
+            
+            users[email] = {
+                name,
+                nickname,
+                password,
+                createdAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('ebookhub_users', JSON.stringify(users));
+            
+            currentUser = { name, nickname, email };
+            localStorage.setItem('ebookhub_current_user', JSON.stringify(currentUser));
+            updateUIForLoggedInUser();
+            closeAuthModal();
+            showNotification(`Conta criada com sucesso! Bem-vindo(a), ${nickname}!`, 'success');
             return;
         }
 
