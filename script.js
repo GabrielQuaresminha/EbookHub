@@ -340,13 +340,19 @@ async function checkout() {
 
 // Handle successful payment
 async function handleSuccessfulPayment(result) {
+    console.log('🔍 handleSuccessfulPayment chamado!', result);
+    console.log('🔍 currentUser:', currentUser);
+    console.log('🔍 cart:', cart);
+    
     if (!currentUser || !currentUser.id) {
+        console.error('❌ Usuário não identificado');
         showNotification('Erro: usuário não identificado', 'error');
         return;
     }
 
     // Save purchase to API FIRST
     try {
+        console.log('📡 Salvando compra no backend...');
         const response = await fetch(`${API_URL}/api/purchase`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -358,7 +364,10 @@ async function handleSuccessfulPayment(result) {
             })
         });
         
+        console.log('📡 Response status:', response.status);
+        
         if (response.ok) {
+            console.log('✅ Compra salva no backend!');
             // Move items from cart to myEbooks AFTER successful save
             const purchaseDate = new Date().toLocaleString('pt-BR');
             cart.forEach(item => {
@@ -369,10 +378,14 @@ async function handleSuccessfulPayment(result) {
                     transactionId: result.payment_id || 'MP-' + Date.now()
                 };
                 myEbooks.push(ebook);
+                console.log('➕ Ebook adicionado ao myEbooks:', ebook.name);
             });
+            console.log('📚 Total de ebooks em myEbooks:', myEbooks.length);
+        } else {
+            console.error('❌ Erro ao salvar compra:', response.status);
         }
     } catch (error) {
-        console.error('Save purchase error:', error);
+        console.error('❌ Save purchase error:', error);
     }
     
     // Clear cart
