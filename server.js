@@ -11,11 +11,17 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gabrielquaresma96_db_user:obEawi5Y0ehgj1CK@cluster0.dzzgcla.mongodb.net/ebookhub?retryWrites=true&w=majority';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gabrielquaresma96_db_user:obEawi5Y0ehgj1CK@cluster0.dzzgcla.mongodb.net/ebookhub?retryWrites=true&w=majority&serverSelectionTimeoutMS=5000';
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI, {
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+})
     .then(() => console.log('✅ MongoDB conectado com sucesso!'))
-    .catch(err => console.error('❌ Erro ao conectar MongoDB:', err));
+    .catch(err => {
+        console.error('❌ Erro ao conectar MongoDB:', err.message);
+        console.error('Connection string:', MONGODB_URI);
+    });
 
 // Serve static files AFTER routes
 app.use(express.static(__dirname));
@@ -68,7 +74,10 @@ app.post('/api/register', async (req, res) => {
 
         // Hash password
         console.log('Hashing password...');
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10).catch(err => {
+            console.error('Bcrypt error:', err);
+            throw new Error('Erro ao criptografar senha');
+        });
 
         // Create user
         console.log('Creating user...');
