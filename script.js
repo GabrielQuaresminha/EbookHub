@@ -172,6 +172,7 @@ function addToCart(name, price, category) {
     
     cart.push(item);
     saveCart();
+    updateCartCount();
     updateCartDisplay();
     showNotification('Ebook adicionado ao carrinho!', 'success');
 }
