@@ -309,6 +309,11 @@ async function checkout() {
         };
         localStorage.setItem('ebookhub_pending_payment', JSON.stringify(paymentInfo));
 
+        // Snapshot the current cart to restore after redirect (used when page reloads)
+        try {
+            localStorage.setItem('ebookhub_cart_snapshot', JSON.stringify(cart));
+        } catch (_) {}
+
         // Create preference using Mercado Pago API
         const response = await fetch('https://api.mercadopago.com/checkout/preferences', {
             method: 'POST',
@@ -348,6 +353,19 @@ async function handleSuccessfulPayment(result) {
         console.error('❌ Usuário não identificado');
         showNotification('Erro: usuário não identificado', 'error');
         return;
+    }
+
+    // If cart is empty (common after redirect), recover from snapshot
+    if (cart.length === 0) {
+        try {
+            const snapshot = JSON.parse(localStorage.getItem('ebookhub_cart_snapshot') || '[]');
+            if (Array.isArray(snapshot) && snapshot.length > 0) {
+                cart = snapshot;
+                console.log('🧩 Cart recuperado do snapshot com', cart.length, 'itens');
+            }
+        } catch (e) {
+            console.warn('Falha ao recuperar snapshot do carrinho', e);
+        }
     }
 
     // Save purchase to API FIRST
@@ -394,6 +412,9 @@ async function handleSuccessfulPayment(result) {
     updateCartCount();
     updateMyEbooksCount();
     updateMyEbooksDisplay();
+    // refresh from backend to ensure consistency
+    try { await loadMyEbooks(); } catch (_) {}
+    try { localStorage.removeItem('ebookhub_cart_snapshot'); } catch (_) {}
     updateCartDisplay();
     
     showNotification('Pagamento aprovado! Ebooks adicionados à sua biblioteca! 🎉', 'success');
