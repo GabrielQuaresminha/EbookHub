@@ -1115,13 +1115,28 @@ function updateMyEbooksDisplay() {
     
     myEbooks.forEach(ebook => {
         const categoryName = getCategoryName(ebook.category);
+        
+        // Get ebook cover image
+        let coverImage = ebook.image || 'images/default-ebook.svg';
+        
+        // Format purchase date
+        let purchaseDateText = '';
+        if (ebook.purchaseDate && ebook.purchaseDate !== 'undefined') {
+            purchaseDateText = ebook.purchaseDate;
+        } else {
+            purchaseDateText = new Date().toLocaleDateString('pt-BR');
+        }
+        
         html += `
             <div class="my-ebook-item">
+                <div class="my-ebook-cover">
+                    <img src="${coverImage}" alt="${ebook.name}">
+                </div>
                 <div class="my-ebook-info">
                     <h4>${ebook.name}</h4>
                     <span class="ebook-category">${categoryName}</span>
                     <div class="purchase-date">
-                        <i class="fas fa-calendar"></i> Comprado em: ${ebook.purchaseDate}
+                        <i class="fas fa-calendar"></i> Comprado em: ${purchaseDateText}
                     </div>
                 </div>
                 <div class="my-ebook-actions">
