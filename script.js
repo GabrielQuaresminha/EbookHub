@@ -349,6 +349,16 @@ async function handleSuccessfulPayment(result) {
     console.log('🔍 currentUser:', currentUser);
     console.log('🔍 cart:', cart);
     
+    // Try to load user from localStorage if not logged in
+    if (!currentUser) {
+        console.log('⚠️ Usuário não identificado, tentando carregar do localStorage...');
+        const savedUser = localStorage.getItem('ebookhub_current_user');
+        if (savedUser) {
+            currentUser = JSON.parse(savedUser);
+            console.log('✅ Usuário recuperado do localStorage:', currentUser);
+        }
+    }
+    
     if (!currentUser || !currentUser.id) {
         console.error('❌ Usuário não identificado');
         showNotification('Erro: usuário não identificado', 'error');
