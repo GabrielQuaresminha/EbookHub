@@ -1720,6 +1720,8 @@ function checkPaymentReturn() {
     const status = urlParams.get('status');
     const payment_id = urlParams.get('payment_id');
     
+    console.log('🔍 checkPaymentReturn chamado!', { status, payment_id });
+    
     if (status === 'approved' && payment_id) {
         console.log('✅ Pagamento aprovado! Processando compra...');
         
