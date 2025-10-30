@@ -1161,7 +1161,7 @@ function downloadEbook(name) {
     } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
         pdfPath = 'O-CEREBRO-DE-ALTA-PERFORMANCE.pdf';
     } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
-        pdfPath = 'DESBLOQUEIE-SUA-MENTE-HABITOS-QUE-MUDAM-SUA-VIDA (1).pdf';
+        pdfPath = 'DESBLOQUEIE-SUA-MENTE-HABITOS-QUE-MUDAM-SUA-VIDA.pdf';
     } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
         pdfPath = 'MENTALIDADE-DE-EMPREENDEDOR.pdf';
     } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
