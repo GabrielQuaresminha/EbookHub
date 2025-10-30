@@ -1747,6 +1747,7 @@ function checkPaymentReturn() {
     
     console.log('🔍 checkPaymentReturn chamado!', { status, payment_id });
     
+    // ONLY process if status is 'approved' - not pending!
     if (status === 'approved' && payment_id) {
         console.log('✅ Pagamento aprovado! Processando compra...');
         
@@ -1768,41 +1769,21 @@ function checkPaymentReturn() {
         showNotification('Pagamento rejeitado. Tente novamente.', 'error');
         window.history.replaceState({}, document.title, window.location.pathname);
     } else if (status === 'pending') {
-        showNotification('Pagamento pendente. Aguarde a confirmação.', 'info');
+        showNotification('Pagamento pendente. Aguarde a confirmação. Os ebooks serão liberados após o pagamento ser aprovado.', 'info');
         window.history.replaceState({}, document.title, window.location.pathname);
+        // DO NOT process purchase for pending payments!
     }
 }
 
 // ===== Enhanced Payment Detection =====
-// Check for payment status in localStorage (backup method)
-function checkStoredPaymentStatus() {
-    const storedPayment = localStorage.getItem('ebookhub_pending_payment');
-    if (storedPayment) {
-        const paymentData = JSON.parse(storedPayment);
-        const now = Date.now();
-        const paymentTime = paymentData.timestamp;
-        
-        // If payment was made more than 30 seconds ago, assume it's approved
-        if (now - paymentTime > 30000) {
-            console.log('✅ Pagamento aprovado (timeout)! Processando compra...');
-            
-            const result = {
-                payment_id: paymentData.payment_id || 'MP-TIMEOUT-' + Date.now(),
-                status: 'approved'
-            };
-            
-            handleSuccessfulPayment(result);
-            localStorage.removeItem('ebookhub_pending_payment');
-            showNotification('Pagamento aprovado! Seus ebooks foram adicionados à sua biblioteca.', 'success');
-        }
-    }
-}
+// NOTE: Removed automatic payment approval for security
+// Only manually approved payments from Mercado Pago redirect are processed
 
 // Check payment return on page load
 checkPaymentReturn();
 
-// Check stored payment status (backup method)
-checkStoredPaymentStatus();
+// NOTE: Removed checkStoredPaymentStatus to prevent fraud!
+// Only approved payments are processed now.
 
 console.log('🎉 EbookHub carregado com sucesso!');
 console.log('✨ Funcionalidades: Login/Cadastro, Meus Ebooks, Carrinho');
