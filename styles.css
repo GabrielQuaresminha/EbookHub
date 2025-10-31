@@ -1294,6 +1294,60 @@ footer {
 }
 
 @media (max-width: 768px) {
+    /* Header mobile */
+    header {
+        padding: 0.5rem 0;
+    }
+
+    header .container {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .logo-image {
+        height: 60px;
+    }
+
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+
+    nav {
+        width: 100%;
+        order: 3;
+    }
+
+    .nav-links {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+
+    .header-actions {
+        order: 2;
+    }
+
+    .user-actions {
+        gap: 0.5rem;
+    }
+
+    .login-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .cart-btn, .my-ebooks-btn, .settings-btn, .logout-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
     .hero-content h2 {
         font-size: 2rem;
     }
@@ -1328,11 +1382,14 @@ footer {
 
     .filter-buttons {
         gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .filter-btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+        white-space: nowrap;
     }
 
     .about-stats {
