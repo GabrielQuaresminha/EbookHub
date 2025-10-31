@@ -144,7 +144,7 @@ function addToCart(name, price, category) {
         image = 'covers/desbloqueie-sua-mente.jpg';
     } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
         image = 'covers/mentalidade-empreendedor.jpg';
-    } else if (name === 'Instagram Lucrativo: Como Transformar Seguidores em Clientes e Gerar Renda com Conteúdo') {
+    } else if (name === 'INSTAGRAM LUCRATIVO: Como Vender Todos os Dias e Transformar Seguidores em Clientes') {
         image = 'covers/instagram-lucrativo.jpg';
     } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
         image = 'covers/durma-melhor-viva-melhor.jpg';
@@ -1028,7 +1028,7 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/desbloqueie-sua-mente.jpg';
     } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
         coverImage = 'covers/mentalidade-empreendedor.jpg';
-    } else if (name === 'Instagram Lucrativo: Como Transformar Seguidores em Clientes e Gerar Renda com Conteúdo') {
+    } else if (name === 'INSTAGRAM LUCRATIVO: Como Vender Todos os Dias e Transformar Seguidores em Clientes') {
         coverImage = 'covers/instagram-lucrativo.jpg';
     } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
         coverImage = 'covers/durma-melhor-viva-melhor.jpg';
@@ -1183,7 +1183,7 @@ function downloadEbook(name) {
         pdfPath = 'DESBLOQUEIE-SUA-MENTE-HABITOS-QUE-MUDAM-SUA-VIDA.pdf';
     } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
         pdfPath = 'MENTALIDADE-DE-EMPREENDEDOR.pdf';
-    } else if (name === 'Instagram Lucrativo: Como Transformar Seguidores em Clientes e Gerar Renda com Conteúdo') {
+    } else if (name === 'INSTAGRAM LUCRATIVO: Como Vender Todos os Dias e Transformar Seguidores em Clientes') {
         pdfPath = 'INSTAGRAM-LUCRATIVO.pdf';
     } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
         pdfPath = 'DURMA-MELHOR-VIVA-MELHOR-DE-FORMA-NATURAL.pdf';
@@ -1471,19 +1471,19 @@ const ebookDetails = {
             'Como tirar ideias do papel e gerar resultados reais'
         ]
     },
-    'Instagram Lucrativo: Como Transformar Seguidores em Clientes e Gerar Renda com Conteúdo': {
-        description: 'Você tem um perfil no Instagram mas não sabe como monetizar? Quer transformar seus seguidores em clientes e gerar renda real? Neste guia prático, você vai descobrir as estratégias comprovadas para construir uma audiência engajada, criar conteúdo que converte e monetizar seu Instagram de forma sustentável. Sem segredos impossíveis — aqui você vai aprender táticas reais usadas por quem fatura com a plataforma.',
+    'INSTAGRAM LUCRATIVO: Como Vender Todos os Dias e Transformar Seguidores em Clientes': {
+        description: 'Você já percebeu que muita gente tem milhares de seguidores, mas quase nenhuma venda? Isso acontece porque seguir não é o mesmo que comprar. O segredo dos perfis que lucram todos os dias está em estratégia, posicionamento e relacionamento verdadeiro com o público. Neste guia, você vai descobrir como transformar seu Instagram em uma vitrine poderosa de vendas, mesmo que ainda tenha poucos seguidores. Aprenderá como criar conteúdo que atrai, engaja e converte — tudo com estratégias simples, práticas e aplicáveis.',
         rating: 5,
         reviews: 0,
         badge: 'Novo',
         highlights: [
-            'Como crescer sua audiência de forma orgânica',
-            'Estratégias de conteúdo que geram engajamento',
-            'Formas de monetizar: vendas diretas, parcerias, afiliados',
-            'Como criar produtos digitais lucrativos',
-            'Gatilhos mentais que aumentam conversão',
-            'Análise de métricas que realmente importam',
-            'Case studies de perfis que faturam alto'
+            'Como criar um perfil profissional que atrai clientes automaticamente',
+            'Como planejar e produzir conteúdo que desperta desejo e gera engajamento',
+            'O passo a passo do funil de vendas no Instagram',
+            'Estratégias de relacionamento para criar uma base fiel de seguidores',
+            'Como usar o Direct, os Stories e o Reels para vender',
+            'Métricas e ferramentas que transformam dados em resultados',
+            'Transforme seu Instagram em uma máquina de engajamento e vendas'
         ]
     },
     'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador': {
