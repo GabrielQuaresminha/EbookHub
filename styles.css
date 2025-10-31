@@ -1302,6 +1302,7 @@ footer {
     header .container {
         flex-wrap: wrap;
         gap: 0.5rem;
+        justify-content: space-between;
     }
 
     .logo-image {
@@ -1312,9 +1313,18 @@ footer {
         font-size: 1.2rem;
     }
 
+    .logo {
+        order: 0;
+    }
+
+    .header-actions {
+        order: 1;
+        margin-left: auto;
+    }
+
     nav {
         width: 100%;
-        order: 3;
+        order: 2;
     }
 
     .nav-links {
@@ -1327,10 +1337,6 @@ footer {
     .nav-links a {
         font-size: 0.9rem;
         padding: 0.5rem;
-    }
-
-    .header-actions {
-        order: 2;
     }
 
     .user-actions {
