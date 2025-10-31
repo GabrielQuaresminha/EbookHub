@@ -144,6 +144,8 @@ function addToCart(name, price, category) {
         image = 'covers/desbloqueie-sua-mente.jpg';
     } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
         image = 'covers/mentalidade-empreendedor.jpg';
+    } else if (name === 'Instagram Lucrativo: Como Transformar Seguidores em Clientes e Gerar Renda com Conteúdo') {
+        image = 'covers/instagram-lucrativo.jpg';
     } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
         image = 'covers/durma-melhor-viva-melhor.jpg';
     } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
@@ -1026,6 +1028,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/desbloqueie-sua-mente.jpg';
     } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
         coverImage = 'covers/mentalidade-empreendedor.jpg';
+    } else if (name === 'Instagram Lucrativo: Como Transformar Seguidores em Clientes e Gerar Renda com Conteúdo') {
+        coverImage = 'covers/instagram-lucrativo.jpg';
     } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
         coverImage = 'covers/durma-melhor-viva-melhor.jpg';
     } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
@@ -1179,6 +1183,8 @@ function downloadEbook(name) {
         pdfPath = 'DESBLOQUEIE-SUA-MENTE-HABITOS-QUE-MUDAM-SUA-VIDA.pdf';
     } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
         pdfPath = 'MENTALIDADE-DE-EMPREENDEDOR.pdf';
+    } else if (name === 'Instagram Lucrativo: Como Transformar Seguidores em Clientes e Gerar Renda com Conteúdo') {
+        pdfPath = 'INSTAGRAM-LUCRATIVO.pdf';
     } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
         pdfPath = 'DURMA-MELHOR-VIVA-MELHOR-DE-FORMA-NATURAL.pdf';
     } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
@@ -1463,6 +1469,21 @@ const ebookDetails = {
             'A importância da visão de longo prazo',
             'Hábitos e atitudes de quem cria riqueza',
             'Como tirar ideias do papel e gerar resultados reais'
+        ]
+    },
+    'Instagram Lucrativo: Como Transformar Seguidores em Clientes e Gerar Renda com Conteúdo': {
+        description: 'Você tem um perfil no Instagram mas não sabe como monetizar? Quer transformar seus seguidores em clientes e gerar renda real? Neste guia prático, você vai descobrir as estratégias comprovadas para construir uma audiência engajada, criar conteúdo que converte e monetizar seu Instagram de forma sustentável. Sem segredos impossíveis — aqui você vai aprender táticas reais usadas por quem fatura com a plataforma.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como crescer sua audiência de forma orgânica',
+            'Estratégias de conteúdo que geram engajamento',
+            'Formas de monetizar: vendas diretas, parcerias, afiliados',
+            'Como criar produtos digitais lucrativos',
+            'Gatilhos mentais que aumentam conversão',
+            'Análise de métricas que realmente importam',
+            'Case studies de perfis que faturam alto'
         ]
     },
     'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador': {
