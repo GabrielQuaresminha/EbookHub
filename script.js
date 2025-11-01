@@ -140,6 +140,8 @@ function addToCart(name, price, category) {
         image = 'covers/investidor-fundos-imobiliarios.jpg';
     } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
         image = 'covers/cerebro-alta-performance.jpg';
+    } else if (name === 'DISCIPLINA E CONSTÂNCIA: Como Criar Força Mental e Hábito Diário de Sucesso') {
+        image = 'covers/disciplina-constancia.jpg';
     } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
         image = 'covers/desbloqueie-sua-mente.jpg';
     } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
@@ -1024,6 +1026,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/investidor-fundos-imobiliarios.jpg';
     } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
         coverImage = 'covers/cerebro-alta-performance.jpg';
+    } else if (name === 'DISCIPLINA E CONSTÂNCIA: Como Criar Força Mental e Hábito Diário de Sucesso') {
+        coverImage = 'covers/disciplina-constancia.jpg';
     } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
         coverImage = 'covers/desbloqueie-sua-mente.jpg';
     } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
@@ -1179,6 +1183,8 @@ function downloadEbook(name) {
         pdfPath = 'GUIA-DO-INVESTIDOR-INICIANTE-EM-FUNDOS-IMOBILIARIOS.pdf';
     } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
         pdfPath = 'O-CEREBRO-DE-ALTA-PERFORMANCE.pdf';
+    } else if (name === 'DISCIPLINA E CONSTÂNCIA: Como Criar Força Mental e Hábito Diário de Sucesso') {
+        pdfPath = 'DISCIPLINA-E-CONSTANCIA.pdf';
     } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
         pdfPath = 'DESBLOQUEIE-SUA-MENTE-HABITOS-QUE-MUDAM-SUA-VIDA.pdf';
     } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
@@ -1440,6 +1446,20 @@ const ebookDetails = {
             'Como combater a procrastinação com base na neurociência',
             'O papel do sono e da alimentação na performance mental',
             'Técnicas práticas de estudo baseadas em evidências científicas'
+        ]
+    },
+    'DISCIPLINA E CONSTÂNCIA: Como Criar Força Mental e Hábito Diário de Sucesso': {
+        description: 'Você já começou algo com empolgação e parou no meio do caminho? Se sim, saiba que o problema não é falta de motivação — é falta de disciplina e constância. Este eBook é o seu guia prático para criar força mental, foco e hábitos diários que levam ao sucesso, mesmo quando você não está motivado. Aqui, você vai entender como o cérebro constrói (e destrói) hábitos, e aprenderá estratégias reais para manter o ritmo, alcançar suas metas e transformar sua mentalidade.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'O que é disciplina e como desenvolvê-la',
+            'Como transformar pequenas ações em grandes resultados',
+            'Estratégias para manter constância mesmo nos dias difíceis',
+            'Como criar hábitos que duram e eliminam a procrastinação',
+            'O poder da mentalidade e da autodisciplina',
+            'Técnicas comprovadas para aumentar foco, energia e resiliência'
         ]
     },
     'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas': {
