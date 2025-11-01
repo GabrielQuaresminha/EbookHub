@@ -136,7 +136,7 @@ function addToCart(name, price, category) {
     // Check for specific ebook and use its cover
     if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
         image = 'covers/redacao-enem-1000.jpg';
-    } else if (name === 'Do zero ao Controle: Como organizar suas finanças e parar de viver no aperto') {
+    } else if (name === 'Do Zero ao Controle: Como Organizar Suas Finanças e Parar de Viver no Aperto') {
         image = 'covers/do-zero-ao-controle.jpg';
     } else if (name === 'Guia do Investidor Iniciante em Fundos Imobiliários') {
         image = 'covers/investidor-fundos-imobiliarios.jpg';
@@ -1024,7 +1024,7 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
     let coverImage = 'images/default-ebook.svg';
     if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
         coverImage = 'covers/redacao-enem-1000.jpg';
-    } else if (name === 'Do zero ao Controle: Como organizar suas finanças e parar de viver no aperto') {
+    } else if (name === 'Do Zero ao Controle: Como Organizar Suas Finanças e Parar de Viver no Aperto') {
         coverImage = 'covers/do-zero-ao-controle.jpg';
     } else if (name === 'Guia do Investidor Iniciante em Fundos Imobiliários') {
         coverImage = 'covers/investidor-fundos-imobiliarios.jpg';
@@ -1183,7 +1183,7 @@ function downloadEbook(name) {
     
     if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
         pdfPath = 'GUIA-COMPLETO-PARA-TIRAR-NOTA-1000-NA-REDACAO-DO-ENEM.pdf';
-    } else if (name === 'Do zero ao Controle: Como organizar suas finanças e parar de viver no aperto') {
+    } else if (name === 'Do Zero ao Controle: Como Organizar Suas Finanças e Parar de Viver no Aperto') {
         pdfPath = 'DO-ZERO-AO-CONTROLE.pdf';
     } else if (name === 'Guia do Investidor Iniciante em Fundos Imobiliários') {
         pdfPath = 'GUIA-DO-INVESTIDOR-INICIANTE-EM-FUNDOS-IMOBILIARIOS.pdf';
@@ -1426,7 +1426,7 @@ const ebookDetails = {
             'Exemplos reais e análises de redações nota 1000'
         ]
     },
-    'Do zero ao Controle: Como organizar suas finanças e parar de viver no aperto': {
+    'Do Zero ao Controle: Como Organizar Suas Finanças e Parar de Viver no Aperto': {
         description: 'Você sente que o dinheiro some e não sabe pra onde vai? Está sempre apertado, mesmo ganhando bem? Então este guia é pra você. Neste eBook, você vai aprender como sair do caos financeiro e assumir o controle total da sua vida econômica, passo a passo. Nada de teorias complicadas — aqui você vai ver métodos simples, planilhas práticas, metas inteligentes e rotinas que realmente funcionam.',
         rating: 5,
         reviews: 0,
