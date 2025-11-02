@@ -1712,7 +1712,7 @@ function startPaymentVerification(preferenceId, userId, items) {
     console.log('🔄 Iniciando verificação automática de pagamento...');
     
     let attempts = 0;
-    const maxAttempts = 60; // 5 minutos (5 segundos x 60)
+    const maxAttempts = 120; // 10 minutos (5 segundos x 120) - PIX pode demorar
     
     verificationInterval = setInterval(async () => {
         attempts++;
@@ -1726,6 +1726,7 @@ function startPaymentVerification(preferenceId, userId, items) {
             });
             
             const result = await response.json();
+            console.log('📊 Status:', result);
             
             if (result.approved) {
                 console.log('✅ Pagamento aprovado!');
@@ -1734,10 +1735,24 @@ function startPaymentVerification(preferenceId, userId, items) {
                 
                 // Reload ebooks
                 await loadMyEbooks();
-                showNotification('Pagamento aprovado! Seus ebooks foram liberados.', 'success');
+                showNotification('🎉 Pagamento confirmado! Seus ebooks foram liberados.', 'success');
+                
+                // Scroll to My Ebooks section
+                setTimeout(() => {
+                    const myEbooksSection = document.getElementById('my-ebooks-section');
+                    if (myEbooksSection) {
+                        myEbooksSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 1000);
+            } else if (result.status === 'pending') {
+                // Show status only on first check
+                if (attempts === 1) {
+                    showNotification('⏳ Aguardando confirmação do pagamento... (isso pode levar alguns minutos)', 'info');
+                }
             } else if (attempts >= maxAttempts) {
                 console.log('⏰ Tempo limite de verificação atingido');
                 clearInterval(verificationInterval);
+                showNotification('⚠️ Não foi possível confirmar o pagamento automaticamente. Aguarde alguns minutos e recarregue a página.', 'warning');
             }
         } catch (error) {
             console.error('Erro na verificação:', error);
@@ -1751,9 +1766,10 @@ function checkPendingPayment() {
         const data = JSON.parse(paymentData);
         const timeElapsed = Date.now() - data.timestamp;
         
-        // Only check if payment was initiated in the last 10 minutes
-        if (timeElapsed < 10 * 60 * 1000) {
+        // Only check if payment was initiated in the last 30 minutes (PIX pode demorar)
+        if (timeElapsed < 30 * 60 * 1000) {
             console.log('🔍 Verificando pagamento pendente...');
+            showNotification('🔄 Verificando seu pagamento...', 'info');
             startPaymentVerification(data.preferenceId, data.userId, data.items);
         } else {
             // Clean up old payment data
