@@ -256,6 +256,76 @@ app.post('/api/cart/:userId', async (req, res) => {
 
 // ===== PURCHASES ROUTES =====
 
+// Mercado Pago Webhook - Receive payment notifications
+app.post('/api/mercadopago/webhook', async (req, res) => {
+    try {
+        console.log('🔔 Webhook recebido do Mercado Pago:', req.body);
+        
+        const { type, data } = req.body;
+        
+        // Only process payment notifications
+        if (type === 'payment') {
+            const paymentId = data.id;
+            
+            // Fetch payment details from Mercado Pago
+            const MP_ACCESS_TOKEN = process.env.MP_ACCESS_TOKEN || 'APP_USR-92158868421375-101718-37ad7e8f5bef84a15fd3995af1d2ea25-1964064467';
+            
+            const paymentResponse = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
+                headers: {
+                    'Authorization': `Bearer ${MP_ACCESS_TOKEN}`
+                }
+            });
+            
+            const payment = await paymentResponse.json();
+            console.log('💰 Detalhes do pagamento:', payment.status, payment.payer.email);
+            
+            // Only process approved payments
+            if (payment.status === 'approved') {
+                const buyerEmail = payment.payer.email;
+                
+                // Find user by email
+                const user = await User.findOne({ email: buyerEmail.toLowerCase() });
+                
+                if (user) {
+                    // Check if purchase already exists
+                    const existingPurchase = await Purchase.findOne({ paymentId: payment.id.toString() });
+                    
+                    if (!existingPurchase) {
+                        // Extract items from payment metadata or external_reference
+                        const items = payment.additional_info?.items || [];
+                        
+                        const purchase = new Purchase({
+                            userId: user._id,
+                            items: items.map(item => ({
+                                name: item.title,
+                                price: item.unit_price,
+                                category: item.category_id || 'geral',
+                                purchaseDate: new Date().toLocaleString('pt-BR'),
+                                transactionId: payment.id
+                            })),
+                            paymentId: payment.id.toString(),
+                            status: 'approved'
+                        });
+                        
+                        await purchase.save();
+                        console.log('✅ Compra processada automaticamente via webhook!', buyerEmail);
+                    } else {
+                        console.log('ℹ️ Compra já processada anteriormente');
+                    }
+                } else {
+                    console.log('⚠️ Usuário não encontrado:', buyerEmail);
+                }
+            }
+        }
+        
+        // Always return 200 to Mercado Pago
+        res.status(200).send('OK');
+    } catch (error) {
+        console.error('❌ Webhook error:', error);
+        res.status(200).send('OK'); // Still return 200 to avoid retries
+    }
+});
+
 // Manual Purchase Addition (for customer support)
 app.post('/api/manual-purchase', async (req, res) => {
     try {

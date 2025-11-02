@@ -304,7 +304,7 @@ async function checkout() {
                 pending: window.location.href + '?status=pending'
             },
             auto_return: 'approved',
-            notification_url: window.location.href + '?notification=payment'
+            notification_url: `${API_URL}/api/mercadopago/webhook`
         };
 
         // Store payment info for backup detection
