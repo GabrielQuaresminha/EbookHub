@@ -1766,6 +1766,7 @@ function checkPendingPayment() {
 document.addEventListener('DOMContentLoaded', () => {
     loadUser();
     addProductCardClickEvents();
+    checkPaymentReturn(); // Clean URL after payment
     checkPendingPayment(); // Check for pending payments
     
     // Add fade-in animation to product cards
@@ -1872,48 +1873,19 @@ searchInput.addEventListener('input', debounce((e) => {
 }, 300));
 
 // ===== Payment Return Detection =====
-// Check if user returned from payment
+// Clean URL parameters after return from payment
 function checkPaymentReturn() {
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get('status');
-    const payment_id = urlParams.get('payment_id');
     
-    console.log('🔍 checkPaymentReturn chamado!', { status, payment_id });
-    
-    // ONLY process if status is 'approved' - not pending!
-    if (status === 'approved' && payment_id) {
-        console.log('✅ Pagamento aprovado! Processando compra...');
+    if (status) {
+        console.log('🔄 Usuário retornou do gateway de pagamento');
         
-        // Simulate successful payment result
-        const result = {
-            payment_id: payment_id,
-            status: 'approved'
-        };
-        
-        // Process the purchase
-        handleSuccessfulPayment(result);
-        
-        // Show success message
-        showNotification('Pagamento aprovado! Seus ebooks foram adicionados à sua biblioteca.', 'success');
-        
-        // Clean URL
+        // Clean URL without showing notifications
+        // The automatic verification system will handle the payment
         window.history.replaceState({}, document.title, window.location.pathname);
-    } else if (status === 'rejected') {
-        showNotification('Pagamento rejeitado. Tente novamente.', 'error');
-        window.history.replaceState({}, document.title, window.location.pathname);
-    } else if (status === 'pending') {
-        showNotification('Pagamento pendente. Aguarde a confirmação. Os ebooks serão liberados após o pagamento ser aprovado.', 'info');
-        window.history.replaceState({}, document.title, window.location.pathname);
-        // DO NOT process purchase for pending payments!
     }
 }
-
-// ===== Enhanced Payment Detection =====
-// NOTE: Removed automatic payment approval for security
-// Only manually approved payments from Mercado Pago redirect are processed
-
-// Check payment return on page load
-checkPaymentReturn();
 
 // NOTE: Removed checkStoredPaymentStatus to prevent fraud!
 // Only approved payments are processed now.
