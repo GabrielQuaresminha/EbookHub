@@ -280,6 +280,8 @@ async function checkout() {
         const total = cart.reduce((sum, item) => sum + item.price, 0);
         
         // Create preference for Mercado Pago
+        const externalReference = `EBOOKHUB-${currentUser.id}-${Date.now()}`;
+        
         const preference = {
             items: cart.map(item => ({
                 id: item.id,
@@ -293,6 +295,7 @@ async function checkout() {
                 name: currentUser.nickname || currentUser.name,
                 email: currentUser.email
             },
+            external_reference: externalReference,
             payment_methods: {
                 excluded_payment_methods: [],
                 excluded_payment_types: [],
@@ -338,9 +341,10 @@ async function checkout() {
             // Log available payment methods for debugging
             console.log('Preference created:', data);
             
-            // Store preference_id for payment verification
+            // Store preference_id and external_reference for payment verification
             const paymentData = {
                 preferenceId: data.id,
+                externalReference: externalReference,
                 userId: currentUser.id,
                 items: cart,
                 timestamp: Date.now()
@@ -348,7 +352,7 @@ async function checkout() {
             localStorage.setItem('ebookhub_payment_data', JSON.stringify(paymentData));
             
             // Start payment verification polling
-            startPaymentVerification(data.id, currentUser.id, cart);
+            startPaymentVerification(data.id, externalReference, currentUser.id, cart);
             
             // Redirect directly to Mercado Pago checkout
             window.location.href = data.init_point;
@@ -1708,7 +1712,7 @@ function addProductCardClickEvents() {
 // Payment Verification Polling
 let verificationInterval = null;
 
-function startPaymentVerification(preferenceId, userId, items, showInitialMessage = true) {
+function startPaymentVerification(preferenceId, externalReference, userId, items, showInitialMessage = true) {
     console.log('🔄 Iniciando verificação automática de pagamento...');
     
     let attempts = 0;
@@ -1725,7 +1729,7 @@ function startPaymentVerification(preferenceId, userId, items, showInitialMessag
             const response = await fetch(`${API_URL}/api/check-payment`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ preferenceId, userId, items })
+                body: JSON.stringify({ preferenceId, externalReference, userId, items })
             });
             
             const result = await response.json();
@@ -1779,7 +1783,7 @@ function checkPendingPayment() {
             console.log('🔍 Detectado pagamento pendente. Retomando verificação...');
             const minutesElapsed = Math.floor(timeElapsed / 60000);
             showNotification(`🔄 Retomando verificação do pagamento (iniciado há ${minutesElapsed} min)...`, 'info');
-            startPaymentVerification(data.preferenceId, data.userId, data.items, false);
+            startPaymentVerification(data.preferenceId, data.externalReference, data.userId, data.items, false);
         } else {
             // Clean up old payment data (older than 24h)
             console.log('🗑️ Removendo dados de pagamento antigo');

@@ -329,16 +329,17 @@ app.post('/api/mercadopago/webhook', async (req, res) => {
 // Check payment status and process if approved
 app.post('/api/check-payment', async (req, res) => {
     try {
-        const { preferenceId, userId, items } = req.body;
+        const { preferenceId, externalReference, userId, items } = req.body;
         console.log('🔍 === INICIANDO VERIFICAÇÃO ===');
         console.log('PreferenceId:', preferenceId);
+        console.log('ExternalReference:', externalReference);
         console.log('UserId:', userId);
         console.log('Items:', JSON.stringify(items));
         
         const MP_ACCESS_TOKEN = process.env.MP_ACCESS_TOKEN || 'APP_USR-92158868421375-101718-37ad7e8f5bef84a15fd3995af1d2ea25-1964064467';
         
-        // Search for payments by preference_id
-        const searchUrl = `https://api.mercadopago.com/v1/payments/search?preference_id=${preferenceId}&sort=date_created&criteria=desc`;
+        // Search for payments by external_reference (API do MP exige este parâmetro)
+        const searchUrl = `https://api.mercadopago.com/v1/payments/search?external_reference=${externalReference}&sort=date_created&criteria=desc`;
         console.log('🌐 URL da API:', searchUrl);
         
         const searchResponse = await fetch(searchUrl, {
@@ -413,7 +414,7 @@ app.post('/api/check-payment', async (req, res) => {
                 });
             }
         } else {
-            console.log('⚠️ Nenhum pagamento encontrado para este preference_id');
+            console.log('⚠️ Nenhum pagamento encontrado para este external_reference');
         }
         
         res.json({ 
