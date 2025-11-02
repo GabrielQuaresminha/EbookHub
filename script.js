@@ -1708,15 +1708,18 @@ function addProductCardClickEvents() {
 // Payment Verification Polling
 let verificationInterval = null;
 
-function startPaymentVerification(preferenceId, userId, items) {
+function startPaymentVerification(preferenceId, userId, items, showInitialMessage = true) {
     console.log('🔄 Iniciando verificação automática de pagamento...');
     
     let attempts = 0;
-    const maxAttempts = 120; // 10 minutos (5 segundos x 120) - PIX pode demorar
     
     verificationInterval = setInterval(async () => {
         attempts++;
-        console.log(`⏱️ Verificação ${attempts}/${maxAttempts}...`);
+        
+        // Log de progresso menos frequente (a cada 12 verificações = 1 minuto)
+        if (attempts % 12 === 0 || attempts <= 5) {
+            console.log(`⏱️ Verificação ${attempts} (${Math.floor(attempts * 5 / 60)} minutos)...`);
+        }
         
         try {
             const response = await fetch(`${API_URL}/api/check-payment`, {
@@ -1726,7 +1729,6 @@ function startPaymentVerification(preferenceId, userId, items) {
             });
             
             const result = await response.json();
-            console.log('📊 Status:', result);
             
             if (result.approved) {
                 console.log('✅ Pagamento aprovado!');
@@ -1746,13 +1748,19 @@ function startPaymentVerification(preferenceId, userId, items) {
                 }, 1000);
             } else if (result.status === 'pending') {
                 // Show status only on first check
-                if (attempts === 1) {
-                    showNotification('⏳ Aguardando confirmação do pagamento... (isso pode levar alguns minutos)', 'info');
+                if (attempts === 1 && showInitialMessage) {
+                    showNotification('⏳ Aguardando confirmação do pagamento PIX... O sistema verificará automaticamente.', 'info');
                 }
-            } else if (attempts >= maxAttempts) {
-                console.log('⏰ Tempo limite de verificação atingido');
+                
+                // Lembrete a cada 3 minutos
+                if (attempts % 36 === 0) {
+                    console.log('ℹ️ PIX ainda pendente. Continuando verificação automática...');
+                }
+            } else if (result.status === 'rejected' || result.status === 'cancelled') {
+                console.log('❌ Pagamento rejeitado ou cancelado');
                 clearInterval(verificationInterval);
-                showNotification('⚠️ Não foi possível confirmar o pagamento automaticamente. Aguarde alguns minutos e recarregue a página.', 'warning');
+                localStorage.removeItem('ebookhub_payment_data');
+                showNotification('❌ Pagamento não foi aprovado.', 'error');
             }
         } catch (error) {
             console.error('Erro na verificação:', error);
@@ -1766,13 +1774,15 @@ function checkPendingPayment() {
         const data = JSON.parse(paymentData);
         const timeElapsed = Date.now() - data.timestamp;
         
-        // Only check if payment was initiated in the last 30 minutes (PIX pode demorar)
-        if (timeElapsed < 30 * 60 * 1000) {
-            console.log('🔍 Verificando pagamento pendente...');
-            showNotification('🔄 Verificando seu pagamento...', 'info');
-            startPaymentVerification(data.preferenceId, data.userId, data.items);
+        // Check if payment was initiated in the last 24 hours
+        if (timeElapsed < 24 * 60 * 60 * 1000) {
+            console.log('🔍 Detectado pagamento pendente. Retomando verificação...');
+            const minutesElapsed = Math.floor(timeElapsed / 60000);
+            showNotification(`🔄 Retomando verificação do pagamento (iniciado há ${minutesElapsed} min)...`, 'info');
+            startPaymentVerification(data.preferenceId, data.userId, data.items, false);
         } else {
-            // Clean up old payment data
+            // Clean up old payment data (older than 24h)
+            console.log('🗑️ Removendo dados de pagamento antigo');
             localStorage.removeItem('ebookhub_payment_data');
         }
     }

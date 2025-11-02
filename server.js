@@ -330,29 +330,39 @@ app.post('/api/mercadopago/webhook', async (req, res) => {
 app.post('/api/check-payment', async (req, res) => {
     try {
         const { preferenceId, userId, items } = req.body;
-        console.log('🔍 Verificando status do pagamento:', preferenceId);
+        console.log('🔍 === INICIANDO VERIFICAÇÃO ===');
+        console.log('PreferenceId:', preferenceId);
+        console.log('UserId:', userId);
+        console.log('Items:', JSON.stringify(items));
         
         const MP_ACCESS_TOKEN = process.env.MP_ACCESS_TOKEN || 'APP_USR-92158868421375-101718-37ad7e8f5bef84a15fd3995af1d2ea25-1964064467';
         
         // Search for payments by preference_id
-        const searchResponse = await fetch(
-            `https://api.mercadopago.com/v1/payments/search?preference_id=${preferenceId}&sort=date_created&criteria=desc`,
-            {
-                headers: { 'Authorization': `Bearer ${MP_ACCESS_TOKEN}` }
-            }
-        );
+        const searchUrl = `https://api.mercadopago.com/v1/payments/search?preference_id=${preferenceId}&sort=date_created&criteria=desc`;
+        console.log('🌐 URL da API:', searchUrl);
+        
+        const searchResponse = await fetch(searchUrl, {
+            headers: { 'Authorization': `Bearer ${MP_ACCESS_TOKEN}` }
+        });
         
         const searchData = await searchResponse.json();
-        console.log('📋 Pagamentos encontrados:', searchData.results?.length || 0);
+        console.log('📋 Resposta da API Mercado Pago:', JSON.stringify(searchData, null, 2));
         
         if (searchData.results && searchData.results.length > 0) {
             // Get the most recent payment
             const payment = searchData.results[0];
-            console.log('💳 Status do pagamento:', payment.status, 'ID:', payment.id);
+            console.log('💳 Pagamento encontrado:');
+            console.log('   - Status:', payment.status);
+            console.log('   - ID:', payment.id);
+            console.log('   - Payer email:', payment.payer?.email);
+            console.log('   - Amount:', payment.transaction_amount);
             
             if (payment.status === 'approved') {
+                console.log('✅ Pagamento APROVADO! Processando compra...');
+                
                 // Check if purchase already exists
                 const existingPurchase = await Purchase.findOne({ paymentId: payment.id.toString() });
+                console.log('🔍 Verificando duplicidade:', existingPurchase ? 'JÁ EXISTE' : 'NOVA COMPRA');
                 
                 if (!existingPurchase) {
                     const purchase = new Purchase({
@@ -369,7 +379,8 @@ app.post('/api/check-payment', async (req, res) => {
                     });
                     
                     await purchase.save();
-                    console.log('✅ Compra processada com sucesso!');
+                    console.log('💾 Compra salva no banco de dados!');
+                    console.log('✅ === COMPRA PROCESSADA COM SUCESSO ===');
                     
                     return res.json({ 
                         success: true, 
@@ -377,7 +388,7 @@ app.post('/api/check-payment', async (req, res) => {
                         message: 'Pagamento aprovado! Ebooks liberados.' 
                     });
                 } else {
-                    console.log('ℹ️ Compra já processada');
+                    console.log('ℹ️ Compra já foi processada anteriormente');
                     return res.json({ 
                         success: true, 
                         approved: true,
@@ -385,6 +396,7 @@ app.post('/api/check-payment', async (req, res) => {
                     });
                 }
             } else if (payment.status === 'pending') {
+                console.log('⏳ Pagamento ainda PENDENTE');
                 return res.json({ 
                     success: true, 
                     approved: false,
@@ -392,6 +404,7 @@ app.post('/api/check-payment', async (req, res) => {
                     message: 'Pagamento pendente' 
                 });
             } else {
+                console.log('❌ Pagamento com status:', payment.status);
                 return res.json({ 
                     success: true, 
                     approved: false,
@@ -399,6 +412,8 @@ app.post('/api/check-payment', async (req, res) => {
                     message: 'Pagamento não aprovado' 
                 });
             }
+        } else {
+            console.log('⚠️ Nenhum pagamento encontrado para este preference_id');
         }
         
         res.json({ 
@@ -407,7 +422,8 @@ app.post('/api/check-payment', async (req, res) => {
             message: 'Nenhum pagamento encontrado ainda' 
         });
     } catch (error) {
-        console.error('❌ Erro ao verificar pagamento:', error);
+        console.error('❌ ERRO AO VERIFICAR PAGAMENTO:', error);
+        console.error('Stack:', error.stack);
         res.status(500).json({ error: 'Erro ao verificar pagamento', details: error.message });
     }
 });
