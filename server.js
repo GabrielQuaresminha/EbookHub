@@ -256,6 +256,39 @@ app.post('/api/cart/:userId', async (req, res) => {
 
 // ===== PURCHASES ROUTES =====
 
+// Manual Purchase Addition (for customer support)
+app.post('/api/manual-purchase', async (req, res) => {
+    try {
+        const { email, ebookName } = req.body;
+        
+        // Find user by email
+        const user = await User.findOne({ email: email.toLowerCase() });
+        if (!user) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        // Create purchase with manual payment
+        const purchase = new Purchase({
+            userId: user._id,
+            items: [{
+                name: ebookName,
+                purchaseDate: new Date().toLocaleString('pt-BR'),
+                transactionId: 'MANUAL-' + Date.now()
+            }],
+            paymentId: 'MANUAL-' + Date.now(),
+            status: 'approved'
+        });
+
+        await purchase.save();
+        console.log('Manual purchase created for:', email, ebookName);
+        
+        res.json({ success: true, message: 'Ebook adicionado com sucesso!' });
+    } catch (error) {
+        console.error('Manual purchase error:', error);
+        res.status(500).json({ error: 'Erro ao adicionar ebook', details: error.message });
+    }
+});
+
 // Get My Ebooks
 app.get('/api/my-ebooks/:userId', async (req, res) => {
     try {
