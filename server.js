@@ -326,6 +326,92 @@ app.post('/api/mercadopago/webhook', async (req, res) => {
     }
 });
 
+// Check payment status and process if approved
+app.post('/api/check-payment', async (req, res) => {
+    try {
+        const { preferenceId, userId, items } = req.body;
+        console.log('🔍 Verificando status do pagamento:', preferenceId);
+        
+        const MP_ACCESS_TOKEN = process.env.MP_ACCESS_TOKEN || 'APP_USR-92158868421375-101718-37ad7e8f5bef84a15fd3995af1d2ea25-1964064467';
+        
+        // Search for payments by preference_id
+        const searchResponse = await fetch(
+            `https://api.mercadopago.com/v1/payments/search?preference_id=${preferenceId}&sort=date_created&criteria=desc`,
+            {
+                headers: { 'Authorization': `Bearer ${MP_ACCESS_TOKEN}` }
+            }
+        );
+        
+        const searchData = await searchResponse.json();
+        console.log('📋 Pagamentos encontrados:', searchData.results?.length || 0);
+        
+        if (searchData.results && searchData.results.length > 0) {
+            // Get the most recent payment
+            const payment = searchData.results[0];
+            console.log('💳 Status do pagamento:', payment.status, 'ID:', payment.id);
+            
+            if (payment.status === 'approved') {
+                // Check if purchase already exists
+                const existingPurchase = await Purchase.findOne({ paymentId: payment.id.toString() });
+                
+                if (!existingPurchase) {
+                    const purchase = new Purchase({
+                        userId: userId,
+                        items: items.map(item => ({
+                            name: item.name,
+                            price: item.price,
+                            category: item.category,
+                            purchaseDate: new Date().toLocaleString('pt-BR'),
+                            transactionId: payment.id
+                        })),
+                        paymentId: payment.id.toString(),
+                        status: 'approved'
+                    });
+                    
+                    await purchase.save();
+                    console.log('✅ Compra processada com sucesso!');
+                    
+                    return res.json({ 
+                        success: true, 
+                        approved: true,
+                        message: 'Pagamento aprovado! Ebooks liberados.' 
+                    });
+                } else {
+                    console.log('ℹ️ Compra já processada');
+                    return res.json({ 
+                        success: true, 
+                        approved: true,
+                        message: 'Compra já foi processada anteriormente.' 
+                    });
+                }
+            } else if (payment.status === 'pending') {
+                return res.json({ 
+                    success: true, 
+                    approved: false,
+                    status: 'pending',
+                    message: 'Pagamento pendente' 
+                });
+            } else {
+                return res.json({ 
+                    success: true, 
+                    approved: false,
+                    status: payment.status,
+                    message: 'Pagamento não aprovado' 
+                });
+            }
+        }
+        
+        res.json({ 
+            success: true, 
+            approved: false,
+            message: 'Nenhum pagamento encontrado ainda' 
+        });
+    } catch (error) {
+        console.error('❌ Erro ao verificar pagamento:', error);
+        res.status(500).json({ error: 'Erro ao verificar pagamento', details: error.message });
+    }
+});
+
 // Manual Purchase Addition (for customer support)
 app.post('/api/manual-purchase', async (req, res) => {
     try {

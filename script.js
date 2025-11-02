@@ -307,11 +307,13 @@ async function checkout() {
             notification_url: `${API_URL}/api/mercadopago/webhook`
         };
 
-        // Store payment info for backup detection
+        // Store payment info for verification
         const paymentInfo = {
             payment_id: 'MP-' + Date.now(),
             timestamp: Date.now(),
-            items: cart.map(item => item.name)
+            items: cart,
+            userId: currentUser.id,
+            userEmail: currentUser.email
         };
         localStorage.setItem('ebookhub_pending_payment', JSON.stringify(paymentInfo));
 
@@ -335,6 +337,18 @@ async function checkout() {
         if (data.id && data.init_point) {
             // Log available payment methods for debugging
             console.log('Preference created:', data);
+            
+            // Store preference_id for payment verification
+            const paymentData = {
+                preferenceId: data.id,
+                userId: currentUser.id,
+                items: cart,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('ebookhub_payment_data', JSON.stringify(paymentData));
+            
+            // Start payment verification polling
+            startPaymentVerification(data.id, currentUser.id, cart);
             
             // Redirect directly to Mercado Pago checkout
             window.location.href = data.init_point;
@@ -1691,10 +1705,68 @@ function addProductCardClickEvents() {
     });
 }
 
+// Payment Verification Polling
+let verificationInterval = null;
+
+function startPaymentVerification(preferenceId, userId, items) {
+    console.log('🔄 Iniciando verificação automática de pagamento...');
+    
+    let attempts = 0;
+    const maxAttempts = 60; // 5 minutos (5 segundos x 60)
+    
+    verificationInterval = setInterval(async () => {
+        attempts++;
+        console.log(`⏱️ Verificação ${attempts}/${maxAttempts}...`);
+        
+        try {
+            const response = await fetch(`${API_URL}/api/check-payment`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ preferenceId, userId, items })
+            });
+            
+            const result = await response.json();
+            
+            if (result.approved) {
+                console.log('✅ Pagamento aprovado!');
+                clearInterval(verificationInterval);
+                localStorage.removeItem('ebookhub_payment_data');
+                
+                // Reload ebooks
+                await loadMyEbooks();
+                showNotification('Pagamento aprovado! Seus ebooks foram liberados.', 'success');
+            } else if (attempts >= maxAttempts) {
+                console.log('⏰ Tempo limite de verificação atingido');
+                clearInterval(verificationInterval);
+            }
+        } catch (error) {
+            console.error('Erro na verificação:', error);
+        }
+    }, 5000); // Check every 5 seconds
+}
+
+function checkPendingPayment() {
+    const paymentData = localStorage.getItem('ebookhub_payment_data');
+    if (paymentData) {
+        const data = JSON.parse(paymentData);
+        const timeElapsed = Date.now() - data.timestamp;
+        
+        // Only check if payment was initiated in the last 10 minutes
+        if (timeElapsed < 10 * 60 * 1000) {
+            console.log('🔍 Verificando pagamento pendente...');
+            startPaymentVerification(data.preferenceId, data.userId, data.items);
+        } else {
+            // Clean up old payment data
+            localStorage.removeItem('ebookhub_payment_data');
+        }
+    }
+}
+
 // ===== Initialize on Page Load =====
 document.addEventListener('DOMContentLoaded', () => {
     loadUser();
     addProductCardClickEvents();
+    checkPendingPayment(); // Check for pending payments
     
     // Add fade-in animation to product cards
     const observer = new IntersectionObserver((entries) => {
