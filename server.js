@@ -454,7 +454,7 @@ app.post('/api/check-payment', async (req, res) => {
 // Manual Purchase Addition (for customer support)
 app.post('/api/manual-purchase', async (req, res) => {
     try {
-        const { email, ebookName } = req.body;
+        const { email, ebookName, price, category } = req.body;
         
         // Find user by email
         const user = await User.findOne({ email: email.toLowerCase() });
@@ -467,6 +467,8 @@ app.post('/api/manual-purchase', async (req, res) => {
             userId: user._id,
             items: [{
                 name: ebookName,
+                price: price || 14.90,
+                category: category || 'geral',
                 purchaseDate: new Date().toLocaleString('pt-BR'),
                 transactionId: 'MANUAL-' + Date.now()
             }],
@@ -481,6 +483,49 @@ app.post('/api/manual-purchase', async (req, res) => {
     } catch (error) {
         console.error('Manual purchase error:', error);
         res.status(500).json({ error: 'Erro ao adicionar ebook', details: error.message });
+    }
+});
+
+// Fix/Update purchase data (for fixing manual purchases)
+app.post('/api/fix-purchase', async (req, res) => {
+    try {
+        const { email, ebookName, price, category } = req.body;
+        
+        // Find user by email
+        const user = await User.findOne({ email: email.toLowerCase() });
+        if (!user) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        // Find and update the purchase
+        const purchase = await Purchase.findOne({ 
+            userId: user._id,
+            'items.name': ebookName
+        });
+        
+        if (!purchase) {
+            return res.status(404).json({ error: 'Compra não encontrada' });
+        }
+
+        // Update the item with missing data
+        purchase.items = purchase.items.map(item => {
+            if (item.name === ebookName) {
+                return {
+                    ...item,
+                    price: price || item.price || 14.90,
+                    category: category || item.category || 'geral'
+                };
+            }
+            return item;
+        });
+
+        await purchase.save();
+        console.log('Purchase fixed for:', email, ebookName);
+        
+        res.json({ success: true, message: 'Compra corrigida com sucesso!' });
+    } catch (error) {
+        console.error('Fix purchase error:', error);
+        res.status(500).json({ error: 'Erro ao corrigir compra', details: error.message });
     }
 });
 
