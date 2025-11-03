@@ -1062,6 +1062,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/durma-melhor-viva-melhor.jpg';
     } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
         coverImage = 'covers/doces-de-festa-em-casa.jpg';
+    } else if (name === 'Desafio dos 21 Dias: Corpo e Mente em Equilíbrio') {
+        coverImage = 'covers/desafio-21-dias.jpg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
