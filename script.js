@@ -158,6 +158,8 @@ function addToCart(name, price, category) {
         image = 'covers/desafio-21-dias.jpg';
     } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
         image = 'covers/receitas-3-ingredientes.jpg';
+    } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
+        image = 'covers/codigo-vendas-online.jpg';
     }
     
     // Try to get image from the product card if not found above
@@ -1068,6 +1070,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/desafio-21-dias.jpg';
     } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
         coverImage = 'covers/receitas-3-ingredientes.jpg';
+    } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
+        coverImage = 'covers/codigo-vendas-online.jpg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1187,6 +1191,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/desafio-21-dias.jpg';
             } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
                 coverImage = 'covers/receitas-3-ingredientes.jpg';
+            } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
+                coverImage = 'covers/codigo-vendas-online.jpg';
             } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
                 coverImage = 'covers/cerebro-alta-performance.jpg';
             } else if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
@@ -1280,6 +1286,8 @@ function downloadEbook(name) {
         pdfPath = 'DESAFIO-DOS-21-DIAS.pdf';
     } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
         pdfPath = 'RECEITAS-COM-3-INGREDIENTES.pdf';
+    } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
+        pdfPath = 'O-CODIGO-DAS-VENDAS-ONLINE.pdf';
     }
     
     if (!pdfPath) {
@@ -1662,6 +1670,22 @@ const ebookDetails = {
             'Sugestões para montar cardápios rápidos e versáteis',
             'Receitas que funcionam até pra quem não sabe cozinhar',
             'Menos ingredientes. Mais sabor. Simples assim.'
+        ]
+    },
+    'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você': {
+        cover: 'covers/codigo-vendas-online.jpg',
+        description: 'Você já se perguntou por que algumas pessoas vendem qualquer coisa na internet — e outras não conseguem sair do zero? A diferença está no código invisível das vendas online. Este eBook revela os segredos psicológicos e estratégicos por trás das marcas e empreendedores que vendem todos os dias, mesmo sem milhares de seguidores. Você vai aprender como ativar o gatilho certo na mente do seu cliente, construir autoridade real e multiplicar suas conversões. Nada de truques vazios ou promessas mágicas. Aqui você vai entender como as pessoas pensam, o que as faz comprar e como aplicar isso de forma ética e inteligente.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como funciona a mente do comprador online',
+            'Os 7 gatilhos mentais que mais vendem',
+            'Como construir autoridade e confiança digital',
+            'O poder das palavras: técnicas de copywriting persuasivo',
+            'Como criar ofertas irresistíveis que convertem',
+            'Estratégias de funil e jornada de compra',
+            'Como vender todos os dias, mesmo com poucos seguidores'
         ]
     },
     'Concurso Polícia Federal - Guia Definitivo': {
