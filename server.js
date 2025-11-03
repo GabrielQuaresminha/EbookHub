@@ -338,15 +338,37 @@ app.post('/api/check-payment', async (req, res) => {
         
         const MP_ACCESS_TOKEN = process.env.MP_ACCESS_TOKEN || 'APP_USR-92158868421375-101718-37ad7e8f5bef84a15fd3995af1d2ea25-1964064467';
         
-        // Search for payments by external_reference (API do MP exige este parâmetro)
-        const searchUrl = `https://api.mercadopago.com/v1/payments/search?external_reference=${externalReference}&sort=date_created&criteria=desc`;
-        console.log('🌐 URL da API:', searchUrl);
+        // Get user to search by email (fallback for old payments)
+        const user = await User.findById(userId);
+        if (!user) {
+            console.log('❌ Usuário não encontrado');
+            return res.json({ success: false, error: 'Usuário não encontrado' });
+        }
         
-        const searchResponse = await fetch(searchUrl, {
-            headers: { 'Authorization': `Bearer ${MP_ACCESS_TOKEN}` }
-        });
+        let searchData = null;
         
-        const searchData = await searchResponse.json();
+        // Try 1: Search by external_reference (for new payments)
+        if (externalReference) {
+            console.log('🔍 Tentativa 1: Buscando por external_reference:', externalReference);
+            const searchUrl = `https://api.mercadopago.com/v1/payments/search?external_reference=${externalReference}&sort=date_created&criteria=desc`;
+            const searchResponse = await fetch(searchUrl, {
+                headers: { 'Authorization': `Bearer ${MP_ACCESS_TOKEN}` }
+            });
+            searchData = await searchResponse.json();
+            console.log('📋 Resultado external_reference:', searchData.results?.length || 0, 'pagamentos');
+        }
+        
+        // Try 2: Search by payer email (fallback for old payments without external_reference)
+        if (!searchData?.results?.length) {
+            console.log('🔍 Tentativa 2: Buscando por email do pagador:', user.email);
+            const searchUrl = `https://api.mercadopago.com/v1/payments/search?payer.email=${user.email}&sort=date_created&criteria=desc&range=date_created&begin_date=NOW-7DAYS&end_date=NOW`;
+            const searchResponse = await fetch(searchUrl, {
+                headers: { 'Authorization': `Bearer ${MP_ACCESS_TOKEN}` }
+            });
+            searchData = await searchResponse.json();
+            console.log('📋 Resultado email:', searchData.results?.length || 0, 'pagamentos');
+        }
+        
         console.log('📋 Resposta da API Mercado Pago:', JSON.stringify(searchData, null, 2));
         
         if (searchData.results && searchData.results.length > 0) {
