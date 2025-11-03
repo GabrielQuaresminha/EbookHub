@@ -156,6 +156,8 @@ function addToCart(name, price, category) {
         image = 'covers/doces-de-festa-em-casa.jpg';
     } else if (name === 'Desafio dos 21 Dias: Corpo e Mente em Equilíbrio') {
         image = 'covers/desafio-21-dias.jpg';
+    } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
+        image = 'covers/receitas-3-ingredientes.jpg';
     }
     
     // Try to get image from the product card if not found above
@@ -1064,6 +1066,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/doces-de-festa-em-casa.jpg';
     } else if (name === 'Desafio dos 21 Dias: Corpo e Mente em Equilíbrio') {
         coverImage = 'covers/desafio-21-dias.jpg';
+    } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
+        coverImage = 'covers/receitas-3-ingredientes.jpg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1181,6 +1185,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/doces-de-festa-em-casa.jpg';
             } else if (name === 'Desafio dos 21 Dias: Corpo e Mente em Equilíbrio') {
                 coverImage = 'covers/desafio-21-dias.jpg';
+            } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
+                coverImage = 'covers/receitas-3-ingredientes.jpg';
             }
         }
         
@@ -1266,6 +1272,8 @@ function downloadEbook(name) {
         pdfPath = 'DOCES-DE-FESTA-EM-CASA.pdf';
     } else if (name === 'Desafio dos 21 Dias: Corpo e Mente em Equilíbrio') {
         pdfPath = 'DESAFIO-DOS-21-DIAS.pdf';
+    } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
+        pdfPath = 'RECEITAS-COM-3-INGREDIENTES.pdf';
     }
     
     if (!pdfPath) {
@@ -1633,6 +1641,21 @@ const ebookDetails = {
             'Estratégias de alimentação, movimento e respiração conscientes',
             'Técnicas simples de autocuidado e equilíbrio emocional',
             '21 dias para transformar sua vida com equilíbrio e bem-estar'
+        ]
+    },
+    'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis': {
+        cover: 'covers/receitas-3-ingredientes.jpg',
+        description: 'Você adora comer bem, mas não tem tempo (ou paciência) para receitas complicadas? Então este eBook é pra você! Aqui, você vai descobrir as melhores receitas com apenas 3 ingredientes, perfeitas para quem quer praticidade, sabor e economia. São receitas rápidas, baratas e deliciosas — ideais para o dia a dia, para vender ou até impressionar a família. Nada de complicação. Com poucos ingredientes, você vai ver que é possível criar verdadeiras maravilhas na cozinha!',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Receitas doces e salgadas com apenas 3 ingredientes',
+            'Dicas para economizar e aproveitar o que tem em casa',
+            'Truques para deixar suas receitas mais saborosas',
+            'Sugestões para montar cardápios rápidos e versáteis',
+            'Receitas que funcionam até pra quem não sabe cozinhar',
+            'Menos ingredientes. Mais sabor. Simples assim.'
         ]
     },
     'Concurso Polícia Federal - Guia Definitivo': {
