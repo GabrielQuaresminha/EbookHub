@@ -300,7 +300,7 @@ app.post('/api/mercadopago/webhook', async (req, res) => {
                                 name: item.title,
                                 price: item.unit_price,
                                 category: item.category_id || 'geral',
-                                purchaseDate: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }).split(',')[0].trim(),
+                                purchaseDate: new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
                                 transactionId: payment.id
                             })),
                             paymentId: payment.id.toString(),
