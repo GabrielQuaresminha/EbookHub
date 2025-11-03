@@ -1187,6 +1187,12 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/desafio-21-dias.jpg';
             } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
                 coverImage = 'covers/receitas-3-ingredientes.jpg';
+            } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
+                coverImage = 'covers/cerebro-alta-performance.jpg';
+            } else if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
+                coverImage = 'covers/redacao-enem-1000.jpg';
+            } else if (name === 'Guia do Investidor Iniciante em Fundos Imobiliários') {
+                coverImage = 'covers/investidor-fundos-imobiliarios.jpg';
             }
         }
         
