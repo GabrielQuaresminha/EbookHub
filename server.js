@@ -486,6 +486,39 @@ app.post('/api/manual-purchase', async (req, res) => {
     }
 });
 
+// Fix purchase dates (correct timezone issues)
+app.post('/api/fix-dates', async (req, res) => {
+    try {
+        const { email, correctDate } = req.body;
+        
+        // Find user by email
+        const user = await User.findOne({ email: email.toLowerCase() });
+        if (!user) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        // Update all purchases for this user
+        const purchases = await Purchase.find({ userId: user._id });
+        
+        let updated = 0;
+        for (const purchase of purchases) {
+            purchase.items = purchase.items.map(item => ({
+                ...item,
+                purchaseDate: correctDate
+            }));
+            await purchase.save();
+            updated++;
+        }
+
+        console.log(`Datas corrigidas para ${updated} compras do usuário:`, email);
+        
+        res.json({ success: true, message: `${updated} compras atualizadas!` });
+    } catch (error) {
+        console.error('Fix dates error:', error);
+        res.status(500).json({ error: 'Erro ao corrigir datas', details: error.message });
+    }
+});
+
 // Fix/Update purchase data (for fixing manual purchases)
 app.post('/api/fix-purchase', async (req, res) => {
     try {
