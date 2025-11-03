@@ -160,6 +160,8 @@ function addToCart(name, price, category) {
         image = 'covers/receitas-3-ingredientes.jpg';
     } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
         image = 'covers/codigo-vendas-online.jpg';
+    } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
+        image = 'covers/metodo-4x4-estudos.jpg';
     }
     
     // Try to get image from the product card if not found above
@@ -1072,6 +1074,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/receitas-3-ingredientes.jpg';
     } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
         coverImage = 'covers/codigo-vendas-online.jpg';
+    } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
+        coverImage = 'covers/metodo-4x4-estudos.jpg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1193,6 +1197,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/receitas-3-ingredientes.jpg';
             } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
                 coverImage = 'covers/codigo-vendas-online.jpg';
+            } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
+                coverImage = 'covers/metodo-4x4-estudos.jpg';
             } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
                 coverImage = 'covers/cerebro-alta-performance.jpg';
             } else if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
@@ -1288,6 +1294,8 @@ function downloadEbook(name) {
         pdfPath = 'RECEITAS-COM-3-INGREDIENTES.pdf';
     } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
         pdfPath = 'O-CODIGO-DAS-VENDAS-ONLINE.pdf';
+    } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
+        pdfPath = 'METODO-4x4-DE-ESTUDOS.pdf';
     }
     
     if (!pdfPath) {
@@ -1686,6 +1694,22 @@ const ebookDetails = {
             'Como criar ofertas irresistíveis que convertem',
             'Estratégias de funil e jornada de compra',
             'Como vender todos os dias, mesmo com poucos seguidores'
+        ]
+    },
+    'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado': {
+        cover: 'covers/metodo-4x4-estudos.jpg',
+        description: 'Você estuda horas, mas sente que o conteúdo não "fica na cabeça"? Ou começa animado, mas perde o foco e acaba desistindo no meio do caminho? Este eBook apresenta o Método 4x4 de Estudos, um sistema prático e poderoso que combina Foco, Revisão, Constância e Resultado — os quatro pilares que formam os estudantes de alta performance. Baseado em princípios de neurociência, psicologia cognitiva e técnicas modernas de aprendizagem, este método foi criado para otimizar o tempo, melhorar a retenção e acelerar o aprendizado, mesmo que você não tenha muito tempo para estudar.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como aplicar o Método 4x4 no seu dia a dia',
+            'Técnicas de foco e concentração mental',
+            'Como fazer revisões inteligentes que fixam o conteúdo',
+            'Estratégias de constância e produtividade nos estudos',
+            'Como medir e avaliar seus resultados semanais',
+            'Cronograma prático para estudar com eficiência',
+            'Estudar não é sobre tempo, é sobre método'
         ]
     },
     'Concurso Polícia Federal - Guia Definitivo': {
