@@ -1147,14 +1147,53 @@ function updateMyEbooksDisplay() {
         const categoryName = getCategoryName(ebook.category);
         
         // Get ebook cover image
-        let coverImage = ebook.image || 'images/default-ebook.svg';
+        let coverImage = 'covers/default-ebook.jpg';
         
-        // Format purchase date
+        // First try to get from ebookDetails
+        const ebookInfo = ebookDetails[ebook.name];
+        if (ebookInfo && ebookInfo.cover) {
+            coverImage = ebookInfo.cover;
+        } 
+        // Then try ebook.image field
+        else if (ebook.image) {
+            coverImage = ebook.image;
+        }
+        // Fallback: try to get from product card
+        else {
+            const name = ebook.name;
+            if (name === 'Do Zero ao Controle: Como Organizar Suas Finanças e Parar de Viver no Aperto') {
+                coverImage = 'covers/do-zero-ao-controle.jpg';
+            } else if (name === 'DISCIPLINA E CONSTÂNCIA: Como Criar Força Mental e Hábito Diário de Sucesso') {
+                coverImage = 'covers/disciplina-constancia.jpg';
+            } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
+                coverImage = 'covers/desbloqueie-sua-mente.jpg';
+            } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
+                coverImage = 'covers/mentalidade-empreendedor.jpg';
+            } else if (name === 'INSTAGRAM LUCRATIVO: Como Vender Todos os Dias e Transformar Seguidores em Clientes') {
+                coverImage = 'covers/instagram-lucrativo.jpg';
+            } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
+                coverImage = 'covers/durma-melhor-viva-melhor.jpg';
+            } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
+                coverImage = 'covers/doces-de-festa-em-casa.jpg';
+            }
+        }
+        
+        // Format purchase date - GMT-3 and only date, no time
         let purchaseDateText = '';
         if (ebook.purchaseDate && ebook.purchaseDate !== 'undefined') {
-            purchaseDateText = ebook.purchaseDate;
+            // Remove time from date (format: DD/MM/YYYY, HH:MM:SS -> DD/MM/YYYY)
+            const dateOnly = ebook.purchaseDate.split(',')[0].trim();
+            purchaseDateText = dateOnly;
         } else {
-            purchaseDateText = new Date().toLocaleDateString('pt-BR');
+            // Use GMT-3 timezone
+            const now = new Date();
+            const options = { 
+                timeZone: 'America/Sao_Paulo', 
+                day: '2-digit', 
+                month: '2-digit', 
+                year: 'numeric' 
+            };
+            purchaseDateText = now.toLocaleDateString('pt-BR', options);
         }
         
         html += `
@@ -1559,6 +1598,7 @@ const ebookDetails = {
         ]
     },
     'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas': {
+        cover: 'covers/doces-de-festa-em-casa.jpg',
         description: 'Quem resiste a um bom doce de festa? Neste guia prático e saboroso, você vai aprender como preparar doces deliciosos e lucrativos sem sair de casa — seja para vender e faturar um dinheiro extra ou para encantar sua família e amigos com sobremesas irresistíveis. Nada de receitas complicadas: aqui você vai encontrar passo a passo detalhado, dicas de conservação, decoração e apresentação, além de técnicas simples que deixam seus doces com aparência profissional.',
         rating: 5,
         reviews: 0,
