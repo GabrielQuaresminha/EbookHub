@@ -154,6 +154,8 @@ function addToCart(name, price, category) {
         image = 'covers/durma-melhor-viva-melhor.jpg';
     } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
         image = 'covers/doces-de-festa-em-casa.jpg';
+    } else if (name === 'Desafio dos 21 Dias: Corpo e Mente em Equilíbrio') {
+        image = 'covers/desafio-21-dias.jpg';
     }
     
     // Try to get image from the product card if not found above
@@ -1175,6 +1177,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/durma-melhor-viva-melhor.jpg';
             } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
                 coverImage = 'covers/doces-de-festa-em-casa.jpg';
+            } else if (name === 'Desafio dos 21 Dias: Corpo e Mente em Equilíbrio') {
+                coverImage = 'covers/desafio-21-dias.jpg';
             }
         }
         
@@ -1258,6 +1262,8 @@ function downloadEbook(name) {
         pdfPath = 'DURMA-MELHOR-VIVA-MELHOR-DE-FORMA-NATURAL.pdf';
     } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
         pdfPath = 'DOCES-DE-FESTA-EM-CASA.pdf';
+    } else if (name === 'Desafio dos 21 Dias: Corpo e Mente em Equilíbrio') {
+        pdfPath = 'DESAFIO-DOS-21-DIAS.pdf';
     }
     
     if (!pdfPath) {
@@ -1610,6 +1616,21 @@ const ebookDetails = {
             'Técnicas de decoração e armazenamento',
             'Ideias criativas para embalar e apresentar seus doces',
             'Cálculo de custo e lucro para começar a empreender'
+        ]
+    },
+    'Desafio dos 21 Dias: Corpo e Mente em Equilíbrio': {
+        cover: 'covers/desafio-21-dias.jpg',
+        description: 'Você se sente cansado, estressado ou sem energia para o dia a dia? Então este eBook foi feito pra você. Em apenas 21 dias, você vai aplicar um programa simples e natural que vai restaurar o equilíbrio entre corpo e mente, aumentando sua disposição, melhorando o sono e elevando seu humor. Nada de dietas radicais ou rotinas impossíveis — este desafio foi criado para caber na sua vida real, com hábitos pequenos que geram resultados grandes e duradouros.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como reprogramar corpo e mente com pequenas ações diárias',
+            'Como melhorar o sono, reduzir o estresse e aumentar a energia',
+            'Como criar hábitos saudáveis que duram além dos 21 dias',
+            'Estratégias de alimentação, movimento e respiração conscientes',
+            'Técnicas simples de autocuidado e equilíbrio emocional',
+            '21 dias para transformar sua vida com equilíbrio e bem-estar'
         ]
     },
     'Concurso Polícia Federal - Guia Definitivo': {
