@@ -169,7 +169,7 @@ function addToCart(name, price, category) {
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
         image = 'covers/SEM_DIVIDAS.png';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
-        image = 'covers/7_PILARES_DA_SAUDE.jpg';
+        image = 'covers/7_PILARES_DA_SAUDE.png';
     }
     
     // Try to get image from the product card if not found above
@@ -1091,7 +1091,7 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
         coverImage = 'covers/SEM_DIVIDAS.png';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
-        coverImage = 'covers/7_PILARES_DA_SAUDE.jpg';
+        coverImage = 'covers/7_PILARES_DA_SAUDE.png';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1228,7 +1228,7 @@ function updateMyEbooksDisplay() {
             } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
                 coverImage = 'covers/SEM_DIVIDAS.png';
             } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
-                coverImage = 'covers/7_PILARES_DA_SAUDE.jpg';
+                coverImage = 'covers/7_PILARES_DA_SAUDE.png';
             }
         }
         
@@ -1793,7 +1793,7 @@ const ebookDetails = {
         ]
     },
     '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade': {
-        cover: 'covers/7_PILARES_DA_SAUDE.jpg',
+        cover: 'covers/7_PILARES_DA_SAUDE.png',
         description: 'Cuidar da saúde vai muito além de "comer bem e fazer exercícios". A verdadeira saúde é construída sobre pilares que se complementam — corpo, mente e espírito em harmonia. Este eBook apresenta os 7 pilares fundamentais da saúde, baseados em estudos científicos e práticas simples do dia a dia, que você pode aplicar imediatamente para aumentar sua energia, disposição e qualidade de vida. Aqui você vai entender como pequenas mudanças geram grandes resultados — e como cuidar de si mesmo de forma integral e equilibrada.',
         rating: 5,
         reviews: 0,
