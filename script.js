@@ -68,7 +68,7 @@ async function loadCart() {
     } catch (error) {
         console.error('Load cart error:', error);
         cart = [];
-        updateCartCount();
+    updateCartCount();
     }
 }
 
@@ -168,6 +168,8 @@ function addToCart(name, price, category) {
         image = 'covers/receitas-fit-saborosas.jpg';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
         image = 'covers/SEM_DIVIDAS.png';
+    } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
+        image = 'covers/7_PILARES_DA_SAUDE.jpg';
     }
     
     // Try to get image from the product card if not found above
@@ -281,7 +283,7 @@ async function checkout() {
         showNotification('Seu carrinho está vazio!', 'warning');
         return;
     }
-
+    
     if (!currentUser) {
         showNotification('Você precisa estar logado para finalizar a compra!', 'error');
         return;
@@ -291,7 +293,7 @@ async function checkout() {
         showNotification('Iniciando pagamento...', 'info');
         
         // Calculate total
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
         
         // Create preference for Mercado Pago
         const externalReference = `EBOOKHUB-${currentUser.id}-${Date.now()}`;
@@ -1088,6 +1090,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/receitas-fit-saborosas.jpg';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
         coverImage = 'covers/SEM_DIVIDAS.png';
+    } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
+        coverImage = 'covers/7_PILARES_DA_SAUDE.jpg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1223,6 +1227,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/receitas-fit-saborosas.jpg';
             } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
                 coverImage = 'covers/SEM_DIVIDAS.png';
+            } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
+                coverImage = 'covers/7_PILARES_DA_SAUDE.jpg';
             }
         }
         
@@ -1320,6 +1326,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/RECEITAS-FIT-E-SABOROSAS.pdf';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
         pdfPath = 'pdfs/SEM_DIVIDAS.pdf';
+    } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
+        pdfPath = 'pdfs/7_PILARES_DA_SAUDE.pdf';
     }
     
     if (!pdfPath) {
@@ -1422,11 +1430,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const href = this.getAttribute('href');
         if (href && href !== '#' && href.length > 1) {
             const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
             }
         }
     });
@@ -1784,6 +1792,22 @@ const ebookDetails = {
             'Sair das dívidas não é sorte — é decisão, estratégia e constância'
         ]
     },
+    '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade': {
+        cover: 'covers/7_PILARES_DA_SAUDE.jpg',
+        description: 'Cuidar da saúde vai muito além de "comer bem e fazer exercícios". A verdadeira saúde é construída sobre pilares que se complementam — corpo, mente e espírito em harmonia. Este eBook apresenta os 7 pilares fundamentais da saúde, baseados em estudos científicos e práticas simples do dia a dia, que você pode aplicar imediatamente para aumentar sua energia, disposição e qualidade de vida. Aqui você vai entender como pequenas mudanças geram grandes resultados — e como cuidar de si mesmo de forma integral e equilibrada.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Os 7 pilares essenciais para o equilíbrio físico e mental',
+            'Como melhorar sono, alimentação e energia naturalmente',
+            'Estratégias simples para reduzir estresse e ansiedade',
+            'A importância da hidratação e do movimento diário',
+            'Hábitos de mentalidade e propósito para uma vida mais plena',
+            'Rotina prática para aplicar os pilares no dia a dia',
+            'Saúde não é o que você faz de vez em quando. É o que você faz todos os dias'
+        ]
+    },
     'Concurso Polícia Federal - Guia Definitivo': {
         description: 'Material completo e atualizado para preparação do concurso da Polícia Federal. Inclui todas as matérias do edital, questões das últimas provas comentadas, dicas de estudo e preparação física.',
         rating: 4.5,
@@ -2052,7 +2076,7 @@ document.addEventListener('keydown', (e) => {
             closeAuthModal();
         }
         if (cartModal.classList.contains('active')) {
-            closeCartModal();
+        closeCartModal();
         }
         if (myEbooksModal.classList.contains('active')) {
             closeMyEbooksModal();
