@@ -162,6 +162,8 @@ function addToCart(name, price, category) {
         image = 'covers/codigo-vendas-online.jpg';
     } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
         image = 'covers/metodo-4x4-estudos.jpg';
+    } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
+        image = 'covers/mente-inabalavel.jpg';
     }
     
     // Try to get image from the product card if not found above
@@ -1076,6 +1078,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/codigo-vendas-online.jpg';
     } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
         coverImage = 'covers/metodo-4x4-estudos.jpg';
+    } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
+        coverImage = 'covers/mente-inabalavel.jpg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1199,6 +1203,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/codigo-vendas-online.jpg';
             } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
                 coverImage = 'covers/metodo-4x4-estudos.jpg';
+            } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
+                coverImage = 'covers/mente-inabalavel.jpg';
             } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
                 coverImage = 'covers/cerebro-alta-performance.jpg';
             } else if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
@@ -1296,6 +1302,8 @@ function downloadEbook(name) {
         pdfPath = 'O-CODIGO-DAS-VENDAS-ONLINE.pdf';
     } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
         pdfPath = 'METODO-4x4-DE-ESTUDOS.pdf';
+    } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
+        pdfPath = 'A-MENTE-INABALAVEL.pdf';
     }
     
     if (!pdfPath) {
@@ -1710,6 +1718,22 @@ const ebookDetails = {
             'Como medir e avaliar seus resultados semanais',
             'Cronograma prático para estudar com eficiência',
             'Estudar não é sobre tempo, é sobre método'
+        ]
+    },
+    'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação': {
+        cover: 'covers/mente-inabalavel.jpg',
+        description: 'Vivemos em um mundo cada vez mais acelerado, barulhento e cheio de estímulos. Notícias, redes sociais, cobranças, comparações — tudo parece empurrar nossa mente para o limite. Por isso, o verdadeiro poder hoje não é falar mais alto — é permanecer calmo enquanto o mundo grita. Este eBook foi criado para te ensinar, de forma simples e prática, como dominar suas emoções, lidar com a ansiedade e manter o equilíbrio, mesmo quando tudo parece desmoronar. Aqui, você vai descobrir estratégias reais, usadas por psicólogos, monges e atletas de alta performance, para fortalecer sua mente e agir com inteligência emocional em qualquer situação.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Entender de onde vêm suas emoções e como controlá-las',
+            'Técnicas de respiração e foco para reduzir ansiedade e impulsividade',
+            'Estratégias para manter calma sob pressão',
+            'Como lidar com críticas, frustrações e raiva',
+            'Hábitos diários para manter a mente equilibrada e resiliente',
+            'Exercícios práticos para aplicar no dia a dia',
+            'Você não controla o vento, mas pode ajustar as velas'
         ]
     },
     'Concurso Polícia Federal - Guia Definitivo': {
