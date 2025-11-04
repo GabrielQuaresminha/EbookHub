@@ -1327,7 +1327,7 @@ function downloadEbook(name) {
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
         pdfPath = 'pdfs/SEM_DIVIDAS.pdf';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
-        pdfPath = 'pdfs/7_PILARES_DA_SAUDE.pdf';
+        pdfPath = 'pdfs/7-PILARES-DA-SAUDE.pdf';
     }
     
     if (!pdfPath) {
