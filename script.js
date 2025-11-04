@@ -170,6 +170,8 @@ function addToCart(name, price, category) {
         image = 'covers/SEM_DIVIDAS.png';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         image = 'covers/7_PILARES_DA_SAUDE.png';
+    } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
+        image = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpg';
     }
     
     // Try to get image from the product card if not found above
@@ -1092,6 +1094,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/SEM_DIVIDAS.png';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         coverImage = 'covers/7_PILARES_DA_SAUDE.png';
+    } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
+        coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1229,6 +1233,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/SEM_DIVIDAS.png';
             } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
                 coverImage = 'covers/7_PILARES_DA_SAUDE.png';
+            } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
+                coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpg';
             }
         }
         
@@ -1328,6 +1334,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/SEM-DIVIDAS.pdf';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         pdfPath = 'pdfs/7-PILARES-DA-SAUDE.pdf';
+    } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
+        pdfPath = 'pdfs/O_PODER_DA_AUTORIDADE_DIGITAL.pdf';
     }
     
     if (!pdfPath) {
@@ -1806,6 +1814,22 @@ const ebookDetails = {
             'Hábitos de mentalidade e propósito para uma vida mais plena',
             'Rotina prática para aplicar os pilares no dia a dia',
             'Saúde não é o que você faz de vez em quando. É o que você faz todos os dias'
+        ]
+    },
+    'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais': {
+        cover: 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpg',
+        description: 'Em um mundo onde todos estão online, quem não tem autoridade digital, não é lembrado. As pessoas não compram produtos — compram quem representa confiança, conhecimento e autenticidade. Este eBook foi criado para te mostrar como construir uma marca pessoal forte, gerar reconhecimento e transformar sua presença online em resultados reais. Você vai entender o que é autoridade digital, como criar posicionamento, construir identidade e usar o Instagram como uma vitrine estratégica de valor.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'O que é autoridade digital e por que ela gera vendas',
+            'Como criar um posicionamento autêntico e memorável',
+            'Como desenvolver sua marca pessoal e se diferenciar da concorrência',
+            'Estratégias práticas para crescer no Instagram e criar conteúdo de valor',
+            'Como transformar seguidores em clientes fiéis',
+            'Mentalidade e hábitos de pessoas com alta autoridade online',
+            'A autoridade digital é o novo cartão de visita'
         ]
     },
     'Concurso Polícia Federal - Guia Definitivo': {
