@@ -167,7 +167,7 @@ function addToCart(name, price, category) {
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         image = 'covers/receitas-fit-saborosas.jpg';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
-        image = 'covers/SEM_DIVIDAS.jpg';
+        image = 'covers/SEM_DIVIDAS.png';
     }
     
     // Try to get image from the product card if not found above
@@ -1087,7 +1087,7 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         coverImage = 'covers/receitas-fit-saborosas.jpg';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
-        coverImage = 'covers/SEM_DIVIDAS.jpg';
+        coverImage = 'covers/SEM_DIVIDAS.png';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1222,7 +1222,7 @@ function updateMyEbooksDisplay() {
             } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
                 coverImage = 'covers/receitas-fit-saborosas.jpg';
             } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
-                coverImage = 'covers/SEM_DIVIDAS.jpg';
+                coverImage = 'covers/SEM_DIVIDAS.png';
             }
         }
         
@@ -1769,7 +1769,7 @@ const ebookDetails = {
         ]
     },
     'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira': {
-        cover: 'covers/SEM_DIVIDAS.jpg',
+        cover: 'covers/SEM_DIVIDAS.png',
         description: 'Viver endividado é viver com um peso invisível nos ombros. A cada boleto, a cada ligação do banco, surge o mesmo sentimento: culpa, medo e impotência. Mas existe saída — e este eBook foi feito pra provar isso. "Sem Dívidas" é um guia prático que ensina como organizar suas finanças, negociar dívidas e reconstruir sua vida financeira, passo a passo. Nada de promessas milagrosas: aqui você vai aprender estratégias reais, sustentáveis e comprovadas para sair do vermelho e começar a investir no seu futuro.',
         rating: 5,
         reviews: 0,
