@@ -166,6 +166,8 @@ function addToCart(name, price, category) {
         image = 'covers/mente-inabalavel.jpg';
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         image = 'covers/receitas-fit-saborosas.jpg';
+    } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
+        image = 'covers/SEM_DIVIDAS.jpg';
     }
     
     // Try to get image from the product card if not found above
@@ -1084,6 +1086,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/mente-inabalavel.jpg';
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         coverImage = 'covers/receitas-fit-saborosas.jpg';
+    } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
+        coverImage = 'covers/SEM_DIVIDAS.jpg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1217,6 +1221,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/investidor-fundos-imobiliarios.jpg';
             } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
                 coverImage = 'covers/receitas-fit-saborosas.jpg';
+            } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
+                coverImage = 'covers/SEM_DIVIDAS.jpg';
             }
         }
         
@@ -1312,6 +1318,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/A-MENTE-INABALAVEL.pdf';
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         pdfPath = 'pdfs/RECEITAS-FIT-E-SABOROSAS.pdf';
+    } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
+        pdfPath = 'pdfs/SEM_DIVIDAS.pdf';
     }
     
     if (!pdfPath) {
@@ -1758,6 +1766,22 @@ const ebookDetails = {
             'Dicas de preparo, armazenamento e variação de sabores',
             'Estratégias para manter a alimentação saudável sem enjoar',
             'Saúde não é sobre comer menos, é sobre comer melhor'
+        ]
+    },
+    'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira': {
+        cover: 'covers/SEM_DIVIDAS.jpg',
+        description: 'Viver endividado é viver com um peso invisível nos ombros. A cada boleto, a cada ligação do banco, surge o mesmo sentimento: culpa, medo e impotência. Mas existe saída — e este eBook foi feito pra provar isso. "Sem Dívidas" é um guia prático que ensina como organizar suas finanças, negociar dívidas e reconstruir sua vida financeira, passo a passo. Nada de promessas milagrosas: aqui você vai aprender estratégias reais, sustentáveis e comprovadas para sair do vermelho e começar a investir no seu futuro.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como entender e diagnosticar sua situação financeira real',
+            'Estratégias eficazes para eliminar dívidas e lidar com juros',
+            'Como negociar com bancos e credores',
+            'Técnicas para organizar seu orçamento mensal',
+            'Como reconstruir o crédito e criar uma nova relação com o dinheiro',
+            'Hábitos financeiros que garantem estabilidade a longo prazo',
+            'Sair das dívidas não é sorte — é decisão, estratégia e constância'
         ]
     },
     'Concurso Polícia Federal - Guia Definitivo': {
