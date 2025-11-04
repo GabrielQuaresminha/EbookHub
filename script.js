@@ -164,6 +164,8 @@ function addToCart(name, price, category) {
         image = 'covers/metodo-4x4-estudos.jpg';
     } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
         image = 'covers/mente-inabalavel.jpg';
+    } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
+        image = 'covers/receitas-fit-saborosas.jpg';
     }
     
     // Try to get image from the product card if not found above
@@ -1080,6 +1082,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/metodo-4x4-estudos.jpg';
     } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
         coverImage = 'covers/mente-inabalavel.jpg';
+    } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
+        coverImage = 'covers/receitas-fit-saborosas.jpg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1211,6 +1215,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/redacao-enem-1000.jpg';
             } else if (name === 'Guia do Investidor Iniciante em Fundos Imobiliários') {
                 coverImage = 'covers/investidor-fundos-imobiliarios.jpg';
+            } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
+                coverImage = 'covers/receitas-fit-saborosas.jpg';
             }
         }
         
@@ -1304,6 +1310,8 @@ function downloadEbook(name) {
         pdfPath = 'METODO-4x4-DE-ESTUDOS.pdf';
     } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
         pdfPath = 'A-MENTE-INABALAVEL.pdf';
+    } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
+        pdfPath = 'RECEITAS-FIT-E-SABOROSAS.pdf';
     }
     
     if (!pdfPath) {
@@ -1734,6 +1742,22 @@ const ebookDetails = {
             'Hábitos diários para manter a mente equilibrada e resiliente',
             'Exercícios práticos para aplicar no dia a dia',
             'Você não controla o vento, mas pode ajustar as velas'
+        ]
+    },
+    'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil': {
+        cover: 'covers/receitas-fit-saborosas.jpg',
+        description: 'Comer saudável não precisa ser caro, difícil ou sem graça. Na verdade, quando você entende os princípios da alimentação equilibrada e aprende receitas práticas, comer bem se torna um prazer diário — e não um sacrifício. Este eBook foi criado para ajudar você a adotar uma rotina alimentar saudável sem abrir mão do sabor. Aqui, você vai encontrar receitas fit reais, de fácil preparo, com ingredientes acessíveis e explicações simples. Além disso, vai aprender como montar seus próprios pratos equilibrados, entender a importância dos macronutrientes e descobrir como a comida pode transformar sua energia, disposição e corpo.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como montar refeições equilibradas com sabor',
+            'Receitas fit para café da manhã, almoço, jantar e sobremesas',
+            'Como economizar e planejar suas refeições da semana',
+            'Substituições inteligentes para versões mais saudáveis',
+            'Dicas de preparo, armazenamento e variação de sabores',
+            'Estratégias para manter a alimentação saudável sem enjoar',
+            'Saúde não é sobre comer menos, é sobre comer melhor'
         ]
     },
     'Concurso Polícia Federal - Guia Definitivo': {
