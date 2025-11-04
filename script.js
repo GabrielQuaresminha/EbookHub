@@ -171,7 +171,7 @@ function addToCart(name, price, category) {
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         image = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
-        image = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpg';
+        image = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
     }
     
     // Try to get image from the product card if not found above
@@ -1095,7 +1095,7 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         coverImage = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
-        coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpg';
+        coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1234,7 +1234,7 @@ function updateMyEbooksDisplay() {
             } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
                 coverImage = 'covers/7_PILARES_DA_SAUDE.png';
             } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
-                coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpg';
+                coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
             }
         }
         
@@ -1817,7 +1817,7 @@ const ebookDetails = {
         ]
     },
     'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais': {
-        cover: 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpg',
+        cover: 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg',
         description: 'Em um mundo onde todos estão online, quem não tem autoridade digital, não é lembrado. As pessoas não compram produtos — compram quem representa confiança, conhecimento e autenticidade. Este eBook foi criado para te mostrar como construir uma marca pessoal forte, gerar reconhecimento e transformar sua presença online em resultados reais. Você vai entender o que é autoridade digital, como criar posicionamento, construir identidade e usar o Instagram como uma vitrine estratégica de valor.',
         rating: 5,
         reviews: 0,
