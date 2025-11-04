@@ -1281,37 +1281,37 @@ function downloadEbook(name) {
     let pdfPath = '';
     
     if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
-        pdfPath = 'GUIA-COMPLETO-PARA-TIRAR-NOTA-1000-NA-REDACAO-DO-ENEM.pdf';
+        pdfPath = 'pdfs/GUIA-COMPLETO-PARA-TIRAR-NOTA-1000-NA-REDACAO-DO-ENEM.pdf';
     } else if (name === 'Do Zero ao Controle: Como Organizar Suas Finanças e Parar de Viver no Aperto') {
-        pdfPath = 'DO-ZERO-AO-CONTROLE.pdf';
+        pdfPath = 'pdfs/DO-ZERO-AO-CONTROLE.pdf';
     } else if (name === 'Guia do Investidor Iniciante em Fundos Imobiliários') {
-        pdfPath = 'GUIA-DO-INVESTIDOR-INICIANTE-EM-FUNDOS-IMOBILIARIOS.pdf';
+        pdfPath = 'pdfs/GUIA-DO-INVESTIDOR-INICIANTE-EM-FUNDOS-IMOBILIARIOS.pdf';
     } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
-        pdfPath = 'O-CEREBRO-DE-ALTA-PERFORMANCE.pdf';
+        pdfPath = 'pdfs/O-CEREBRO-DE-ALTA-PERFORMANCE.pdf';
     } else if (name === 'DISCIPLINA E CONSTÂNCIA: Como Criar Força Mental e Hábito Diário de Sucesso') {
-        pdfPath = 'DISCIPLINA-E-CONSTANCIA.pdf';
+        pdfPath = 'pdfs/DISCIPLINA-E-CONSTANCIA.pdf';
     } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
-        pdfPath = 'DESBLOQUEIE-SUA-MENTE-HABITOS-QUE-MUDAM-SUA-VIDA.pdf';
+        pdfPath = 'pdfs/DESBLOQUEIE-SUA-MENTE-HABITOS-QUE-MUDAM-SUA-VIDA.pdf';
     } else if (name === 'Mentalidade de Empreendedor: Como Pensar Como Quem Ganha Dinheiro e Transforma Ideias em Resultados') {
-        pdfPath = 'MENTALIDADE-DE-EMPREENDEDOR.pdf';
+        pdfPath = 'pdfs/MENTALIDADE-DE-EMPREENDEDOR.pdf';
     } else if (name === 'INSTAGRAM LUCRATIVO: Como Vender Todos os Dias e Transformar Seguidores em Clientes') {
-        pdfPath = 'INSTAGRAM-LUCRATIVO.pdf';
+        pdfPath = 'pdfs/INSTAGRAM-LUCRATIVO.pdf';
     } else if (name === 'Durma Melhor, Viva Melhor de Forma Natural: O Segredo do Sono Restaurador') {
-        pdfPath = 'DURMA-MELHOR-VIVA-MELHOR-DE-FORMA-NATURAL.pdf';
+        pdfPath = 'pdfs/DURMA-MELHOR-VIVA-MELHOR-DE-FORMA-NATURAL.pdf';
     } else if (name === 'Doces de Festa em Casa: Ganhe Dinheiro ou Surpreenda Sua Família com Receitas Fáceis e Deliciosas') {
-        pdfPath = 'DOCES-DE-FESTA-EM-CASA.pdf';
+        pdfPath = 'pdfs/DOCES-DE-FESTA-EM-CASA.pdf';
     } else if (name === 'Desafio dos 21 Dias: Corpo e Mente em Equilíbrio') {
-        pdfPath = 'DESAFIO-DOS-21-DIAS.pdf';
+        pdfPath = 'pdfs/DESAFIO-DOS-21-DIAS.pdf';
     } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
-        pdfPath = 'RECEITAS-COM-3-INGREDIENTES.pdf';
+        pdfPath = 'pdfs/RECEITAS-COM-3-INGREDIENTES.pdf';
     } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
-        pdfPath = 'O-CODIGO-DAS-VENDAS-ONLINE.pdf';
+        pdfPath = 'pdfs/O-CODIGO-DAS-VENDAS-ONLINE.pdf';
     } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
-        pdfPath = 'METODO-4x4-DE-ESTUDOS.pdf';
+        pdfPath = 'pdfs/METODO-4x4-DE-ESTUDOS.pdf';
     } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
-        pdfPath = 'A-MENTE-INABALAVEL.pdf';
+        pdfPath = 'pdfs/A-MENTE-INABALAVEL.pdf';
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
-        pdfPath = 'RECEITAS-FIT-E-SABOROSAS.pdf';
+        pdfPath = 'pdfs/RECEITAS-FIT-E-SABOROSAS.pdf';
     }
     
     if (!pdfPath) {
