@@ -1942,15 +1942,21 @@ function checkPendingPayment() {
         const data = JSON.parse(paymentData);
         const timeElapsed = Date.now() - data.timestamp;
         
-        // Check if payment was initiated in the last 24 hours
-        if (timeElapsed < 24 * 60 * 60 * 1000) {
+        // Only check if payment was initiated in the last 30 minutes (not 24h)
+        // After 30 min, assume customer gave up
+        if (timeElapsed < 30 * 60 * 1000) {
             console.log('🔍 Detectado pagamento pendente. Retomando verificação...');
             const minutesElapsed = Math.floor(timeElapsed / 60000);
-            showNotification(`🔄 Retomando verificação do pagamento (iniciado há ${minutesElapsed} min)...`, 'info');
+            
+            // Only show notification if less than 10 minutes (silent after that)
+            if (timeElapsed < 10 * 60 * 1000) {
+                showNotification(`🔄 Verificando seu pagamento...`, 'info');
+            }
+            
             startPaymentVerification(data.preferenceId, data.externalReference, data.userId, data.items, false);
         } else {
-            // Clean up old payment data (older than 24h)
-            console.log('🗑️ Removendo dados de pagamento antigo');
+            // Clean up old payment data (older than 30min - customer gave up)
+            console.log('🗑️ Removendo dados de pagamento antigo (cliente desistiu)');
             localStorage.removeItem('ebookhub_payment_data');
         }
     }
