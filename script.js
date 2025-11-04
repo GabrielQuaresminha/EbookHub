@@ -1325,7 +1325,7 @@ function downloadEbook(name) {
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         pdfPath = 'pdfs/RECEITAS-FIT-E-SABOROSAS.pdf';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
-        pdfPath = 'pdfs/SEM_DIVIDAS.pdf';
+        pdfPath = 'pdfs/SEM-DIVIDAS.pdf';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         pdfPath = 'pdfs/7-PILARES-DA-SAUDE.pdf';
     }
