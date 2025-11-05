@@ -164,6 +164,8 @@ function addToCart(name, price, category) {
         image = 'covers/metodo-4x4-estudos.jpg';
     } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
         image = 'covers/mente-inabalavel.jpg';
+    } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
+        image = 'covers/MENTALIDADE_ANTIFRAGIL.jpg';
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         image = 'covers/receitas-fit-saborosas.jpg';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
@@ -1092,6 +1094,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/metodo-4x4-estudos.jpg';
     } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
         coverImage = 'covers/mente-inabalavel.jpg';
+    } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
+        coverImage = 'covers/MENTALIDADE_ANTIFRAGIL.jpg';
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         coverImage = 'covers/receitas-fit-saborosas.jpg';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
@@ -1229,6 +1233,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/metodo-4x4-estudos.jpg';
             } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
                 coverImage = 'covers/mente-inabalavel.jpg';
+            } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
+                coverImage = 'covers/MENTALIDADE_ANTIFRAGIL.jpg';
             } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
                 coverImage = 'covers/cerebro-alta-performance.jpg';
             } else if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
@@ -1340,6 +1346,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/METODO-4x4-DE-ESTUDOS.pdf';
     } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
         pdfPath = 'pdfs/A-MENTE-INABALAVEL.pdf';
+    } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
+        pdfPath = 'pdfs/MENTALIDADE_ANTIFRAGIL.pdf';
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         pdfPath = 'pdfs/RECEITAS-FIT-E-SABOROSAS.pdf';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
@@ -1782,6 +1790,22 @@ const ebookDetails = {
             'Hábitos diários para manter a mente equilibrada e resiliente',
             'Exercícios práticos para aplicar no dia a dia',
             'Você não controla o vento, mas pode ajustar as velas'
+        ]
+    },
+    'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor': {
+        cover: 'covers/MENTALIDADE_ANTIFRAGIL.jpg',
+        description: 'A maioria das pessoas teme o caos e as dificuldades da vida. Mas há um grupo de pessoas que, em vez de quebrar diante das adversidades, crescem por causa delas. Essas pessoas têm algo em comum: a mentalidade antifrágil. Inspirado nos conceitos do pensador Nassim Nicholas Taleb, este eBook foi criado para te ensinar a lidar com a incerteza, superar obstáculos e transformar cada problema em uma oportunidade de crescimento.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'O que é a mentalidade antifrágil e como desenvolvê-la',
+            'Como transformar fracassos em combustível para o sucesso',
+            'Estratégias práticas para crescer diante de crises e desafios',
+            'Como fortalecer a mente, a disciplina e as emoções',
+            'Hábitos diários para se tornar emocionalmente inabalável',
+            'Como usar o caos e a dor como instrumentos de evolução',
+            'O fraco quebra diante da pressão. O resiliente resiste. O antifrágil melhora'
         ]
     },
     'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil': {
