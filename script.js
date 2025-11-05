@@ -168,6 +168,8 @@ function addToCart(name, price, category) {
         image = 'covers/receitas-fit-saborosas.jpg';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
         image = 'covers/SEM_DIVIDAS.png';
+    } else if (name === 'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco') {
+        image = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         image = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
@@ -1094,6 +1096,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/receitas-fit-saborosas.jpg';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
         coverImage = 'covers/SEM_DIVIDAS.png';
+    } else if (name === 'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco') {
+        coverImage = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         coverImage = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
@@ -1235,6 +1239,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/receitas-fit-saborosas.jpg';
             } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
                 coverImage = 'covers/SEM_DIVIDAS.png';
+            } else if (name === 'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco') {
+                coverImage = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
             } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
                 coverImage = 'covers/7_PILARES_DA_SAUDE.png';
             } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
@@ -1338,6 +1344,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/RECEITAS-FIT-E-SABOROSAS.pdf';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
         pdfPath = 'pdfs/SEM-DIVIDAS.pdf';
+    } else if (name === 'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco') {
+        pdfPath = 'pdfs/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.pdf';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         pdfPath = 'pdfs/7-PILARES-DA-SAUDE.pdf';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
@@ -1806,6 +1814,22 @@ const ebookDetails = {
             'Como reconstruir o crédito e criar uma nova relação com o dinheiro',
             'Hábitos financeiros que garantem estabilidade a longo prazo',
             'Sair das dívidas não é sorte — é decisão, estratégia e constância'
+        ]
+    },
+    'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco': {
+        cover: 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg',
+        description: 'A liberdade financeira não é um privilégio — é uma construção. Não importa quanto você ganha hoje, e sim como você lida com o que tem. Este eBook foi criado para te mostrar o caminho passo a passo para alcançar estabilidade, segurança e crescimento financeiro, mesmo começando do zero. Com hábitos simples, mentalidade correta e constância, você vai entender como eliminar dívidas, economizar de forma inteligente e começar a investir.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como criar uma mentalidade de prosperidade',
+            'O passo a passo da organização financeira',
+            'Estratégias reais para economizar e investir, mesmo ganhando pouco',
+            'Como eliminar dívidas e criar uma reserva de emergência',
+            'Os princípios do enriquecimento gradual e sustentável',
+            'Hábitos financeiros das pessoas que conquistaram a liberdade',
+            'A liberdade financeira começa na mente — e se concretiza nas atitudes diárias'
         ]
     },
     '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade': {
