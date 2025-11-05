@@ -172,6 +172,8 @@ function addToCart(name, price, category) {
         image = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         image = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
+    } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
+        image = 'covers/SABORES_DO_MUNDO.jpg';
     }
     
     // Try to get image from the product card if not found above
@@ -1096,6 +1098,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
+    } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
+        coverImage = 'covers/SABORES_DO_MUNDO.jpg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1235,6 +1239,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/7_PILARES_DA_SAUDE.png';
             } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
                 coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
+            } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
+                coverImage = 'covers/SABORES_DO_MUNDO.jpg';
             }
         }
         
@@ -1336,6 +1342,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/7-PILARES-DA-SAUDE.pdf';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         pdfPath = 'pdfs/O_PODER_DA_AUTORIDADE_DIGITAL.pdf';
+    } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
+        pdfPath = 'pdfs/SABORES_DO_MUNDO.pdf';
     }
     
     if (!pdfPath) {
@@ -1830,6 +1838,21 @@ const ebookDetails = {
             'Como transformar seguidores em clientes fiéis',
             'Mentalidade e hábitos de pessoas com alta autoridade online',
             'A autoridade digital é o novo cartão de visita'
+        ]
+    },
+    'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países': {
+        cover: 'covers/SABORES_DO_MUNDO.jpg',
+        description: 'Você já imaginou saborear uma massa italiana autêntica, um curry indiano aromático ou um brownie americano incrível — sem precisar sair do Brasil? Este eBook foi criado para te levar a uma viagem gastronômica pelo mundo, apresentando receitas tradicionais de diversos países, adaptadas com ingredientes acessíveis e práticas para o dia a dia. Prepare-se para descobrir sabores, histórias e técnicas que vão transformar suas refeições em experiências internacionais!',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Receitas típicas de diversos países — com versões simples e acessíveis',
+            'Histórias e curiosidades sobre cada prato',
+            'Dicas de substituições e adaptações brasileiras',
+            'Sugestões de acompanhamentos e harmonizações',
+            'Técnicas culinárias internacionais adaptadas ao seu dia a dia',
+            'Viajar pelo paladar é a forma mais deliciosa de conhecer o mundo'
         ]
     },
     'Concurso Polícia Federal - Guia Definitivo': {
