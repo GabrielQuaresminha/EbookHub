@@ -174,6 +174,8 @@ function addToCart(name, price, category) {
         image = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         image = 'covers/7_PILARES_DA_SAUDE.png';
+    } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
+        image = 'covers/ENERGIA_TOTAL.jpg';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         image = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -1104,6 +1106,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         coverImage = 'covers/7_PILARES_DA_SAUDE.png';
+    } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
+        coverImage = 'covers/ENERGIA_TOTAL.jpg';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -1249,6 +1253,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
             } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
                 coverImage = 'covers/7_PILARES_DA_SAUDE.png';
+            } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
+                coverImage = 'covers/ENERGIA_TOTAL.jpg';
             } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
                 coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
             } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -1356,6 +1362,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.pdf';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         pdfPath = 'pdfs/7-PILARES-DA-SAUDE.pdf';
+    } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
+        pdfPath = 'pdfs/ENERGIA_TOTAL.pdf';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         pdfPath = 'pdfs/O_PODER_DA_AUTORIDADE_DIGITAL.pdf';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -1870,6 +1878,22 @@ const ebookDetails = {
             'Hábitos de mentalidade e propósito para uma vida mais plena',
             'Rotina prática para aplicar os pilares no dia a dia',
             'Saúde não é o que você faz de vez em quando. É o que você faz todos os dias'
+        ]
+    },
+    'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias': {
+        cover: 'covers/ENERGIA_TOTAL.jpg',
+        description: 'Você acorda cansado, sem vontade de começar o dia? Sente que falta energia mesmo dormindo bem? A boa notícia é que você pode mudar isso. Este eBook foi criado para te mostrar como recuperar sua vitalidade, entender o que está drenando sua disposição e aprender hábitos naturais que aumentam energia física e mental. Com passos simples e eficazes, você vai aprender a eliminar o cansaço crônico, regular seu sono, alimentar-se melhor e usar seu corpo e mente a seu favor.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'As causas reais do cansaço físico e mental',
+            'Como a alimentação influencia sua energia',
+            'Estratégias práticas para ter mais disposição todos os dias',
+            'Hábitos matinais e noturnos para manter a vitalidade',
+            'Como o sono, a mente e o movimento se conectam',
+            'Dicas de suplementação natural e autocuidado energético',
+            'Energia é a base da produtividade, da saúde e da felicidade'
         ]
     },
     'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais': {
