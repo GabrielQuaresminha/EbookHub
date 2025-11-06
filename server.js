@@ -394,7 +394,7 @@ app.post('/api/check-payment', async (req, res) => {
                             name: item.name,
                             price: item.price,
                             category: item.category,
-                            purchaseDate: new Date().toLocaleString('pt-BR'),
+                            purchaseDate: new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
                             transactionId: payment.id
                         })),
                         paymentId: payment.id.toString(),
@@ -469,7 +469,7 @@ app.post('/api/manual-purchase', async (req, res) => {
                 name: ebookName,
                 price: price || 14.90,
                 category: category || 'geral',
-                purchaseDate: new Date().toLocaleString('pt-BR'),
+                purchaseDate: new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
                 transactionId: 'MANUAL-' + Date.now()
             }],
             paymentId: 'MANUAL-' + Date.now(),
