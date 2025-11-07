@@ -158,6 +158,8 @@ function addToCart(name, price, category) {
         image = 'covers/desafio-21-dias.jpg';
     } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
         image = 'covers/receitas-3-ingredientes.jpg';
+    } else if (name === 'Cozinha em 20 Minutos: Receitas Rápidas que Parecem de Chef') {
+        image = 'covers/COZINHA_EM_20_MINUTOS.jpg';
     } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
         image = 'covers/codigo-vendas-online.jpg';
     } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
@@ -1090,6 +1092,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/desafio-21-dias.jpg';
     } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
         coverImage = 'covers/receitas-3-ingredientes.jpg';
+    } else if (name === 'Cozinha em 20 Minutos: Receitas Rápidas que Parecem de Chef') {
+        coverImage = 'covers/COZINHA_EM_20_MINUTOS.jpg';
     } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
         coverImage = 'covers/codigo-vendas-online.jpg';
     } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
@@ -1231,6 +1235,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/desafio-21-dias.jpg';
             } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
                 coverImage = 'covers/receitas-3-ingredientes.jpg';
+            } else if (name === 'Cozinha em 20 Minutos: Receitas Rápidas que Parecem de Chef') {
+                coverImage = 'covers/COZINHA_EM_20_MINUTOS.jpg';
             } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
                 coverImage = 'covers/codigo-vendas-online.jpg';
             } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
@@ -1346,6 +1352,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/DESAFIO-DOS-21-DIAS.pdf';
     } else if (name === 'Receitas Com 3 Ingredientes: Simples, Baratas e Irresistíveis') {
         pdfPath = 'pdfs/RECEITAS-COM-3-INGREDIENTES.pdf';
+    } else if (name === 'Cozinha em 20 Minutos: Receitas Rápidas que Parecem de Chef') {
+        pdfPath = 'pdfs/COZINHA_EM_20_MINUTOS.pdf';
     } else if (name === 'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você') {
         pdfPath = 'pdfs/O-CODIGO-DAS-VENDAS-ONLINE.pdf';
     } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
@@ -1750,6 +1758,21 @@ const ebookDetails = {
             'Sugestões para montar cardápios rápidos e versáteis',
             'Receitas que funcionam até pra quem não sabe cozinhar',
             'Menos ingredientes. Mais sabor. Simples assim.'
+        ]
+    },
+    'Cozinha em 20 Minutos: Receitas Rápidas que Parecem de Chef': {
+        cover: 'covers/COZINHA_EM_20_MINUTOS.jpg',
+        description: 'Você vive na correria e sente que não tem tempo para cozinhar? Pois saiba que comer bem não precisa ser demorado. Este eBook foi criado para quem tem uma rotina agitada, mas não abre mão de refeições saborosas, práticas e com um toque de chef. Com receitas simples e rápidas, você vai descobrir como preparar pratos incríveis em até 20 minutos, usando ingredientes acessíveis e técnicas descomplicadas.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Receitas rápidas para café da manhã, almoço e jantar',
+            'Técnicas de preparo que economizam tempo sem perder sabor',
+            'Como organizar sua cozinha e sua rotina alimentar',
+            'Dicas de combinações práticas e criativas',
+            'Estratégias para cozinhar como um chef em poucos minutos',
+            'Não é sobre ter tempo — é sobre transformar o tempo que você tem em algo delicioso'
         ]
     },
     'O Código Das Vendas Online: A Estratégia Que Faz Pessoas Comprarem de Você': {
