@@ -164,6 +164,8 @@ function addToCart(name, price, category) {
         image = 'covers/codigo-vendas-online.jpg';
     } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
         image = 'covers/metodo-4x4-estudos.jpg';
+    } else if (name === 'Aprendendo Com a IA: Como Usar a Inteligência Artificial Para Estudar e Produzir Mais') {
+        image = 'covers/APRENDENDO_COM_A_IA.jpg';
     } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
         image = 'covers/mente-inabalavel.jpg';
     } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
@@ -1098,6 +1100,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/codigo-vendas-online.jpg';
     } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
         coverImage = 'covers/metodo-4x4-estudos.jpg';
+    } else if (name === 'Aprendendo Com a IA: Como Usar a Inteligência Artificial Para Estudar e Produzir Mais') {
+        coverImage = 'covers/APRENDENDO_COM_A_IA.jpg';
     } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
         coverImage = 'covers/mente-inabalavel.jpg';
     } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
@@ -1241,6 +1245,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/codigo-vendas-online.jpg';
             } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
                 coverImage = 'covers/metodo-4x4-estudos.jpg';
+            } else if (name === 'Aprendendo Com a IA: Como Usar a Inteligência Artificial Para Estudar e Produzir Mais') {
+                coverImage = 'covers/APRENDENDO_COM_A_IA.jpg';
             } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
                 coverImage = 'covers/mente-inabalavel.jpg';
             } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
@@ -1358,6 +1364,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/O-CODIGO-DAS-VENDAS-ONLINE.pdf';
     } else if (name === 'Método 4x4 de Estudos: Foco, Revisão, Constância e Resultado') {
         pdfPath = 'pdfs/METODO-4x4-DE-ESTUDOS.pdf';
+    } else if (name === 'Aprendendo Com a IA: Como Usar a Inteligência Artificial Para Estudar e Produzir Mais') {
+        pdfPath = 'pdfs/APRENDENDO_COM_A_IA.pdf';
     } else if (name === 'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação') {
         pdfPath = 'pdfs/A-MENTE-INABALAVEL.pdf';
     } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
@@ -1805,6 +1813,22 @@ const ebookDetails = {
             'Como medir e avaliar seus resultados semanais',
             'Cronograma prático para estudar com eficiência',
             'Estudar não é sobre tempo, é sobre método'
+        ]
+    },
+    'Aprendendo Com a IA: Como Usar a Inteligência Artificial Para Estudar e Produzir Mais': {
+        cover: 'covers/APRENDENDO_COM_A_IA.jpg',
+        description: 'A inteligência artificial está revolucionando a forma como aprendemos, trabalhamos e criamos. Mas, enquanto muitos ainda a enxergam como uma ameaça, os que aprendem a usá-la a seu favor saem na frente. Este eBook vai te ensinar como usar ferramentas como o ChatGPT, Notion AI, Gemini, Copilot e outras IAs para estudar melhor, revisar conteúdos, escrever com mais clareza e produzir mais em menos tempo. Aqui você vai aprender na prática como usar a IA para organizar seus estudos, aprender mais rápido, criar resumos e mapas mentais, melhorar sua escrita e raciocínio, e aumentar sua produtividade e foco.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como a IA está transformando o aprendizado',
+            'Ferramentas essenciais para estudar e produzir mais',
+            'Estratégias para usar IA em diferentes áreas de estudo',
+            'Como criar prompts inteligentes e eficientes',
+            'Exemplos práticos de uso do ChatGPT nos estudos',
+            'Dicas para evitar erros e dependência da tecnologia',
+            'A IA não substitui o esforço humano — ela multiplica o potencial de quem sabe usá-la'
         ]
     },
     'A Mente Inabalável: Como Ter Controle Emocional em Qualquer Situação': {
