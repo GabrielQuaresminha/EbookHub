@@ -176,6 +176,8 @@ function addToCart(name, price, category) {
         image = 'covers/SEM_DIVIDAS.png';
     } else if (name === 'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco') {
         image = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
+    } else if (name === 'O Código da Riqueza: 7 Princípios Que Transformam Sua Vida Financeira') {
+        image = 'covers/O_CODIGO_DA_RIQUEZA.jpg';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         image = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
@@ -1112,6 +1114,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/SEM_DIVIDAS.png';
     } else if (name === 'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco') {
         coverImage = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
+    } else if (name === 'O Código da Riqueza: 7 Princípios Que Transformam Sua Vida Financeira') {
+        coverImage = 'covers/O_CODIGO_DA_RIQUEZA.jpg';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         coverImage = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
@@ -1263,6 +1267,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/SEM_DIVIDAS.png';
             } else if (name === 'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco') {
                 coverImage = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
+            } else if (name === 'O Código da Riqueza: 7 Princípios Que Transformam Sua Vida Financeira') {
+                coverImage = 'covers/O_CODIGO_DA_RIQUEZA.jpg';
             } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
                 coverImage = 'covers/7_PILARES_DA_SAUDE.png';
             } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
@@ -1376,6 +1382,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/SEM-DIVIDAS.pdf';
     } else if (name === 'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco') {
         pdfPath = 'pdfs/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.pdf';
+    } else if (name === 'O Código da Riqueza: 7 Princípios Que Transformam Sua Vida Financeira') {
+        pdfPath = 'pdfs/O_CODIGO_DA_RIQUEZA.pdf';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         pdfPath = 'pdfs/7-PILARES-DA-SAUDE.pdf';
     } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
@@ -1909,6 +1917,22 @@ const ebookDetails = {
             'Os princípios do enriquecimento gradual e sustentável',
             'Hábitos financeiros das pessoas que conquistaram a liberdade',
             'A liberdade financeira começa na mente — e se concretiza nas atitudes diárias'
+        ]
+    },
+    'O Código da Riqueza: 7 Princípios Que Transformam Sua Vida Financeira': {
+        cover: 'covers/O_CODIGO_DA_RIQUEZA.jpg',
+        description: 'A riqueza verdadeira não é apenas sobre dinheiro — é sobre mentalidade, escolhas e propósito. Enquanto muitos vivem presas ao ciclo do endividamento, poucos entendem que o primeiro passo para a liberdade financeira começa na mente. Neste eBook, você vai aprender os 7 princípios fundamentais que moldam a vida das pessoas financeiramente bem-sucedidas. Esses princípios combinam educação financeira, psicologia do dinheiro e hábitos práticos, permitindo que qualquer pessoa — mesmo começando do zero — construa uma base sólida rumo à prosperidade.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como desenvolver uma mentalidade de abundância',
+            'Os hábitos diários das pessoas financeiramente bem-sucedidas',
+            'Como controlar o dinheiro e fazer ele trabalhar para você',
+            'Estratégias práticas para poupar, investir e multiplicar',
+            'Como eliminar crenças limitantes sobre dinheiro',
+            'Como alcançar liberdade e tranquilidade financeira',
+            'Riqueza não é sorte. É método'
         ]
     },
     '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade': {
