@@ -177,7 +177,7 @@ function addToCart(name, price, category) {
     } else if (name === 'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco') {
         image = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
     } else if (name === 'O Código da Riqueza: 7 Princípios Que Transformam Sua Vida Financeira') {
-        image = 'covers/O_CODIGO_DA_RIQUEZA.jpg';
+        image = 'covers/O_CODIGO_DA_RIQUEZA.png';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         image = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
@@ -1115,7 +1115,7 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
     } else if (name === 'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco') {
         coverImage = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
     } else if (name === 'O Código da Riqueza: 7 Princípios Que Transformam Sua Vida Financeira') {
-        coverImage = 'covers/O_CODIGO_DA_RIQUEZA.jpg';
+        coverImage = 'covers/O_CODIGO_DA_RIQUEZA.png';
     } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
         coverImage = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
@@ -1268,7 +1268,7 @@ function updateMyEbooksDisplay() {
             } else if (name === 'Liberdade Financeira Passo a Passo: Como Construir Riqueza Mesmo Ganhando Pouco') {
                 coverImage = 'covers/LIBERDADE_FINANCEIRA_PASSO_A_PASSO.jpg';
             } else if (name === 'O Código da Riqueza: 7 Princípios Que Transformam Sua Vida Financeira') {
-                coverImage = 'covers/O_CODIGO_DA_RIQUEZA.jpg';
+                coverImage = 'covers/O_CODIGO_DA_RIQUEZA.png';
             } else if (name === '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade') {
                 coverImage = 'covers/7_PILARES_DA_SAUDE.png';
             } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
@@ -1920,7 +1920,7 @@ const ebookDetails = {
         ]
     },
     'O Código da Riqueza: 7 Princípios Que Transformam Sua Vida Financeira': {
-        cover: 'covers/O_CODIGO_DA_RIQUEZA.jpg',
+        cover: 'covers/O_CODIGO_DA_RIQUEZA.png',
         description: 'A riqueza verdadeira não é apenas sobre dinheiro — é sobre mentalidade, escolhas e propósito. Enquanto muitos vivem presas ao ciclo do endividamento, poucos entendem que o primeiro passo para a liberdade financeira começa na mente. Neste eBook, você vai aprender os 7 princípios fundamentais que moldam a vida das pessoas financeiramente bem-sucedidas. Esses princípios combinam educação financeira, psicologia do dinheiro e hábitos práticos, permitindo que qualquer pessoa — mesmo começando do zero — construa uma base sólida rumo à prosperidade.',
         rating: 5,
         reviews: 0,
