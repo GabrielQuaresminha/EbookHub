@@ -170,6 +170,8 @@ function addToCart(name, price, category) {
         image = 'covers/mente-inabalavel.jpg';
     } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
         image = 'covers/MENTALIDADE_ANTIFRAGIL.jpg';
+    } else if (name === 'Você é o Seu Maior Inimigo: Como Parar de Sabotar Sua Própria Vida') {
+        image = 'covers/VOCE_E_O_SEU_MAIOR_INIMIGO.jpg';
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         image = 'covers/receitas-fit-saborosas.jpg';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
@@ -1108,6 +1110,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/mente-inabalavel.jpg';
     } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
         coverImage = 'covers/MENTALIDADE_ANTIFRAGIL.jpg';
+    } else if (name === 'Você é o Seu Maior Inimigo: Como Parar de Sabotar Sua Própria Vida') {
+        coverImage = 'covers/VOCE_E_O_SEU_MAIOR_INIMIGO.jpg';
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         coverImage = 'covers/receitas-fit-saborosas.jpg';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
@@ -1255,6 +1259,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/mente-inabalavel.jpg';
             } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
                 coverImage = 'covers/MENTALIDADE_ANTIFRAGIL.jpg';
+            } else if (name === 'Você é o Seu Maior Inimigo: Como Parar de Sabotar Sua Própria Vida') {
+                coverImage = 'covers/VOCE_E_O_SEU_MAIOR_INIMIGO.jpg';
             } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
                 coverImage = 'covers/cerebro-alta-performance.jpg';
             } else if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
@@ -1376,6 +1382,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/A-MENTE-INABALAVEL.pdf';
     } else if (name === 'Mentalidade Antifrágil: Como Usar as Dificuldades a Seu Favor') {
         pdfPath = 'pdfs/MENTALIDADE_ANTIFRAGIL.pdf';
+    } else if (name === 'Você é o Seu Maior Inimigo: Como Parar de Sabotar Sua Própria Vida') {
+        pdfPath = 'pdfs/VOCE_E_O_SEU_MAIOR_INIMIGO.pdf';
     } else if (name === 'Receitas Fit e Saborosas: Comer Bem Nunca Foi Tão Fácil') {
         pdfPath = 'pdfs/RECEITAS-FIT-E-SABOROSAS.pdf';
     } else if (name === 'Sem Dívidas: Como Sair do Vermelho e Reconstruir Sua Vida Financeira') {
@@ -1933,6 +1941,23 @@ const ebookDetails = {
             'Como eliminar crenças limitantes sobre dinheiro',
             'Como alcançar liberdade e tranquilidade financeira',
             'Riqueza não é sorte. É método'
+        ]
+    },
+    'Você é o Seu Maior Inimigo: Como Parar de Sabotar Sua Própria Vida': {
+        cover: 'covers/VOCE_E_O_SEU_MAIOR_INIMIGO.jpg',
+        description: 'Você já percebeu que, muitas vezes, o seu maior obstáculo é você mesmo? Quantas oportunidades você já perdeu por procrastinar, duvidar de si mesmo ou ter medo de fracassar? A autossabotagem é o inimigo invisível que destrói planos, mina sonhos e alimenta a sensação de que você "não é bom o suficiente". Mas a boa notícia é: você pode aprender a dominar sua mente e mudar essa história. Neste eBook, você vai entender de onde vem esse comportamento, como ele se manifesta e — o mais importante — como vencê-lo de forma prática.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'O que é autossabotagem e por que ela acontece',
+            'Como identificar padrões e pensamentos destrutivos',
+            'Técnicas para vencer a procrastinação e o medo',
+            'Como lidar com a síndrome do impostor',
+            'Estratégias para desenvolver autodomínio e confiança',
+            'Como o ambiente influencia seu sucesso',
+            'Passos para criar uma mentalidade de crescimento',
+            'A pessoa que você precisa vencer todos os dias é você mesmo'
         ]
     },
     '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade': {
