@@ -142,6 +142,8 @@ function addToCart(name, price, category) {
         image = 'covers/investidor-fundos-imobiliarios.jpg';
     } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
         image = 'covers/cerebro-alta-performance.jpg';
+    } else if (name === 'Memória de Ferro: Como Lembrar Tudo Que Você Estuda') {
+        image = 'covers/MEMORIA_DE_FERRO.jpg';
     } else if (name === 'DISCIPLINA E CONSTÂNCIA: Como Criar Força Mental e Hábito Diário de Sucesso') {
         image = 'covers/disciplina-constancia.jpg';
     } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
@@ -1082,6 +1084,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/investidor-fundos-imobiliarios.jpg';
     } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
         coverImage = 'covers/cerebro-alta-performance.jpg';
+    } else if (name === 'Memória de Ferro: Como Lembrar Tudo Que Você Estuda') {
+        coverImage = 'covers/MEMORIA_DE_FERRO.jpg';
     } else if (name === 'DISCIPLINA E CONSTÂNCIA: Como Criar Força Mental e Hábito Diário de Sucesso') {
         coverImage = 'covers/disciplina-constancia.jpg';
     } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
@@ -1263,6 +1267,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/VOCE_E_O_SEU_MAIOR_INIMIGO.jpg';
             } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
                 coverImage = 'covers/cerebro-alta-performance.jpg';
+            } else if (name === 'Memória de Ferro: Como Lembrar Tudo Que Você Estuda') {
+                coverImage = 'covers/MEMORIA_DE_FERRO.jpg';
             } else if (name === 'Guia Completo para Tirar Nota 1000 na Redação do ENEM') {
                 coverImage = 'covers/redacao-enem-1000.jpg';
             } else if (name === 'Guia do Investidor Iniciante em Fundos Imobiliários') {
@@ -1354,6 +1360,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/GUIA-DO-INVESTIDOR-INICIANTE-EM-FUNDOS-IMOBILIARIOS.pdf';
     } else if (name === 'O Cérebro de Alta Performance: Como Usar a Neurociência Para Estudar Melhor') {
         pdfPath = 'pdfs/O-CEREBRO-DE-ALTA-PERFORMANCE.pdf';
+    } else if (name === 'Memória de Ferro: Como Lembrar Tudo Que Você Estuda') {
+        pdfPath = 'pdfs/MEMORIA_DE_FERRO.pdf';
     } else if (name === 'DISCIPLINA E CONSTÂNCIA: Como Criar Força Mental e Hábito Diário de Sucesso') {
         pdfPath = 'pdfs/DISCIPLINA-E-CONSTANCIA.pdf';
     } else if (name === 'Desbloqueie Sua Mente: Hábitos Que Mudam Vidas') {
@@ -1958,6 +1966,21 @@ const ebookDetails = {
             'Como o ambiente influencia seu sucesso',
             'Passos para criar uma mentalidade de crescimento',
             'A pessoa que você precisa vencer todos os dias é você mesmo'
+        ]
+    },
+    'Memória de Ferro: Como Lembrar Tudo Que Você Estuda': {
+        cover: 'covers/MEMORIA_DE_FERRO.jpg',
+        description: 'Você já estudou algo e, dias depois, parecia ter esquecido tudo? Isso não é falta de inteligência — é falta de estratégia cerebral. O cérebro humano é uma máquina de aprendizado, mas ele não foi projetado para decorar informações, e sim para reconhecer padrões, criar conexões e consolidar memórias. Neste eBook, você vai aprender como a memória funciona biologicamente, por que esquecemos, e quais são as técnicas cientificamente comprovadas para reter o que realmente importa. Da neurociência à prática, você vai entender como transformar conhecimento em lembrança duradoura.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como o cérebro armazena e recupera informações',
+            'Técnicas de memorização ativa e inteligente',
+            'O papel do sono, alimentação e revisão na retenção de conteúdo',
+            'Como usar IA e tecnologia para estudar melhor',
+            'Hábitos diários que fortalecem a mente e a memória',
+            'A mente não se enche — ela se fortalece quando é bem treinada'
         ]
     },
     '7 Pilares da Saúde: O Método Para Viver com Mais Energia e Vitalidade': {
