@@ -186,6 +186,8 @@ function addToCart(name, price, category) {
         image = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
         image = 'covers/ENERGIA_TOTAL.jpg';
+    } else if (name === 'Desintoxique Sua Mente: Como Limpar o Estresse, a Ansiedade e os Pensamentos Negativos') {
+        image = 'covers/DESINTOXIQUE_SUA_MENTE.jpg';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         image = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -1128,6 +1130,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/7_PILARES_DA_SAUDE.png';
     } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
         coverImage = 'covers/ENERGIA_TOTAL.jpg';
+    } else if (name === 'Desintoxique Sua Mente: Como Limpar o Estresse, a Ansiedade e os Pensamentos Negativos') {
+        coverImage = 'covers/DESINTOXIQUE_SUA_MENTE.jpg';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -1285,6 +1289,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/7_PILARES_DA_SAUDE.png';
             } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
                 coverImage = 'covers/ENERGIA_TOTAL.jpg';
+            } else if (name === 'Desintoxique Sua Mente: Como Limpar o Estresse, a Ansiedade e os Pensamentos Negativos') {
+                coverImage = 'covers/DESINTOXIQUE_SUA_MENTE.jpg';
             } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
                 coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
             } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -1404,6 +1410,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/7-PILARES-DA-SAUDE.pdf';
     } else if (name === 'Energia Total: Como Acabar com o Cansaço e Ter Disposição Todos os Dias') {
         pdfPath = 'pdfs/ENERGIA_TOTAL.pdf';
+    } else if (name === 'Desintoxique Sua Mente: Como Limpar o Estresse, a Ansiedade e os Pensamentos Negativos') {
+        pdfPath = 'pdfs/DESINTOXIQUE_SUA_MENTE.pdf';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         pdfPath = 'pdfs/O_PODER_DA_AUTORIDADE_DIGITAL.pdf';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -2013,6 +2021,21 @@ const ebookDetails = {
             'Como o sono, a mente e o movimento se conectam',
             'Dicas de suplementação natural e autocuidado energético',
             'Energia é a base da produtividade, da saúde e da felicidade'
+        ]
+    },
+    'Desintoxique Sua Mente: Como Limpar o Estresse, a Ansiedade e os Pensamentos Negativos': {
+        cover: 'covers/DESINTOXIQUE_SUA_MENTE.jpg',
+        description: 'Vivemos em um mundo saturado de estímulos — notificações, preocupações e informações sem pausa. O resultado? Uma mente sobrecarregada, ansiosa e exausta. Mas, assim como o corpo precisa se desintoxicar para funcionar bem, a mente também precisa de limpeza. A boa notícia é que a neurociência e a psicologia moderna mostram que é possível resetar o cérebro, aliviar o estresse e recuperar o equilíbrio mental com práticas simples e consistentes. Neste eBook, você vai aprender como o estresse afeta o corpo e o cérebro, e vai dominar técnicas eficazes para restaurar sua clareza mental e emocional.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'O impacto do estresse e da ansiedade no corpo e no cérebro',
+            'Técnicas práticas para limpar a mente (respiração, journaling, silêncio, rotina leve)',
+            'Como o sono e o descanso regeneram o cérebro',
+            'Hábitos diários para manter a mente calma e produtiva',
+            'Como construir uma rotina mental de equilíbrio e foco',
+            'A paz interior não é ausência de problemas — é presença de autocontrole'
         ]
     },
     'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais': {
