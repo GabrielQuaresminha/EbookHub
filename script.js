@@ -196,6 +196,8 @@ function addToCart(name, price, category) {
         image = 'covers/ENERGIA_TOTAL.jpg';
     } else if (name === 'Desintoxique Sua Mente: Como Limpar o Estresse, a Ansiedade e os Pensamentos Negativos') {
         image = 'covers/DESINTOXIQUE_SUA_MENTE.jpg';
+    } else if (name === 'Negócio Invisível: Como Lucrar na Internet Mesmo Sem Aparecer') {
+        image = 'covers/NEGOCIO_INVISIVEL.jpg';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         image = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -1140,6 +1142,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/ENERGIA_TOTAL.jpg';
     } else if (name === 'Desintoxique Sua Mente: Como Limpar o Estresse, a Ansiedade e os Pensamentos Negativos') {
         coverImage = 'covers/DESINTOXIQUE_SUA_MENTE.jpg';
+    } else if (name === 'Negócio Invisível: Como Lucrar na Internet Mesmo Sem Aparecer') {
+        coverImage = 'covers/NEGOCIO_INVISIVEL.jpg';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -1299,6 +1303,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/ENERGIA_TOTAL.jpg';
             } else if (name === 'Desintoxique Sua Mente: Como Limpar o Estresse, a Ansiedade e os Pensamentos Negativos') {
                 coverImage = 'covers/DESINTOXIQUE_SUA_MENTE.jpg';
+            } else if (name === 'Negócio Invisível: Como Lucrar na Internet Mesmo Sem Aparecer') {
+                coverImage = 'covers/NEGOCIO_INVISIVEL.jpg';
             } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
                 coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
             } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -1420,6 +1426,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/ENERGIA_TOTAL.pdf';
     } else if (name === 'Desintoxique Sua Mente: Como Limpar o Estresse, a Ansiedade e os Pensamentos Negativos') {
         pdfPath = 'pdfs/DESINTOXIQUE_SUA_MENTE.pdf';
+    } else if (name === 'Negócio Invisível: Como Lucrar na Internet Mesmo Sem Aparecer') {
+        pdfPath = 'pdfs/NEGOCIO_INVISIVEL.pdf';
     } else if (name === 'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais') {
         pdfPath = 'pdfs/O_PODER_DA_AUTORIDADE_DIGITAL.pdf';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
@@ -2044,6 +2052,21 @@ const ebookDetails = {
             'Hábitos diários para manter a mente calma e produtiva',
             'Como construir uma rotina mental de equilíbrio e foco',
             'A paz interior não é ausência de problemas — é presença de autocontrole'
+        ]
+    },
+    'Negócio Invisível: Como Lucrar na Internet Mesmo Sem Aparecer': {
+        cover: 'covers/NEGOCIO_INVISIVEL.jpg',
+        description: 'Você já imaginou ganhar dinheiro na internet sem precisar se expor nas redes sociais? Sem gravar vídeos, sem mostrar o rosto, sem depender de likes — apenas com estratégia e inteligência digital? O novo modelo de negócios online tornou isso possível. Hoje, empreendedores constroem verdadeiros impérios digitais com sistemas automatizados, conteúdo gerado por IA, lojas que funcionam sozinhas e funis invisíveis de vendas. Neste eBook, você vai descobrir como montar o seu negócio invisível do zero, explorando diferentes caminhos para criar uma renda real e escalável — mesmo que ninguém saiba quem você é.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Como funcionam os negócios invisíveis na prática',
+            'Estratégias para lucrar online sem precisar aparecer',
+            'Modelos como infoprodutos, dropshipping e marketing de afiliados',
+            'Como criar automações e funis de vendas invisíveis',
+            'Ferramentas e IAs para produzir conteúdo e vender 24h por dia',
+            'Enquanto uns buscam atenção, outros constroem patrimônio em silêncio'
         ]
     },
     'O Poder da Autoridade Digital: Como Ser Reconhecido e Vender Mais': {
