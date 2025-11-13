@@ -6,6 +6,9 @@ const path = require('path');
 
 const app = express();
 
+// Admin Configuration - APENAS ESTE EMAIL TEM ACESSO AO PAINEL ADMIN
+const ADMIN_EMAIL = 'gabrielquaresma96@hotmail.com';
+
 // Middleware FIRST
 app.use(cors());
 app.use(express.json());
@@ -138,13 +141,17 @@ app.post('/api/login', async (req, res) => {
             return res.status(401).json({ error: 'E-mail ou senha incorretos!' });
         }
 
+        // Verificar se é admin
+        const isAdmin = user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+
         res.json({
             success: true,
             user: {
                 id: user._id,
                 name: user.name,
                 nickname: user.nickname,
-                email: user.email
+                email: user.email,
+                isAdmin: isAdmin
             }
         });
     } catch (error) {
@@ -595,6 +602,181 @@ app.post('/api/purchase', async (req, res) => {
     } catch (error) {
         console.error('Save purchase error:', error);
         res.status(500).json({ error: 'Erro ao salvar compra' });
+    }
+});
+
+// ===== ADMIN MIDDLEWARE =====
+// Middleware para verificar se o usuário é admin
+function verificarAdmin(req, res, next) {
+    const userEmail = req.headers['x-user-email']; // Email vem do frontend
+    
+    if (!userEmail || userEmail.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+        return res.status(403).json({ error: 'Acesso negado. Apenas administradores.' });
+    }
+    
+    next();
+}
+
+// ===== ADMIN ROUTES =====
+
+// Verificar se usuário é admin
+app.get('/api/admin/check', async (req, res) => {
+    try {
+        const userEmail = req.headers['x-user-email'];
+        const isAdmin = userEmail && userEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+        res.json({ isAdmin });
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao verificar admin' });
+    }
+});
+
+// Estatísticas Gerais (Dashboard)
+app.get('/api/admin/stats', verificarAdmin, async (req, res) => {
+    try {
+        // Total de vendas aprovadas
+        const totalSales = await Purchase.countDocuments({ status: 'approved' });
+        
+        // Receita total
+        const purchases = await Purchase.find({ status: 'approved' });
+        const totalRevenue = purchases.reduce((sum, purchase) => {
+            const purchaseTotal = purchase.items.reduce((itemSum, item) => itemSum + (item.price || 14.90), 0);
+            return sum + purchaseTotal;
+        }, 0);
+        
+        // Total de clientes únicos
+        const uniqueCustomers = await Purchase.distinct('userId', { status: 'approved' });
+        const totalCustomers = uniqueCustomers.length;
+        
+        // Total de ebooks vendidos
+        const totalEbooksSold = purchases.reduce((sum, purchase) => sum + purchase.items.length, 0);
+        
+        // Vendas por categoria
+        const salesByCategory = {};
+        purchases.forEach(purchase => {
+            purchase.items.forEach(item => {
+                const category = item.category || 'geral';
+                salesByCategory[category] = (salesByCategory[category] || 0) + 1;
+            });
+        });
+        
+        res.json({
+            totalSales,
+            totalRevenue: totalRevenue.toFixed(2),
+            totalCustomers,
+            totalEbooksSold,
+            salesByCategory
+        });
+    } catch (error) {
+        console.error('Admin stats error:', error);
+        res.status(500).json({ error: 'Erro ao buscar estatísticas' });
+    }
+});
+
+// Lista de todas as vendas
+app.get('/api/admin/sales', verificarAdmin, async (req, res) => {
+    try {
+        const purchases = await Purchase.find({ status: 'approved' })
+            .populate('userId', 'name email nickname')
+            .sort({ createdAt: -1 })
+            .limit(100); // Últimas 100 vendas
+        
+        const salesData = purchases.map(purchase => {
+            return purchase.items.map(item => ({
+                purchaseId: purchase._id,
+                customerName: purchase.userId?.name || 'N/A',
+                customerEmail: purchase.userId?.email || 'N/A',
+                customerNickname: purchase.userId?.nickname || 'N/A',
+                ebookName: item.name,
+                price: item.price || 14.90,
+                category: item.category || 'geral',
+                purchaseDate: item.purchaseDate || purchase.createdAt.toLocaleDateString('pt-BR'),
+                createdAt: purchase.createdAt
+            }));
+        }).flat();
+        
+        res.json({ sales: salesData });
+    } catch (error) {
+        console.error('Admin sales error:', error);
+        res.status(500).json({ error: 'Erro ao buscar vendas' });
+    }
+});
+
+// Top Ebooks Mais Vendidos
+app.get('/api/admin/top-ebooks', verificarAdmin, async (req, res) => {
+    try {
+        const purchases = await Purchase.find({ status: 'approved' });
+        
+        const ebookStats = {};
+        purchases.forEach(purchase => {
+            purchase.items.forEach(item => {
+                const ebookName = item.name;
+                if (!ebookStats[ebookName]) {
+                    ebookStats[ebookName] = {
+                        name: ebookName,
+                        sales: 0,
+                        revenue: 0,
+                        category: item.category || 'geral'
+                    };
+                }
+                ebookStats[ebookName].sales += 1;
+                ebookStats[ebookName].revenue += item.price || 14.90;
+            });
+        });
+        
+        // Converter para array e ordenar por vendas
+        const topEbooks = Object.values(ebookStats)
+            .sort((a, b) => b.sales - a.sales)
+            .slice(0, 10); // Top 10
+        
+        res.json({ topEbooks });
+    } catch (error) {
+        console.error('Admin top ebooks error:', error);
+        res.status(500).json({ error: 'Erro ao buscar top ebooks' });
+    }
+});
+
+// Clientes e seus históricos
+app.get('/api/admin/customers', verificarAdmin, async (req, res) => {
+    try {
+        const purchases = await Purchase.find({ status: 'approved' })
+            .populate('userId', 'name email nickname createdAt');
+        
+        const customerMap = {};
+        
+        purchases.forEach(purchase => {
+            const userId = purchase.userId?._id?.toString();
+            if (!userId) return;
+            
+            if (!customerMap[userId]) {
+                customerMap[userId] = {
+                    name: purchase.userId.name,
+                    email: purchase.userId.email,
+                    nickname: purchase.userId.nickname,
+                    registeredAt: purchase.userId.createdAt,
+                    totalPurchases: 0,
+                    totalSpent: 0,
+                    ebooks: []
+                };
+            }
+            
+            purchase.items.forEach(item => {
+                customerMap[userId].totalPurchases += 1;
+                customerMap[userId].totalSpent += item.price || 14.90;
+                customerMap[userId].ebooks.push({
+                    name: item.name,
+                    price: item.price || 14.90,
+                    purchaseDate: item.purchaseDate
+                });
+            });
+        });
+        
+        const customers = Object.values(customerMap)
+            .sort((a, b) => b.totalSpent - a.totalSpent);
+        
+        res.json({ customers });
+    } catch (error) {
+        console.error('Admin customers error:', error);
+        res.status(500).json({ error: 'Erro ao buscar clientes' });
     }
 });
 

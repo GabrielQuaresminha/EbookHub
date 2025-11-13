@@ -33,6 +33,14 @@ function updateUIForLoggedInUser() {
     document.getElementById('userLoggedIn').style.display = 'flex';
     const displayName = currentUser.nickname || currentUser.name.split(' ')[0];
     document.getElementById('userGreeting').innerHTML = `Olá, <strong>${displayName}</strong>`;
+    
+    // Mostrar botão admin apenas para o administrador
+    if (currentUser.isAdmin) {
+        document.getElementById('adminBtn').style.display = 'block';
+    } else {
+        document.getElementById('adminBtn').style.display = 'none';
+    }
+    
     loadMyEbooks();
     loadCart();
 }
