@@ -633,18 +633,29 @@ app.get('/api/admin/check', async (req, res) => {
 // Estatísticas Gerais (Dashboard)
 app.get('/api/admin/stats', verificarAdmin, async (req, res) => {
     try {
+        const period = req.query.period; // 'all', '7', '30', '90', '180', '365'
+        
+        // Criar filtro de data
+        const query = { status: 'approved' };
+        if (period && period !== 'all') {
+            const days = parseInt(period);
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() - days);
+            query.createdAt = { $gte: startDate };
+        }
+        
         // Total de vendas aprovadas
-        const totalSales = await Purchase.countDocuments({ status: 'approved' });
+        const totalSales = await Purchase.countDocuments(query);
         
         // Receita total
-        const purchases = await Purchase.find({ status: 'approved' });
+        const purchases = await Purchase.find(query);
         const totalRevenue = purchases.reduce((sum, purchase) => {
             const purchaseTotal = purchase.items.reduce((itemSum, item) => itemSum + (item.price || 14.90), 0);
             return sum + purchaseTotal;
         }, 0);
         
         // Total de clientes únicos
-        const uniqueCustomers = await Purchase.distinct('userId', { status: 'approved' });
+        const uniqueCustomers = await Purchase.distinct('userId', query);
         const totalCustomers = uniqueCustomers.length;
         
         // Total de ebooks vendidos
@@ -704,7 +715,17 @@ app.get('/api/admin/sales', verificarAdmin, async (req, res) => {
 // Top Ebooks Mais Vendidos
 app.get('/api/admin/top-ebooks', verificarAdmin, async (req, res) => {
     try {
-        const purchases = await Purchase.find({ status: 'approved' });
+        const period = req.query.period;
+        
+        const query = { status: 'approved' };
+        if (period && period !== 'all') {
+            const days = parseInt(period);
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() - days);
+            query.createdAt = { $gte: startDate };
+        }
+        
+        const purchases = await Purchase.find(query);
         
         const ebookStats = {};
         purchases.forEach(purchase => {

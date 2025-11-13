@@ -324,6 +324,52 @@
             display: block;
         }
 
+        .filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-section h3 {
+            color: #333;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e9ecef;
+            background: white;
+            color: #666;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
         @media (max-width: 768px) {
             .content-grid {
                 grid-template-columns: 1fr;
@@ -351,6 +397,18 @@
         <div class="header">
             <h1><i class="fas fa-chart-line"></i>Painel Administrativo</h1>
             <a href="/" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar à Loja</a>
+        </div>
+
+        <div class="filter-section">
+            <h3><i class="fas fa-calendar-alt"></i> Período</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn" data-period="7" onclick="filterByPeriod(7)">Últimos 7 dias</button>
+                <button class="filter-btn active" data-period="30" onclick="filterByPeriod(30)">Últimos 30 dias</button>
+                <button class="filter-btn" data-period="90" onclick="filterByPeriod(90)">Últimos 3 meses</button>
+                <button class="filter-btn" data-period="180" onclick="filterByPeriod(180)">Últimos 6 meses</button>
+                <button class="filter-btn" data-period="365" onclick="filterByPeriod(365)">Último 1 ano</button>
+                <button class="filter-btn" data-period="all" onclick="filterByPeriod('all')">Todo o período</button>
+            </div>
         </div>
 
         <div class="stats-grid">
@@ -433,6 +491,9 @@
             window.location.href = '/';
         }
 
+        // Período atual selecionado (padrão: 30 dias)
+        let currentPeriod = 30;
+
         // Função para fazer requisições com autenticação
         async function fetchAdmin(url) {
             const response = await fetch(API_URL + url, {
@@ -450,10 +511,36 @@
             return await response.json();
         }
 
+        // Filtrar por período
+        function filterByPeriod(period) {
+            currentPeriod = period;
+            
+            // Atualizar botões ativos
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Recarregar dados
+            loadStats();
+            loadTopEbooks();
+            loadSales();
+        }
+
+        // Verificar se data está no período selecionado
+        function isInPeriod(date) {
+            if (currentPeriod === 'all') return true;
+            
+            const saleDate = new Date(date);
+            const now = new Date();
+            const diffTime = now - saleDate;
+            const diffDays = diffTime / (1000 * 60 * 60 * 24);
+            
+            return diffDays <= currentPeriod;
+        }
+
         // Carregar estatísticas
         async function loadStats() {
             try {
-                const data = await fetchAdmin('/api/admin/stats');
+                const data = await fetchAdmin(`/api/admin/stats?period=${currentPeriod}`);
                 if (!data) return;
                 
                 document.getElementById('totalRevenue').textContent = `R$ ${data.totalRevenue}`;
@@ -483,7 +570,7 @@
         // Carregar top ebooks
         async function loadTopEbooks() {
             try {
-                const data = await fetchAdmin('/api/admin/top-ebooks');
+                const data = await fetchAdmin(`/api/admin/top-ebooks?period=${currentPeriod}`);
                 if (!data) return;
                 
                 const topEbooksDiv = document.getElementById('topEbooks');
