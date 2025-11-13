@@ -749,10 +749,10 @@ app.get('/api/admin/customers', verificarAdmin, async (req, res) => {
             
             if (!customerMap[userId]) {
                 customerMap[userId] = {
-                    name: purchase.userId.name,
-                    email: purchase.userId.email,
-                    nickname: purchase.userId.nickname,
-                    registeredAt: purchase.userId.createdAt,
+                    name: purchase.userId?.name || 'Cliente',
+                    email: purchase.userId?.email || 'email@desconhecido.com',
+                    nickname: purchase.userId?.nickname || 'Usuário',
+                    registeredAt: purchase.userId?.createdAt || purchase.createdAt,
                     totalPurchases: 0,
                     totalSpent: 0,
                     ebooks: []
