@@ -202,6 +202,8 @@ function addToCart(name, price, category) {
         image = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
         image = 'covers/SABORES_DO_MUNDO.jpg';
+    } else if (name === 'Receitas na AirFryer: Pratos Crocantes, Saudáveis e Prontos em Minutos') {
+        image = 'covers/RECEITAS_NA_AIRFRYER.jpg';
     }
     
     // Try to get image from the product card if not found above
@@ -1148,6 +1150,8 @@ function openEbookDetails(name, price, category, description, rating, reviews, b
         coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
         coverImage = 'covers/SABORES_DO_MUNDO.jpg';
+    } else if (name === 'Receitas na AirFryer: Pratos Crocantes, Saudáveis e Prontos em Minutos') {
+        coverImage = 'covers/RECEITAS_NA_AIRFRYER.jpg';
     }
     
     const ebookDetailsBody = document.getElementById('ebookDetailsBody');
@@ -1309,6 +1313,8 @@ function updateMyEbooksDisplay() {
                 coverImage = 'covers/O_PODER_DA_AUTORIDADE_DIGITAL.jpeg';
             } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
                 coverImage = 'covers/SABORES_DO_MUNDO.jpg';
+            } else if (name === 'Receitas na AirFryer: Pratos Crocantes, Saudáveis e Prontos em Minutos') {
+                coverImage = 'covers/RECEITAS_NA_AIRFRYER.jpg';
             }
         }
         
@@ -1432,6 +1438,8 @@ function downloadEbook(name) {
         pdfPath = 'pdfs/O_PODER_DA_AUTORIDADE_DIGITAL.pdf';
     } else if (name === 'Sabores do Mundo: Receitas Fáceis Inspiradas em Diversos Países') {
         pdfPath = 'pdfs/SABORES_DO_MUNDO.pdf';
+    } else if (name === 'Receitas na AirFryer: Pratos Crocantes, Saudáveis e Prontos em Minutos') {
+        pdfPath = 'pdfs/RECEITAS_NA_AIRFRYER.pdf';
     }
     
     if (!pdfPath) {
@@ -2098,6 +2106,21 @@ const ebookDetails = {
             'Sugestões de acompanhamentos e harmonizações',
             'Técnicas culinárias internacionais adaptadas ao seu dia a dia',
             'Viajar pelo paladar é a forma mais deliciosa de conhecer o mundo'
+        ]
+    },
+    'Receitas na AirFryer: Pratos Crocantes, Saudáveis e Prontos em Minutos': {
+        cover: 'covers/RECEITAS_NA_AIRFRYER.jpg',
+        description: 'A Airfryer revolucionou a forma de cozinhar. Com ela, é possível preparar refeições crocantes, saborosas e muito mais saudáveis — sem óleo, sem bagunça e em poucos minutos. Mas, para aproveitar ao máximo o potencial desse aparelho, é preciso saber o ponto certo de cada alimento, como organizar o preparo e usar os truques certos. Neste guia, você vai aprender passo a passo como preparar lanches, pratos principais e sobremesas na AirFryer — além de dicas práticas de limpeza e conservação.',
+        rating: 5,
+        reviews: 0,
+        badge: 'Novo',
+        highlights: [
+            'Receitas práticas e rápidas para o dia a dia',
+            'Pratos saudáveis e crocantes, com pouco ou nenhum óleo',
+            'Técnicas de preparo para deixar tudo no ponto certo',
+            'Dicas de uso, limpeza e conservação da sua AirFryer',
+            'Truques de chef para economizar tempo e impressionar na cozinha',
+            'Cozinhar bem não é questão de tempo — é questão de técnica'
         ]
     },
     'Concurso Polícia Federal - Guia Definitivo': {
